@@ -66,7 +66,6 @@ object Version {
   // Testing
   const val jUnit = "4.13"
   const val archCoreTesting = "1.1.1"
-  const val testRunner = "1.1.1"
   const val espresso = "3.2.0"
   const val mockitoKotlin = "2.0.0-RC1"
   const val mockito = "2.23.4"
@@ -119,8 +118,13 @@ object Deps {
 
   // Tests
   const val jUnit = "junit:junit:${Version.jUnit}"
+  const val jUnitExt = "androidx.test.ext:junit:${Version.archCoreTesting}"
   const val mockito = "org.mockito:mockito-core:${Version.mockito}"
   const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Version.mockitoKotlin}"
-  const val androidTestRunner = "androidx.test:runner:${Version.testRunner}"
   const val espresso = "androidx.test.espresso:espresso-core:${Version.espresso}"
+  const val testNavigation = "androidx.navigation:navigation-testing:${Version.navigation}"
+  const val testArch = "androidx.arch.core:core-testing:${Version.arch}"
+  const val testRoom = "androidx.room:room-testing:${Version.room}"
+  const val testOkHttpMockServer = "com.squareup.okhttp3:mockwebserver:${Version.okHttp}"
 }
+

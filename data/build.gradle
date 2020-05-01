@@ -1,0 +1,17 @@
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/base.gradle"
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation 'androidx.appcompat:appcompat:1.1.0'
+  implementation 'androidx.core:core-ktx:1.2.0'
+
+  testImplementation Deps.jUnit
+  testImplementation Deps.mockito
+  testImplementation Deps.mockitoKotlin
+  testImplementation Deps.testRoom
+  testImplementation Deps.testOkHttpMockServer
+  testImplementation Deps.testArch
+  androidTestImplementation Deps.jUnitExt
+}

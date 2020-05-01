@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/base.gradle"
+
+dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation 'androidx.core:core-ktx:1.2.0'
+
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
+}

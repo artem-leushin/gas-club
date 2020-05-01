@@ -1,2 +1,5 @@
 rootProject.name='Gas Club'
 include ':app'
+include ':domain'
+include ':data'
+include ':utils'

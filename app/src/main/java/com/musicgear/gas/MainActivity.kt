@@ -2,6 +2,7 @@ package com.musicgear.gas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.musicgear.gas.R
 
 class MainActivity : AppCompatActivity() {
 
