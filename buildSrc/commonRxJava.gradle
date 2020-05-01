@@ -1,0 +1,11 @@
+dependencies {
+  //  implementation "io.reactivex.rxjava3:rxjava:$Version.rxJava3"
+  //  implementation "io.reactivex.rxjava3:rxandroid:$Version.rxAndroid3"
+  //  implementation "io.reactivex.rxjava3:rxkotlin:$Version.rxKotlin3"
+  //  implementation "com.jakewharton.rxbinding3:rxbinding:$Version.rxBinding3"
+
+  implementation "io.reactivex.rxjava2:rxjava:$Version.rxJava2"
+  implementation "io.reactivex.rxjava2:rxandroid:$Version.rxAndroid2"
+  implementation "io.reactivex.rxjava2:rxkotlin:$Version.rxKotlin2"
+  implementation "com.jakewharton.rxbinding2:rxbinding:$Version.rxBinding2"
+}

@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+apply from: "$rootProject.projectDir/base.gradle"
+apply from: "${sharedDependencies}/commonRxJava.gradle"
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+//  implementation project(":utils")
+//  implementation project(":domain")
+//  implementation project(":data")
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
+  implementation "androidx.appcompat:appcompat:$Version.appCompat"
+  implementation "com.google.android.material:material:$Version.material"
+  implementation "androidx.constraintlayout:constraintlayout:$Version.constraintLayout"
+  implementation "androidx.viewpager2:viewpager2:$Version.viewpager2"
+  implementation "androidx.core:core-ktx:$Version.ktxCore"
+
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-common-java8:$Version.lifecycle"
+
+  implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
+  implementation "androidx.navigation:navigation-ui-ktx:$Version.navigation"
+
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.espresso
+  androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+  androidTestImplementation "androidx.navigation:navigation-testing:$Version.navigation"
+}
+
+android {
+  defaultConfig {
+    applicationId "com.gas.musicgear"
+  }
+}

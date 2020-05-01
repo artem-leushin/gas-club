@@ -1,0 +1,33 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion Version.compileSdk
+  buildToolsVersion Version.buildTools
+
+  defaultConfig {
+    minSdkVersion Version.minSdk
+    targetSdkVersion Version.targetSdk
+    versionCode Version.appVersionCode
+    versionName Version.appVersionName
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    vectorDrawables.useSupportLibrary = true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+              'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  dataBinding.enabled = true
+}
