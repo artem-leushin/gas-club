@@ -12,7 +12,6 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$Version.appCompat"
   implementation "com.google.android.material:material:$Version.material"
   implementation "androidx.constraintlayout:constraintlayout:$Version.constraintLayout"
-  implementation "androidx.viewpager2:viewpager2:$Version.viewpager2"
   implementation "androidx.core:core-ktx:$Version.ktxCore"
 
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Version.lifecycle"
@@ -22,6 +21,9 @@ dependencies {
 
   implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
   implementation "androidx.navigation:navigation-ui-ktx:$Version.navigation"
+
+  implementation Deps.koinCore
+  implementation Deps.koinAndroid
 
   testImplementation Deps.jUnit
   androidTestImplementation Deps.jUnitExt

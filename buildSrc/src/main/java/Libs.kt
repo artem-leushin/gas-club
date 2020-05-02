@@ -11,6 +11,7 @@ object Version {
   const val kotlinPlugin = "1.3.61"
   const val coroutinesAndroid = "1.0.1" // https://kotlinlang.org/
 
+  const val jackson = "2.9.9"
   const val adapterDelegates = "4.2.0"
   const val threeTen = "1.2.2"
 
@@ -92,12 +93,12 @@ object Deps {
   const val lifecycleProcess = "androidx.lifecycle:lifecycle-process:${Version.lifecycle}"
   const val lifecycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Version.lifecycle}"
   const val lifecyclePaging = "androidx.paging:paging-runtime:${Version.lifecycle}"
-  const val lifecycleRoom = "androidx.room:room-runtime:${Version.lifecycle}"
-  const val lifecycleRoomRxJava2 = "androidx.room:room-rxjava2:${Version.lifecycle}"
-  const val lifecycleRoomCompiler = "androidx.room:room-compiler:${Version.lifecycle}"
-  const val lifecycleNavigation = "androidx.navigation:navigation-fragment-ktx:${Version.lifecycle}"
-  const val lifecycleNavigationUi = "androidx.navigation:navigation-ui-ktx:${Version.lifecycle}"
-  const val lifecycleNavigationDynamic ="androidx.navigation:navigation-dynamic-features-fragment:${Version.lifecycle}"
+  const val room = "androidx.room:room-runtime:${Version.lifecycle}"
+  const val roomRx = "androidx.room:room-rxjava2:${Version.lifecycle}"
+  const val roomCompiler = "androidx.room:room-compiler:${Version.lifecycle}"
+  const val navigation = "androidx.navigation:navigation-fragment-ktx:${Version.lifecycle}"
+  const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Version.lifecycle}"
+  const val navigationDynamic ="androidx.navigation:navigation-dynamic-features-fragment:${Version.lifecycle}"
 
   // KTX
   const val ktxCore = "androidx.core:core-ktx:${Version.ktxCore}"
@@ -111,10 +112,29 @@ object Deps {
 
   // Koin
   const val koinCore = "org.koin:koin-core:${Version.koin}"
+  const val koinExperimental = "org.koin:koin-core-ext:${Version.koin}"
   const val koinAndroid = "org.koin:koin-android:${Version.koin}"
-  const val koinCoreScope = "org.koin:koin-androidx-scope:${Version.koin}"
-  const val koinAndroidViewModel = "org.koin:koin-androidx-viewmodel:${Version.koin}"
+  const val koinScope = "org.koin:koin-androidx-scope:${Version.koin}"
+  const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Version.koin}"
+  const val koinFragmentFactory = "org.koin:koin-androidx-fragment:${Version.koin}"
   const val koinTests = "org.koin:koin-test:${Version.koin}"
+
+  // Network
+  const val retrofit2 = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+  const val retrofit2RxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
+  const val okhttp = "com.squareup.okhttp3:okhttp:${Version.okHttp}"
+  const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
+  const val jacksonParser = "com.fasterxml.jackson.core:jackson-core:${Version.jackson}"
+
+  // Image loading
+  const val glide = "com.github.bumptech.glide:glide:${Version.glide}"
+  const val glideOkhttpIntegration = "com.github.bumptech.glide:okhttp3-integration:${Version.glide}"
+  const val glideCompiler = "com.github.bumptech.glide:compiler:${Version.glide}"
+
+  // Serialization
+  const val loganSquare = "com.bluelinelabs:logansquare:${Version.loganSquare}"
+  const val loganSquarecompiler = "com.bluelinelabs:logansquare-compiler:${Version.loganSquare}"
+  const val retrofitLoganSquare = "com.github.aurae.retrofit2:converter-logansquare:${Version.loganSquare}"
 
   // Tests
   const val jUnit = "junit:junit:${Version.jUnit}"

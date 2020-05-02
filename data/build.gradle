@@ -3,9 +3,29 @@ apply from: "$rootProject.projectDir/base.gradle"
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation 'androidx.appcompat:appcompat:1.1.0'
-  implementation 'androidx.core:core-ktx:1.2.0'
+  implementation project(":domain")
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
+  implementation "io.reactivex.rxjava2:rxjava:$Version.rxJava2"
+  implementation "io.reactivex.rxjava2:rxandroid:$Version.rxAndroid2"
+  implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
+  implementation "com.jakewharton.rx2:replaying-share:${Version.rxReplayShare}"
+
+  implementation "androidx.core:core-ktx:${Version.ktxCore}"
+  implementation "com.squareup.okhttp3:okhttp:${Version.okHttp}"
+  debugImplementation "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
+
+  implementation "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:${Version.retrofit}"
+  implementation "com.github.pwittchen:reactivenetwork-rx2:${Version.rxNetwork}"
+
+  implementation "com.bluelinelabs:logansquare:${Version.loganSquare}"
+  implementation "com.github.aurae.retrofit2:converter-logansquare:${Version.retrofitLoganSquare}"
+  kapt "com.bluelinelabs:logansquare-compiler:${Version.loganSquare}"
+  implementation "com.fasterxml.jackson.core:jackson-core:${Version.jackson}"
+
+  implementation Deps.koinCore
+  implementation Deps.koinAndroid
 
   testImplementation Deps.jUnit
   testImplementation Deps.mockito
@@ -15,3 +35,5 @@ dependencies {
   testImplementation Deps.testArch
   androidTestImplementation Deps.jUnitExt
 }
+
+
