@@ -26,6 +26,7 @@ dependencies {
 
   implementation Deps.koinCore
   implementation Deps.koinAndroid
+  implementation Deps.koinAndroidExperimental
 
   testImplementation Deps.jUnit
   testImplementation Deps.mockito

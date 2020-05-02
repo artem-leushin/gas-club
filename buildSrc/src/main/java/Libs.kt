@@ -14,6 +14,7 @@ object Version {
   const val jackson = "2.9.9"
   const val adapterDelegates = "4.2.0"
   const val threeTen = "1.2.2"
+  const val vkSdk = "2.2.1"
 
   // Android Jetpack
   // https://developer.android.com/jetpack
@@ -44,9 +45,9 @@ object Version {
   const val rxReplayShare = "2.2.0"     //https://github.com/JakeWharton/RxReplayingShare
   const val rxKotlin2 = "2.2.0"          //https://github.com/ReactiveX/RxKotlin
   const val rxKotlin3 = "3.0.0"
-  const val rxAndroid2 = "2.1.0"         //https://github.com/ReactiveX/RxAndroid
+  const val rxAndroid2 = "2.1.1"         //https://github.com/ReactiveX/RxAndroid
   const val rxAndroid3 = "3.0.0"
-  const val rxBinding2 = "2.1.1"         //https://github.com/JakeWharton/RxBinding
+  const val rxBinding2 = "2.2.0"         //https://github.com/JakeWharton/RxBinding
   const val rxBinding3 = "3.1.0"
   const val rxNetwork = "3.0.1"         //https://github.com/pwittchen/ReactiveNetwork
   const val rxPermissions = "0.10.2"    //https://github.com/tbruyelle/RxPermissions
@@ -76,29 +77,42 @@ object Version {
 
 @Suppress("Reformat")
 object Deps {
-  // Kotlin
   const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
 
-  // Coroutines
-  const val coroutines ="org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutinesAndroid}"
-  const val coroutinesAndroid ="org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutinesAndroid}"
+  const val vkSdk = "com.vk:androidsdk:${Version.vkSdk}"
+  const val adapterDelegates = "com.hannesdorfmann:adapterdelegates4:${Version.adapterDelegates}"
+  const val threeTenTime = "com.jakewharton.threetenabp:threetenabp:${Version.threeTen}"
 
-  // Jetpack
-  const val lifecycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Version.lifecycle}"
-  const val lifecycleReactiveStreams = "androidx.lifecycle:lifecycle-reactivestreams:${Version.lifecycle}"
-  const val lifecycleLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Version.lifecycle}"
-  const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycle}"
-  const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
+  // Android
+  const val appCompat = "androidx.appcompat:appcompat:${Version.appCompat}"
+  const val material = "com.google.android.material:material:${Version.material}"
+
+  // Coroutines
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutinesAndroid}"
+  const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutinesAndroid}"
+
+  // Jetpack main
+  const val lifecycle = "androidx.lifecycle:lifecycle-runtime:${Version.lifecycle}"
+  const val lifecycleKapt = "androidx.lifecycle:lifecycle-common-java8:${Version.lifecycle}"
+  const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycle}"
+  const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
+
+  // Jetpack optional
   const val lifecycleService = "androidx.lifecycle:lifecycle-service:${Version.lifecycle}"
   const val lifecycleProcess = "androidx.lifecycle:lifecycle-process:${Version.lifecycle}"
-  const val lifecycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Version.lifecycle}"
-  const val lifecyclePaging = "androidx.paging:paging-runtime:${Version.lifecycle}"
+  const val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Version.lifecycle}"
+  const val lifecycleReactiveStreams = "androidx.lifecycle:lifecycle-reactivestreams:${Version.lifecycle}"
+
+  // Jetpack persistance
+  const val paging = "androidx.paging:paging-runtime:${Version.lifecycle}"
   const val room = "androidx.room:room-runtime:${Version.lifecycle}"
   const val roomRx = "androidx.room:room-rxjava2:${Version.lifecycle}"
   const val roomCompiler = "androidx.room:room-compiler:${Version.lifecycle}"
+
+  // Jetpack navigation
   const val navigation = "androidx.navigation:navigation-fragment-ktx:${Version.lifecycle}"
   const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Version.lifecycle}"
-  const val navigationDynamic ="androidx.navigation:navigation-dynamic-features-fragment:${Version.lifecycle}"
+  const val navigationDynamic = "androidx.navigation:navigation-dynamic-features-fragment:${Version.lifecycle}"
 
   // KTX
   const val ktxCore = "androidx.core:core-ktx:${Version.ktxCore}"
@@ -106,18 +120,21 @@ object Deps {
   const val ktxFragment = "androidx.fragment:fragment-ktx:${Version.ktxFragment}"
   const val ktxRoom = "androidx.room:room-ktx:${Version.ktxRoom}"
   const val ktxLifecycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.ktxLifecycle}"
-  const val ktxNavigationFragment ="androidx.navigation:navigation-fragment-ktx:${Version.ktxNavigation}"
-  const val ktxNavigationRuntime ="androidx.navigation:navigation-runtime-ktx:${Version.ktxNavigation}"
+  const val ktxNavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Version.ktxNavigation}"
+  const val ktxNavigationRuntime = "androidx.navigation:navigation-runtime-ktx:${Version.ktxNavigation}"
   const val ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:${Version.ktxNavigation}"
 
-  // Koin
+  // Koin core
   const val koinCore = "org.koin:koin-core:${Version.koin}"
   const val koinExperimental = "org.koin:koin-core-ext:${Version.koin}"
+  const val koinTests = "org.koin:koin-test:${Version.koin}"
+
+  // Koin Android
   const val koinAndroid = "org.koin:koin-android:${Version.koin}"
+  const val koinAndroidExperimental = "org.koin:koin-androidx-ext:${Version.koin}"
   const val koinScope = "org.koin:koin-androidx-scope:${Version.koin}"
   const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Version.koin}"
   const val koinFragmentFactory = "org.koin:koin-androidx-fragment:${Version.koin}"
-  const val koinTests = "org.koin:koin-test:${Version.koin}"
 
   // Network
   const val retrofit2 = "com.squareup.retrofit2:retrofit:${Version.retrofit}"

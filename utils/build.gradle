@@ -2,11 +2,25 @@ apply plugin: 'com.android.library'
 apply from: "$rootProject.projectDir/base.gradle"
 
 dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation 'androidx.core:core-ktx:1.2.0'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
+  implementation "androidx.core:core-ktx:$Version.ktxCore"
+  implementation "androidx.appcompat:appcompat:$Version.appCompat"
+  implementation "com.google.android.material:material:$Version.material"
+
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-common-java8:$Version.lifecycle"
+
+  implementation "io.reactivex.rxjava2:rxjava:$Version.rxJava2"
+  implementation "io.reactivex.rxjava2:rxandroid:$Version.rxAndroid2"
+  implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
+  implementation "com.jakewharton.rxbinding2:rxbinding:$Version.rxBinding2"
+  implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${Version.rxBinding2}"
 
   implementation Deps.koinCore
   implementation Deps.koinAndroid
+  implementation Deps.koinAndroidExperimental
 
   testImplementation Deps.jUnit
   androidTestImplementation Deps.jUnitExt
