@@ -32,7 +32,7 @@ class GasApp : Application() {
       RxJavaPlugins.setErrorHandler {
         if (BuildConfig.DEBUG) {
           it.printStackTrace()
-          Log.e("CrewellApp", it?.message ?: "")
+          Log.e("GasApp", it?.message ?: "")
         }
       }
 

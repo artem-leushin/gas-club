@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--Color palette-->
+  <color name="crimson">#C65A53</color> <!--Color primary (light)-->
+  <color name="crimson_dark">#912b2a</color> <!--Color primary variant (light)-->
+  <color name="crimson_light">#fd8a7f</color>
+  <color name="orange_browney">#6E6352</color> <!--Color primary (dark)-->
+  <color name="orange_sunset">#E9AD78</color> <!--Color primary variant (dark)-->
+
+  <color name="cream">#f4f2d1</color> <!--Color secondary-->
+  <color name="cream_dark">#c1bfa0</color> <!--Color secondary variant-->
+  <color name="cream_light">#fcfef5</color>
+
+  <color name="red_200">#cf6679</color> <!--Color error (dark)-->
+  <color name="red_600">#b00020</color> <!--Color error (light)-->
+
+  <!--Color surface (light), color on error (light), -->
+  <!--color on surface (dark), color on surface (dark)-->
+  <color name="white_50">#ffffff</color>
+
+  <color name="black_800">#121212</color> <!--Color surface (dark)-->
+  <!--Color on secondary (light), color on background (light),-->
+  <!--color on surface (light)-->
+  <color name="black_900">#000000</color>
+
+  <!--additional colors-->
+  <color name="browney">#5C3E2F</color>
+  <color name="brown_dark">#3B2012</color>
+
+  <color name="green_pale">#A0B090</color>
+  <color name="yellow_pale">#CDC6AE</color>
+  <color name="blue_pale">#BFD8DC</color>
+</resources>
