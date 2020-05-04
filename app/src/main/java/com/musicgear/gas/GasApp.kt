@@ -5,7 +5,9 @@ import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.musicgear.gas.data.di.dataModule
+import com.musicgear.gas.di.loginModule
 import com.musicgear.gas.di.mainModule
+import com.musicgear.gas.di.utilsModule
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.plugins.RxJavaPlugins
@@ -22,7 +24,9 @@ class GasApp : Application() {
       androidContext(this@GasApp)
       modules(
         mainModule,
-        dataModule
+        dataModule,
+        loginModule,
+        utilsModule
       )
     }
   }

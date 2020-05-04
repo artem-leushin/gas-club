@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/base.gradle"
+
+android {
+  compileSdkVersion 29
+  buildToolsVersion "29.0.2"
+
+  defaultConfig {
+    minSdkVersion 21
+    targetSdkVersion 29
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles 'consumer-rules.pro'
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation project(":featureLogin")
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
+  implementation "androidx.core:core-ktx:$Version.ktxCore"
+
+  implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
+  implementation "androidx.navigation:navigation-ui-ktx:$Version.navigation"
+  implementation "androidx.navigation:navigation-runtime-ktx:$Version.ktxNavigation"
+
+  implementation Deps.koinCore
+  implementation Deps.koinAndroid
+  implementation Deps.koinAndroidExperimental
+
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
+}

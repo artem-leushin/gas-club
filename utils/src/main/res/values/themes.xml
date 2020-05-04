@@ -41,6 +41,7 @@
     <item name="textAppearanceButton">@style/TextAppearance.Gas.Button</item>
     <item name="textAppearanceCaption">@style/TextAppearance.Gas.Caption</item>
     <item name="textAppearanceOverline">@style/TextAppearance.Gas.Overline</item>
+    <item name="fontFamily">@font/open_sans_family</item>
     <!--Material shape attributes-->
     <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent</item>
     <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyTheme.MediumComponent</item>
@@ -53,9 +54,9 @@
   </style>
 
   <style name="Base.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-    <item name="android:statusBarColor" >?attr/colorSurface</item>
+    <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
     <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-    <item name="android:navigationBarColor" >?android:attr/colorBackground</item>
+    <item name="android:navigationBarColor" >?attr/colorPrimary</item>
     <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
   </style>

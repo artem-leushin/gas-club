@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">Gas Club</string>
+  <string name="menu_categories">Instruments Categories</string>
+  <string name="menu_bookmarks">Bookmarks</string>
+  <string name="menu_search">Search</string>
+  <string name="menu_blacklist">Blacklist</string>
 </resources>
