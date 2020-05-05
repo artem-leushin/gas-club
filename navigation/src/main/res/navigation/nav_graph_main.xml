@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph_main">
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph_main"
+    app:startDestination="@id/startFragment">
 
+  <fragment
+      android:id="@+id/loginFragment"
+      android:name="com.musicgear.gas.login.LoginFragment"
+      android:label="LoginFragment" />
+
+  <fragment
+      android:id="@+id/musicGearFragment"
+      android:name="com.musicgear.gas.gear.MusicGearFragment"
+      android:label="MusicGearFragment" >
+    <action
+        android:id="@+id/from_music_gear_to_instruments"
+        app:destination="@id/instrumentsFragment" />
+    <action
+        android:id="@+id/action_musicGearFragment_to_blacklistedUsersFragment"
+        app:destination="@id/blacklistedUsersFragment" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/instrumentsFragment"
+      android:name="com.musicgear.gas.instruments.InstrumentsFragment"
+      android:label="InstrumentsFragment" >
+    <action
+        android:id="@+id/from_instruments_to_details"
+        app:destination="@id/musicItemDetailsFragment" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/musicItemDetailsFragment"
+      android:name="com.musicgear.gas.details.MusicItemDetailsFragment"
+      android:label="MusicItemDetailsFragment" />
+
+  <fragment
+      android:id="@+id/blacklistedUsersFragment"
+      android:name="com.musicgear.gas.blacklist.BlacklistedUsersFragment"
+      android:label="BlacklistedUsersFragment" />
+
+  <fragment
+      android:id="@+id/startFragment"
+      android:name="com.musicgear.gas.start.StartFragment"
+      android:label="StartFragment" >
+
+    <action
+        android:id="@+id/from_start_to_login"
+        app:destination="@id/loginFragment" />
+  </fragment>
+
+  <action android:id="@+id/to_music_gear" app:destination="@id/musicGearFragment" />
 </navigation>

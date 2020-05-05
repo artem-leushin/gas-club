@@ -1,30 +1,10 @@
 apply plugin: 'com.android.library'
 apply from: "$rootProject.projectDir/base.gradle"
 
-android {
-  compileSdkVersion 29
-  buildToolsVersion "29.0.2"
-
-  defaultConfig {
-    minSdkVersion 21
-    targetSdkVersion 29
-    versionCode 1
-    versionName "1.0"
-
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles 'consumer-rules.pro'
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-    }
-  }
-}
-
 dependencies {
+  implementation project(":domain")
   implementation project(":featureLogin")
+  implementation project(":featureMusicGear")
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
   implementation "androidx.core:core-ktx:$Version.ktxCore"

@@ -1,6 +1,8 @@
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/base.gradle"
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
   implementation "io.reactivex.rxjava2:rxjava:$Version.rxJava2"
+  implementation Deps.threeTenTime
 }

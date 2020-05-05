@@ -21,8 +21,9 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     super.onViewCreated(view, savedInstanceState)
     navigation_view.setNavigationItemSelectedListener {
       when (it.itemId) {
-        R.id.bottom_menu_bookmarks -> snackBarShort(it.title)?.show()
+        R.id.bottom_menu_categories -> snackBarShort(it.title)?.show()
         R.id.bottom_menu_black_list -> snackBarShort(it.title)?.show()
+        R.id.bottom_menu_bookmarks -> snackBarShort(it.title)?.show()
       }
       true
     }

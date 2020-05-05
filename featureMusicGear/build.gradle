@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/base.gradle"
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation project(":domain")
+  implementation project(":utils")
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
+  implementation "androidx.appcompat:appcompat:$Version.appCompat"
+  implementation "com.google.android.material:material:$Version.material"
+  implementation "androidx.constraintlayout:constraintlayout:$Version.constraintLayout"
+  implementation "androidx.core:core-ktx:$Version.ktxCore"
+
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Version.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-common-java8:$Version.lifecycle"
+
+  implementation Deps.koinCore
+  implementation Deps.koinAndroid
+  implementation Deps.koinAndroidExperimental
+
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
+
+  apply from: "${sharedDependencies}/commonRxJava.gradle"
+}

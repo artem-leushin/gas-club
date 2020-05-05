@@ -4,6 +4,7 @@ apply from: "$rootProject.projectDir/base.gradle"
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation project(":domain")
+  implementation Deps.threeTenTime
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
   implementation "io.reactivex.rxjava2:rxjava:$Version.rxJava2"
@@ -23,6 +24,12 @@ dependencies {
   implementation "com.github.aurae.retrofit2:converter-logansquare:${Version.retrofitLoganSquare}"
   kapt "com.bluelinelabs:logansquare-compiler:${Version.loganSquare}"
   implementation "com.fasterxml.jackson.core:jackson-core:${Version.jackson}"
+
+  implementation Deps.room
+  implementation Deps.roomRx
+  kapt Deps.roomCompiler
+
+  implementation "com.vk:androidsdk:2.2.1"
 
   implementation Deps.koinCore
   implementation Deps.koinAndroid

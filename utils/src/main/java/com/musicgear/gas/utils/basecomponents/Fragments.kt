@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.musicgear.gas.utils.basecomponents.mvi.BaseView
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.disposeOf
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateChange>> :
   Fragment(),
   BaseView<State> {
 
   protected var createdFirstTime: Boolean = true
-  protected open var viewSubscriptions: Disposable? = null
+  protected open val viewSubscriptions: CompositeDisposable? = null
   protected abstract val viewModel: VM
   protected abstract fun layoutResId(): Int
 
@@ -31,16 +32,20 @@ abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateC
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    val view = inflater.inflate(layoutResId(), container, false)
+  ): View? = inflater.inflate(layoutResId(), container, false)
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     initIntents()
-    return view
+  }
+
+  override fun observeViewState() {
+    viewModel.currentViewState().observe(this, Observer { state -> render(state) })
   }
 
   override fun onDestroyView() {
     super.onDestroyView()
     viewSubscriptions.disposeOf()
-    viewSubscriptions = null
   }
 }
 
@@ -60,6 +65,11 @@ abstract class BaseBindingFragment<Binding : ViewDataBinding,
   ): View? = DataBindingUtil.inflate<Binding>(inflater, layoutResId(), container, false).run {
     viewBinding = this
     root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initIntents()
   }
 
   override fun onDestroyView() {

@@ -9,6 +9,7 @@ dependencies {
   implementation project(":data")
   implementation project(":navigation")
   implementation project(":featureLogin")
+  implementation project(":featureMusicGear")
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
   implementation "androidx.appcompat:appcompat:$Version.appCompat"
@@ -23,6 +24,8 @@ dependencies {
 
   implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
   implementation "androidx.navigation:navigation-ui-ktx:$Version.navigation"
+
+  implementation "com.vk:androidsdk:2.2.1"
 
   implementation Deps.koinCore
   implementation Deps.koinAndroid

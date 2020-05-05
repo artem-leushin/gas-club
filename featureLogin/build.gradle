@@ -21,6 +21,9 @@ dependencies {
   implementation Deps.koinAndroid
   implementation Deps.koinAndroidExperimental
 
+  implementation "com.vk:androidsdk:2.2.1"
+  implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
+
   testImplementation Deps.jUnit
   androidTestImplementation Deps.jUnitExt
   androidTestImplementation Deps.espresso

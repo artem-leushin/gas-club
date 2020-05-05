@@ -1,18 +1,54 @@
 package com.musicgear.gas.login
 
+import com.musicgear.gas.domain.interactor.LoginWithVkUseCase
+import com.musicgear.gas.domain.interactor.ProceedLoginWithVkUseCase
 import com.musicgear.gas.login.LoginView.*
+import com.musicgear.gas.login.LoginView.Event.*
+import com.musicgear.gas.login.LoginView.StateChange.*
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
+import com.musicgear.gas.utils.rx.applySchedulers
+import com.musicgear.gas.utils.rx.sequenceEvents
 import io.reactivex.Observable
 
-class LoginViewModel : BaseViewModel<State, StateChange>() {
+class LoginViewModel(
+  private val startLogin: LoginWithVkUseCase,
+  private val proceedLogin: ProceedLoginWithVkUseCase,
+  private val navigator: LoginCoordinator
+) : BaseViewModel<State, StateChange>() {
   override fun initState(): State = State()
 
-  override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> = Observable.never()
+  override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
+    with(intentStream) {
+      Observable.merge(
+        ofType(StartLogin::class.java)
+          .switchMap {
+            startLogin.execute(it.activity)
+              .applySchedulers()
+              .andThen(Observable.just(Success))
+              .cast(StateChange::class.java)
+              .onErrorResumeNext { e: Throwable -> sequenceEvents(Error(e), HideError) }
+              .startWith(StartLoading)
+          },
 
-  override fun reduceState(
-    state: State,
-    changes: StateChange
-  ): State {
-    return state
+        ofType(ProceedLogin::class.java)
+          .switchMap {
+            proceedLogin.execute(it.vkAuthBundle)
+              .applySchedulers()
+              .andThen(
+                Observable.just(Success)
+                  .doOnNext { navigator.goToMusicGear() }
+              )
+              .cast(StateChange::class.java)
+              .onErrorResumeNext { e: Throwable -> sequenceEvents(Error(e), HideError) }
+              .startWith(StartLoading)
+          }
+      )
+    }
+
+  override fun reduceState(state: State, changes: StateChange): State = when (changes) {
+    is StartLoading -> state.copy(loading = true)
+    is Success -> state.copy(success = true, loading = false, error = null)
+    is Error -> state.copy(success = false, loading = false, error = changes.error)
+    is HideError -> state.copy(error = null)
   }
 }
