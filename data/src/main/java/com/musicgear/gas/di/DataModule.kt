@@ -58,7 +58,7 @@ val dataModule = module {
 
   single<OkHttpClientFactory>(named(HTTP_CLIENT_FACTORY_IMG)) { ImageLoaderClientFactory() }
   single<OkHttpClientFactory>(named(HTTP_CLIENT_FACTORY_API)) {
-    ClientFactory(connectivityService = get())
+    ClientFactory(connectivityService = get(), sessionSource = get())
   }
 
   single<CallAdapter.Factory> { RxErrorHandlingCallAdapterFactory() }

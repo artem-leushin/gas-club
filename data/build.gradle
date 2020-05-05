@@ -44,4 +44,12 @@ dependencies {
   androidTestImplementation Deps.jUnitExt
 }
 
+android {
+  buildTypes {
+    debug {
+      buildConfigField "String", "BASE_URL", '"https://api.vk.com/method/"'
+      buildConfigField "String", "API_VERSION", '"5.103"'
+    }
+  }
+}
 

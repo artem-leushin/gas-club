@@ -1,8 +1,10 @@
 package com.musicgear.gas.data.remote.api.okhttp
 
 import android.annotation.SuppressLint
+import com.musicgear.gas.data.BuildConfig
 import com.musicgear.gas.data.HttpClientBuilderProvider
 import com.musicgear.gas.data.remote.api.entity.ErrorHolder
+import com.musicgear.gas.domain.datasource.VkSessionSource
 import com.musicgear.gas.domain.service.InternetObserverService
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -20,19 +22,38 @@ interface OkHttpClientFactory {
 }
 
 @SuppressLint("CheckResult")
-internal class ClientFactory(connectivityService: InternetObserverService) : OkHttpClientFactory {
+internal class ClientFactory(
+  connectivityService: InternetObserverService,
+  sessionSource: VkSessionSource
+) : OkHttpClientFactory {
 
   private var connected = true
+  private var accessToken: String = ""
 
   init {
     connectivityService.observeInternetConnection()
       .subscribe { connected = it }
+
+    sessionSource.getSession().doOnNext { accessToken = it.accessToken }
+      .subscribe()
   }
 
   override fun create(): OkHttpClient = HttpClientBuilderProvider.create()
-    .addInterceptor(acceptLanguageInterceptor)
+    .addInterceptor(accessTokenInterceptor)
     .addInterceptor(connectionStateInterceptor)
+    .addInterceptor(acceptLanguageInterceptor)
     .build()
+
+  private val accessTokenInterceptor = Interceptor { chain ->
+    val origRequest = chain.request()
+    val newUrl = origRequest.url.newBuilder()
+      .addQueryParameter("access_token", accessToken)
+      .addQueryParameter("v", BuildConfig.API_VERSION)
+      .build()
+
+    val newRequest = origRequest.newBuilder().url(newUrl).build()
+    chain.proceed(newRequest)
+  }
 
   private val acceptLanguageInterceptor = Interceptor { chain ->
     val origRequest = chain.request()
