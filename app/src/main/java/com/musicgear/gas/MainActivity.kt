@@ -7,7 +7,8 @@ import android.view.MenuItem
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
-import com.musicgear.gas.MainView.*
+import com.musicgear.gas.MainView.State
+import com.musicgear.gas.MainView.StateChanges
 import com.musicgear.gas.login.LoginFragment
 import com.musicgear.gas.navigation.AppNavigator
 import com.musicgear.gas.utils.basecomponents.BaseActivity

@@ -22,7 +22,7 @@ dependencies {
   implementation Deps.koinAndroid
   implementation Deps.koinAndroidExperimental
 
-  api Deps.glide
+  implementation Deps.glide
   kapt Deps.glideCompiler
 
   testImplementation Deps.jUnit

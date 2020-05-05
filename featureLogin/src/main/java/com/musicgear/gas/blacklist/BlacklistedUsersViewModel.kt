@@ -1,6 +1,7 @@
 package com.musicgear.gas.blacklist
 
-import com.musicgear.gas.blacklist.BlacklistedUsersView.*
+import com.musicgear.gas.blacklist.BlacklistedUsersView.State
+import com.musicgear.gas.blacklist.BlacklistedUsersView.StateChange
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import io.reactivex.Observable
 

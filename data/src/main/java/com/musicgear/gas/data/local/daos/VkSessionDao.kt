@@ -5,10 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.musicgear.gas.data.local.entity.UserDB
 import com.musicgear.gas.data.local.entity.VkSessionDB
 import io.reactivex.Completable
-import io.reactivex.Flowable
 import io.reactivex.Observable
 
 @Dao

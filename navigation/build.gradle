@@ -3,8 +3,10 @@ apply from: "$rootProject.projectDir/base.gradle"
 
 dependencies {
   implementation project(":domain")
+  implementation project(":featureStart")
   implementation project(":featureLogin")
-  implementation project(":featureMusicGear")
+  implementation project(':featureCategories')
+  implementation project(':featureInstrumentsList')
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
   implementation "androidx.core:core-ktx:$Version.ktxCore"

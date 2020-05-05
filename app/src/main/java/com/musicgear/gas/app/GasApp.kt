@@ -5,14 +5,16 @@ import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
+import com.musicgear.di.loginModule
 import com.musicgear.gas.BuildConfig
 import com.musicgear.gas.di.BindingComponent
+import com.musicgear.gas.di.categoriesModule
 import com.musicgear.gas.di.dataModule
-import com.musicgear.gas.di.loginModule
 import com.musicgear.gas.di.mainModule
-import com.musicgear.gas.di.musicGearModule
 import com.musicgear.gas.di.navigationModule
+import com.musicgear.gas.di.startModule
 import com.musicgear.gas.di.utilsModule
+import com.musicgear.gas.instruments.di.instrumentsModule
 import com.vk.api.sdk.VK
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,11 +37,14 @@ class GasApp : Application() {
         mainModule,
         dataModule,
         navigationModule,
+        startModule,
         loginModule,
-        musicGearModule,
+        categoriesModule,
+        instrumentsModule,
         utilsModule
       )
     }
+
     DataBindingUtil.setDefaultComponent(BindingComponent())
   }
 

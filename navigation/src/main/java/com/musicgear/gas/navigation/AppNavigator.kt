@@ -22,20 +22,21 @@ class AppNavigator {
     navController.navigate(R.id.from_start_to_login, null, navOptions, extras)
   }
 
-  fun goToMusicGear() {
+  fun goToCategories() {
     val navOptions = NavOptions.Builder()
       .setEnterAnim(R.anim.fade_in)
       .setExitAnim(R.anim.fade_out)
+      .setPopUpTo(R.id.startFragment, true)
       .build()
-    navController.navigate(R.id.to_music_gear, null, navOptions)
+    navController.navigate(R.id.to_categories, null, navOptions)
   }
 
-  fun goFromMusicGearToInstruments() {
+  fun goFromCategoriesToInstruments() {
     val navOptions = NavOptions.Builder()
       .setEnterAnim(R.anim.fade_in)
       .setExitAnim(R.anim.fade_out)
       .build()
-    navController.navigate(R.id.from_music_gear_to_instruments, null, navOptions)
+    navController.navigate(R.id.from_categories_to_instruments, null, navOptions)
   }
 
   fun goFromInstrumentsToDetails() {
@@ -43,7 +44,7 @@ class AppNavigator {
       .setEnterAnim(R.anim.fade_in)
       .setExitAnim(R.anim.fade_out)
       .build()
-    navController.navigate(R.id.from_instruments_to_details, null, navOptions)
+    navController.navigate(R.id.from_instruments_to_item_details, null, navOptions)
   }
 
 }

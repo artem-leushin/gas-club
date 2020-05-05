@@ -1,7 +1,6 @@
 package com.musicgear.gas.data.local.entity
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.musicgear.gas.data.local.db.LocalDateConverter

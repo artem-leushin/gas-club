@@ -1,7 +1,6 @@
 package com.musicgear.gas.data.remote.api.okhttp
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.musicgear.gas.data.HttpClientBuilderProvider
 import com.musicgear.gas.data.remote.api.entity.ErrorHolder
 import com.musicgear.gas.domain.service.InternetObserverService

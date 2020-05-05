@@ -1,6 +1,7 @@
 package com.musicgear.gas.details
 
-import com.musicgear.gas.details.MusicItemDetailsView.*
+import com.musicgear.gas.details.MusicItemDetailsView.State
+import com.musicgear.gas.details.MusicItemDetailsView.StateChange
 import com.musicgear.gas.utils.basecomponents.BaseFragment
 
 class MusicItemDetailsFragment : BaseFragment<State, StateChange, MusicItemDetailsViewModel>(),

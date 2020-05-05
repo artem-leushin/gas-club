@@ -18,9 +18,9 @@ import com.musicgear.gas.domain.HTTP_CLIENT_FACTORY_API
 import com.musicgear.gas.domain.HTTP_CLIENT_FACTORY_IMG
 import com.musicgear.gas.domain.USER_SOURCE_LOCAL
 import com.musicgear.gas.domain.USER_SOURCE_REMOTE
+import com.musicgear.gas.domain.datasource.UserSource
 import com.musicgear.gas.domain.datasource.VkSessionSource
 import com.musicgear.gas.domain.repository.UserRepository
-import com.musicgear.gas.domain.datasource.UserSource
 import com.musicgear.gas.domain.service.AuthService
 import com.musicgear.gas.domain.service.InternetObserverService
 import com.musicgear.gas.domain.service.SessionStatusService

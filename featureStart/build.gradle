@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/base.gradle"
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation project(":domain")
+  implementation project(":utils")
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
+  implementation "androidx.appcompat:appcompat:$Version.appCompat"
+  implementation "com.google.android.material:material:$Version.material"
+
+  implementation Deps.koinCore
+  implementation Deps.koinAndroid
+  implementation Deps.koinAndroidExperimental
+
+  implementation "com.vk:androidsdk:2.2.1"
+  implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
+
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
+
+  apply from: "${sharedDependencies}/commonRxJava.gradle"
+}

@@ -12,7 +12,6 @@ import androidx.core.graphics.ColorUtils
 import com.bumptech.glide.load.Key
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import com.musicgear.gas.utils.px
 import java.security.MessageDigest
 
 class AlphaTransformation : BitmapTransformation() {

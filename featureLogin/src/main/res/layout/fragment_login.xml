@@ -22,24 +22,22 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        bind:imgResId="@{R.mipmap.ic_logo}"
+        bind:assetName="@{`ic_logo.jpg`}"
         tools:srcCompat="@mipmap/ic_logo" />
 
     <ImageView
         android:id="@+id/iv_background"
         android:layout_width="0dp"
         android:layout_height="400dp"
-        android:adjustViewBounds="true"
-        android:cropToPadding="true"
         tools:alpha="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         bind:alphaGradient="@{true}"
-        bind:imgResId="@{R.mipmap.ic_logo_2}"
+        bind:assetName="@{`ic_logo_background.jpg`}"
         bind:transformCenterCrop="@{true}"
-        tools:src="@mipmap/ic_logo_2" />
+        tools:src="@mipmap/ic_logo_background" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"

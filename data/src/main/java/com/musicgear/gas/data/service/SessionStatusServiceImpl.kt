@@ -2,7 +2,8 @@ package com.musicgear.gas.data.service
 
 import android.annotation.SuppressLint
 import com.musicgear.gas.domain.entity.SessionStatus
-import com.musicgear.gas.domain.entity.SessionStatus.*
+import com.musicgear.gas.domain.entity.SessionStatus.LOGGED_IN
+import com.musicgear.gas.domain.entity.SessionStatus.LOGGED_OUT
 import com.musicgear.gas.domain.service.SessionStatusService
 import com.vk.api.sdk.VK
 import io.reactivex.Observable

@@ -1,9 +1,9 @@
 package com.musicgear.gas.data.repository
 
 import com.jakewharton.rx.ReplayingShare
-import com.musicgear.gas.domain.repository.UserRepository
 import com.musicgear.gas.domain.datasource.UserSource
 import com.musicgear.gas.domain.entity.User
+import com.musicgear.gas.domain.repository.UserRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 

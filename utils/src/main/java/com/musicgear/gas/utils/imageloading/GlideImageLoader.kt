@@ -1,6 +1,7 @@
 package com.musicgear.gas.utils.imageloading
 
 import android.graphics.Bitmap
+import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.Transformation
@@ -8,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.musicgear.gas.utils.imageloading.ImageLoader.*
+import com.musicgear.gas.utils.imageloading.ImageLoader.Args
 import com.musicgear.gas.utils.imageloading.transformation.AlphaTransformation
 import com.musicgear.gas.utils.px
 import java.util.ArrayList
@@ -23,6 +24,25 @@ object GlideImageLoader : ImageLoader {
 
     GlideApp.with(imageView)
       .load(imgUrl)
+      .apply(optionsTransformation)
+      .into(imageView)
+  }
+
+  override fun loadImg(imageView: ImageView, uri: Uri, args: Args) {
+    val optionsTransformation = extractTransformOptions(args)
+
+    GlideApp.with(imageView)
+      .load(uri)
+      .apply(optionsTransformation)
+      .into(imageView)
+  }
+
+  override fun loadAssetImg(imageView: ImageView, assetName: String, args: Args) {
+    val optionsTransformation = extractTransformOptions(args)
+    val uri = Uri.parse("file:///android_asset/$assetName")
+
+    GlideApp.with(imageView)
+      .load(uri)
       .apply(optionsTransformation)
       .into(imageView)
   }

@@ -2,9 +2,14 @@ package com.musicgear.gas.login
 
 import com.musicgear.gas.domain.interactor.LoginWithVkUseCase
 import com.musicgear.gas.domain.interactor.ProceedLoginWithVkUseCase
-import com.musicgear.gas.login.LoginView.*
-import com.musicgear.gas.login.LoginView.Event.*
-import com.musicgear.gas.login.LoginView.StateChange.*
+import com.musicgear.gas.login.LoginView.Event.ProceedLogin
+import com.musicgear.gas.login.LoginView.Event.StartLogin
+import com.musicgear.gas.login.LoginView.State
+import com.musicgear.gas.login.LoginView.StateChange
+import com.musicgear.gas.login.LoginView.StateChange.Error
+import com.musicgear.gas.login.LoginView.StateChange.HideError
+import com.musicgear.gas.login.LoginView.StateChange.StartLoading
+import com.musicgear.gas.login.LoginView.StateChange.Success
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.applySchedulers
 import com.musicgear.gas.utils.rx.sequenceEvents
