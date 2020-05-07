@@ -6,12 +6,12 @@
   <fragment
       android:id="@+id/loginFragment"
       android:name="com.musicgear.gas.login.LoginFragment"
-      android:label="LoginFragment" />
+      android:label="Login" />
 
   <fragment
       android:id="@+id/categoriesFragment"
       android:name="com.musicgear.gas.categories.CategoriesFragment"
-      android:label="CategoriesFragment" >
+      android:label="Categories" >
     <action
         android:id="@+id/from_categories_to_instruments"
         app:destination="@id/instrumentsFragment" />
@@ -23,7 +23,7 @@
   <fragment
       android:id="@+id/instrumentsFragment"
       android:name="com.musicgear.gas.instruments.InstrumentsFragment"
-      android:label="InstrumentsFragment" >
+      android:label="Instruments" >
     <action
         android:id="@+id/from_instruments_to_item_details"
         app:destination="@id/musicItemDetailsFragment" />
@@ -32,7 +32,7 @@
   <fragment
       android:id="@+id/musicItemDetailsFragment"
       android:name="com.musicgear.gas.details.MusicItemDetailsFragment"
-      android:label="MusicItemDetailsFragment" />
+      android:label="Details" />
 
   <fragment
       android:id="@+id/blacklistedUsersFragment"

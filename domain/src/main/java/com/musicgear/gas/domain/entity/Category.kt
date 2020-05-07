@@ -1,14 +1,22 @@
 package com.musicgear.gas.domain.entity
 
-class Category(
-  val id: Int,
-  val name: String,
-  val instruments: List<Instrument>
-)
+import org.threeten.bp.LocalDateTime
 
-class Instrument(
+data class Category(
   val id: Int,
   val name: String,
   val description: String,
+  val instrumentsCount: Int,
   val photoUrl: String
+)
+
+data class Instrument(
+  val id: Int,
+  val name: String,
+  val dateAdded: LocalDateTime,
+  val photoUrl: String
+)
+
+data class Comment(
+val text: String
 )

@@ -4,4 +4,8 @@
   <dimen name="corners_medium">8dp</dimen>
   <dimen name="corners_large">16dp</dimen>
 
+  <dimen name="stroke_thin">0.5dp</dimen>
+  <dimen name="stroke_medium">1dp</dimen>
+  <dimen name="stroke_thick">2dp</dimen>
+
 </resources>

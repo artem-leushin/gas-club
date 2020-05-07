@@ -2,11 +2,14 @@ package com.musicgear.gas.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
+import androidx.transition.Slide
+import androidx.transition.Transition
 import androidx.transition.TransitionSet
 import com.musicgear.gas.domain.entity.AuthBundle
 import com.musicgear.gas.login.LoginView.Event.ProceedLogin
@@ -37,11 +40,18 @@ class LoginFragment :
     savedInstanceState: Bundle?
   ): View? {
     super.onCreateView(inflater, container, savedInstanceState)
+    prepareEnterTransition()
+    return viewBinding!!.root
+  }
+
+  private fun prepareEnterTransition() {
     sharedElementEnterTransition = TransitionSet().apply {
       addTransition(ChangeBounds())
       addTransition(ChangeImageTransform())
     }
-    return viewBinding!!.root
+    enterTransition = Slide(Gravity.BOTTOM).apply {
+      startDelay = (sharedElementEnterTransition as Transition).duration + 300
+    }
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -49,7 +59,7 @@ class LoginFragment :
   }
 
   override fun initIntents() {
-    viewSubscriptions += btnLogin.safeClicks { StartLogin(activity!!) }
+    viewSubscriptions += btnLogin.safeClicks { StartLogin(requireActivity()) }
       .subscribe(viewModel.viewIntentsConsumer())
   }
 

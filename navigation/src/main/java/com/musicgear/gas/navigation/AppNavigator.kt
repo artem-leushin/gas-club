@@ -1,15 +1,18 @@
 package com.musicgear.gas.navigation
 
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 
 class AppNavigator {
-
   private lateinit var navController: NavController
 
   fun setNavController(navController: NavController) {
     this.navController = navController
+  }
+
+  fun setupToolbar(toolbar: Toolbar) {
   }
 
   fun goFromStartToLogin(extras: Navigator.Extras) {
@@ -26,7 +29,7 @@ class AppNavigator {
     val navOptions = NavOptions.Builder()
       .setEnterAnim(R.anim.fade_in)
       .setExitAnim(R.anim.fade_out)
-      .setPopUpTo(R.id.startFragment, true)
+      .setPopUpTo(R.id.nav_graph_main, true)
       .build()
     navController.navigate(R.id.to_categories, null, navOptions)
   }

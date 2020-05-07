@@ -1,9 +1,9 @@
 package com.musicgear.gas.data.datasource.local
 
-import com.musicgear.gas.data.local.daos.UserDao
+import com.musicgear.gas.data.database.daos.UserDao
+import com.musicgear.gas.data.datasource.UserSource
 import com.musicgear.gas.data.mappers.toDB
 import com.musicgear.gas.data.mappers.toDomain
-import com.musicgear.gas.domain.datasource.UserSource
 import com.musicgear.gas.domain.entity.User
 import io.reactivex.Completable
 import io.reactivex.Observable

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <import type="com.musicgear.gas.categories.R" />
+
+    <variable
+        name="category"
+        type="com.musicgear.gas.categories.CategoriesView.DisplayableCategory" />
+  </data>
+
+  <com.google.android.material.card.MaterialCardView
+      style="@style/Widget.MaterialComponents.CardView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clickable="true"
+      android:focusable="true"
+      android:stateListAnimator="@animator/thread_elevation_state_animator"
+      app:cardCornerRadius="0dp"
+      app:cardElevation="0dp"
+      app:rippleColor="?attr/colorSecondaryVariant">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:id="@+id/tv_title"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="16dp"
+          android:text="@{category.name}"
+          android:textAppearance="@style/TextAppearance.Gas.Subtitle2"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/iv_photo"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="Electric Guitars" />
+
+      <ImageView
+          android:id="@+id/iv_photo"
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:layout_marginStart="16dp"
+          android:adjustViewBounds="true"
+          android:cropToPadding="true"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          bind:imgUrl="@{category.photoUrl}"
+          bind:transformCenterCrop="@{true}"
+          bind:transformRoundedCorners="@{8}"
+          tools:srcCompat="@tools:sample/avatars" />
+
+      <TextView
+          android:id="@+id/tv_count"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          android:text="@{category.instrumentsCount + ` items`}"
+          android:textAppearance="@style/TextAppearance.Gas.Body2"
+          app:layout_constraintStart_toEndOf="@+id/iv_photo"
+          app:layout_constraintTop_toBottomOf="@+id/tv_title"
+          tools:text="347" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </com.google.android.material.card.MaterialCardView>
+</layout>

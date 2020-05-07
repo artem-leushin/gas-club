@@ -6,6 +6,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val categoriesModule = module {
-  viewModel { CategoriesViewModel(loadCategories = get()) }
-  factory { LoadCategoriesUseCase() }
+  viewModel { CategoriesViewModel(loadCategories = get(), coordinator = get()) }
+  factory { LoadCategoriesUseCase(repo = get()) }
 }

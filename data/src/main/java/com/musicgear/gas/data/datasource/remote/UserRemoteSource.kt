@@ -1,7 +1,7 @@
 package com.musicgear.gas.data.datasource.remote
 
-import com.musicgear.gas.data.remote.api.retrofit.RetrofitApi
-import com.musicgear.gas.domain.datasource.UserSource
+import com.musicgear.gas.data.api.retrofit.RetrofitApi
+import com.musicgear.gas.data.datasource.UserSource
 import com.musicgear.gas.domain.entity.User
 import io.reactivex.Completable
 import io.reactivex.Observable

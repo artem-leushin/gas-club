@@ -1,11 +1,14 @@
 package com.musicgear.gas.instruments
 
+import com.musicgear.gas.domain.interactor.LoadInstrumentsUseCase
 import com.musicgear.gas.instruments.InstrumentsView.State
 import com.musicgear.gas.instruments.InstrumentsView.StateChange
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import io.reactivex.Observable
 
-class InstrumentsViewModel : BaseViewModel<State, StateChange>() {
+class InstrumentsViewModel(
+  private val getInstrumentsForCategory: LoadInstrumentsUseCase
+) : BaseViewModel<State, StateChange>() {
   override fun initState(): State = State()
 
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> = Observable.never()

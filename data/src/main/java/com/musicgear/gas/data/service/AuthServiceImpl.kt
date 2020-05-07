@@ -1,8 +1,8 @@
 package com.musicgear.gas.data.service
 
 import android.app.Activity
+import com.musicgear.gas.data.datasource.VkSessionSource
 import com.musicgear.gas.data.mappers.toDomain
-import com.musicgear.gas.domain.datasource.VkSessionSource
 import com.musicgear.gas.domain.entity.AuthBundle
 import com.musicgear.gas.domain.entity.VkSession
 import com.musicgear.gas.domain.exception.VkLoginFailedException

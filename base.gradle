@@ -14,13 +14,18 @@ android {
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables.useSupportLibrary = true
+    resValue "string", "app_version", "${defaultConfig.versionName}${versionNameSuffix}"
   }
 
   buildTypes {
     release {
+      versionNameSuffix ".release"
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    debug {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-              'proguard-rules.pro'
+      versionNameSuffix ".debug"
     }
   }
 

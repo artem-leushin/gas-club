@@ -1,8 +1,8 @@
 dependencies {
-  implementation "com.jakewharton.rxbinding2:rxbinding:${Version.rxBinding}"
-  implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${Version.rxBinding}"
-  implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${Version.rxBinding}"
-  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:${Version.rxBinding}"
-  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${Version.rxBinding}"
-  implementation "com.jakewharton.rxbinding2:rxbinding-design:${Version.rxBinding}"
+  implementation "com.jakewharton.rxbinding2:rxbinding:${Version.rxBinding2}"
+  implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:${Version.rxBinding2}"
+  implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${Version.rxBinding2}"
+  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4:${Version.rxBinding2}"
+  implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${Version.rxBinding2}"
+  implementation "com.jakewharton.rxbinding2:rxbinding-design:${Version.rxBinding2}"
 }

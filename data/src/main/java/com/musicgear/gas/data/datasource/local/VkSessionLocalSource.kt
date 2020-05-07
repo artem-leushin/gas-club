@@ -1,9 +1,9 @@
 package com.musicgear.gas.data.datasource.local
 
-import com.musicgear.gas.data.local.daos.VkSessionDao
+import com.musicgear.gas.data.database.daos.VkSessionDao
+import com.musicgear.gas.data.datasource.VkSessionSource
 import com.musicgear.gas.data.mappers.toDB
 import com.musicgear.gas.data.mappers.toDomain
-import com.musicgear.gas.domain.datasource.VkSessionSource
 import com.musicgear.gas.domain.entity.VkSession
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.VKTokenExpiredHandler

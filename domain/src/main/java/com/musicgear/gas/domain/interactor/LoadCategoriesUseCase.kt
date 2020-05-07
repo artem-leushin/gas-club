@@ -2,14 +2,20 @@ package com.musicgear.gas.domain.interactor
 
 import com.musicgear.gas.domain.entity.Category
 import com.musicgear.gas.domain.entity.Instrument
+import com.musicgear.gas.domain.repository.CategoriesRepository
+import com.musicgear.gas.domain.repository.InstrumentsRepository
 import io.reactivex.Observable
 
-class LoadCategoriesUseCase {
-  fun execute(): Observable<List<Category>> = Observable.just(emptyList())
+class LoadCategoriesUseCase(
+  private val repo: CategoriesRepository
+) {
+  fun execute(): Observable<List<Category>> = repo.getShoppingCategories()
 }
 
-class LoadInstrumentsUseCase {
-  fun execute(): Observable<List<Instrument>> = Observable.just(emptyList())
+class LoadInstrumentsUseCase(
+  private val repo: InstrumentsRepository
+) {
+  fun execute(categoryId: Int): Observable<List<Instrument>> = repo.getInstruments(categoryId)
 }
 
 

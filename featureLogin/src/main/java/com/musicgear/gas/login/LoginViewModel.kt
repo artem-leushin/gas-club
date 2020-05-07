@@ -18,7 +18,7 @@ import io.reactivex.Observable
 class LoginViewModel(
   private val startLogin: LoginWithVkUseCase,
   private val proceedLogin: ProceedLoginWithVkUseCase,
-  private val navigator: LoginCoordinator
+  private val coordinator: LoginCoordinator
 ) : BaseViewModel<State, StateChange>() {
   override fun initState(): State = State()
 
@@ -39,10 +39,7 @@ class LoginViewModel(
           .switchMap {
             proceedLogin.execute(it.vkAuthBundle)
               .applySchedulers()
-              .andThen(
-                Observable.just(Success)
-                  .doOnNext { navigator.goToMusicGear() }
-              )
+              .andThen(Observable.just(StateChange.Transition(coordinator::goToMusicGear)))
               .cast(StateChange::class.java)
               .onErrorResumeNext { e: Throwable -> sequenceEvents(Error(e), HideError) }
               .startWith(StartLoading)
@@ -55,5 +52,6 @@ class LoginViewModel(
     is Success -> state.copy(success = true, loading = false, error = null)
     is Error -> state.copy(success = false, loading = false, error = changes.error)
     is HideError -> state.copy(error = null)
+    else -> state
   }
 }

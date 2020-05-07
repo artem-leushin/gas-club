@@ -20,5 +20,10 @@ interface LoginView {
     object Success : StateChange()
     class Error(val error: Throwable) : StateChange()
     object HideError : StateChange()
+    class Transition(transition: () -> Unit) : StateChange() {
+      init {
+        transition()
+      }
+    }
   }
 }

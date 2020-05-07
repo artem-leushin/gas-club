@@ -6,6 +6,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val instrumentsModule = module {
-  viewModel { InstrumentsViewModel() }
-  factory { LoadInstrumentsUseCase() }
+  viewModel { InstrumentsViewModel(getInstrumentsForCategory = get()) }
+  factory { LoadInstrumentsUseCase(repo = get()) }
 }

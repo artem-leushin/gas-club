@@ -1,7 +1,7 @@
 package com.musicgear.gas.data.mappers
 
-import com.musicgear.gas.data.local.entity.UserDB
-import com.musicgear.gas.data.local.entity.VkSessionDB
+import com.musicgear.gas.data.entity.local.UserDB
+import com.musicgear.gas.data.entity.local.VkSessionDB
 import com.musicgear.gas.domain.entity.User
 import com.musicgear.gas.domain.entity.VkSession
 
