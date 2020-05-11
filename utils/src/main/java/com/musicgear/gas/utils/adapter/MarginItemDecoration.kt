@@ -1,4 +1,4 @@
-package com.musicgear.gas.categories.adapter
+package com.musicgear.gas.utils.adapter
 
 import android.graphics.Rect
 import android.view.View

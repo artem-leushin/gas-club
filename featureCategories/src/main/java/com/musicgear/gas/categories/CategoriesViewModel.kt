@@ -1,7 +1,8 @@
 package com.musicgear.gas.categories
 
 import com.musicgear.gas.categories.CategoriesView.DisplayableCategory
-import com.musicgear.gas.categories.CategoriesView.Event
+import com.musicgear.gas.categories.CategoriesView.Event.GoToInstruments
+import com.musicgear.gas.categories.CategoriesView.Event.RefreshCategories
 import com.musicgear.gas.categories.CategoriesView.State
 import com.musicgear.gas.categories.CategoriesView.StateChange
 import com.musicgear.gas.categories.CategoriesView.StateChange.CategoriesLoaded
@@ -26,10 +27,10 @@ class CategoriesViewModel(
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
     with(intentStream) {
       Observable.merge(
-        ofType(Event.GoToInstruments::class.java)
-          .map { Transition(coordinator::goToInstruments) },
+        ofType(GoToInstruments::class.java)
+          .map { Transition { coordinator.goToInstruments(it.category) } },
 
-        ofType(Event.RefreshCategories::class.java)
+        ofType(RefreshCategories::class.java)
           .switchMap { loadCategories() }
       )
     }
@@ -45,13 +46,17 @@ class CategoriesViewModel(
     .startWith(StartLoading)
 
   private fun mapToDisplayable(categories: List<Category>): List<DisplayableCategory> =
-    categories.map { category ->
-      category.run {
-        DisplayableCategory(id, name, description, instrumentsCount.toString(), photoUrl)
-      }
-    }
+    categories.map { it.toPresentation() }
 
-  override fun reduceState(state: State, changes: StateChange): State = when (changes) {
+  private fun Category.toPresentation() = DisplayableCategory(
+    id,
+    name,
+    description,
+    instrumentsCount.toString(),
+    photoSizes.first().srcUrl
+  )
+
+  override fun reduce(state: State, changes: StateChange): State = when (changes) {
     is StartLoading -> state.copy(loading = true, error = null)
     is Success -> state.copy(loading = false, success = true, error = null)
     is CategoriesLoaded -> state.copy(

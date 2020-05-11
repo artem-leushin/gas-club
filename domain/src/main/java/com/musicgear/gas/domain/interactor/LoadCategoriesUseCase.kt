@@ -15,7 +15,8 @@ class LoadCategoriesUseCase(
 class LoadInstrumentsUseCase(
   private val repo: InstrumentsRepository
 ) {
-  fun execute(categoryId: Int): Observable<List<Instrument>> = repo.getInstruments(categoryId)
+  fun execute(categoryId: Int, page: Int): Observable<List<Instrument>> =
+    repo.getInstruments(categoryId, page)
 }
 
 

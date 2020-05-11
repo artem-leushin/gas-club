@@ -26,10 +26,10 @@ import com.musicgear.gas.data.repository.UserRepositoryImpl
 import com.musicgear.gas.data.service.AuthServiceImpl
 import com.musicgear.gas.data.service.InternetObserverImpl
 import com.musicgear.gas.data.service.SessionStatusServiceImpl
-import com.musicgear.gas.domain.HTTP_CLIENT_FACTORY_API
-import com.musicgear.gas.domain.HTTP_CLIENT_FACTORY_IMG
-import com.musicgear.gas.domain.USER_SOURCE_LOCAL
-import com.musicgear.gas.domain.USER_SOURCE_REMOTE
+import com.musicgear.gas.domain.constants.HTTP_CLIENT_FACTORY_API
+import com.musicgear.gas.domain.constants.HTTP_CLIENT_FACTORY_IMG
+import com.musicgear.gas.domain.constants.USER_SOURCE_LOCAL
+import com.musicgear.gas.domain.constants.USER_SOURCE_REMOTE
 import com.musicgear.gas.domain.repository.CategoriesRepository
 import com.musicgear.gas.domain.repository.InstrumentsRepository
 import com.musicgear.gas.domain.repository.ResourcesRepository

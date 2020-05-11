@@ -18,7 +18,7 @@ abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateC
   BaseView<State> {
 
   protected var createdFirstTime: Boolean = true
-  protected open val viewSubscriptions: CompositeDisposable? = null
+  protected var viewSubscriptions: CompositeDisposable? = null
   protected abstract val viewModel: VM
   protected abstract fun layoutResId(): Int
 
@@ -36,6 +36,7 @@ abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateC
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    viewSubscriptions = CompositeDisposable()
     initIntents()
   }
 
@@ -46,6 +47,7 @@ abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateC
   override fun onDestroyView() {
     super.onDestroyView()
     viewSubscriptions.disposeOf()
+    viewSubscriptions = null
   }
 }
 

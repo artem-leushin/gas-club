@@ -11,7 +11,7 @@ class MusicItemDetailsViewModel : BaseViewModel<State, StateChange>() {
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
     Observable.never()
 
-  override fun reduceState(state: State, changes: StateChange): State {
+  override fun reduce(state: State, changes: StateChange): State {
     return state
   }
 }

@@ -6,10 +6,10 @@ import com.musicgear.gas.data.mappers.toDomain
 import com.musicgear.gas.domain.entity.Category
 import io.reactivex.Observable
 
-class CategoriesRemoteSource(
+internal class CategoriesRemoteSource(
   private val api: RetrofitApi
 ) : CategoriesSource {
 
-  override fun getCategories(groupId: Int): Observable<List<Category>> = api.getAlbums(groupId)
+  override fun getCategories(groupId: Int): Observable<List<Category>> = api.getAlbums()
     .map { it.response!!.items!!.map { category -> category.toDomain() } }
 }

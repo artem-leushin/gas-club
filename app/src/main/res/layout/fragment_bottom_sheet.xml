@@ -1,69 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-  <com.google.android.material.navigation.NavigationView
-      android:id="@+id/navigation_view"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginEnd="16dp"
-      android:elevation="0dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/divider"
-      app:menu="@menu/bottom_nav_drawer_menu" />
+    <data>
+      <variable
+          name="user"
+          type="com.musicgear.gas.domain.entity.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <com.google.android.material.navigation.NavigationView
+          android:id="@+id/navigation_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginEnd="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/divider"
+          app:menu="@menu/menu_navigation_drawer" />
 
 
-  <ImageView
-      android:id="@+id/iv_avatar"
-      android:layout_width="64dp"
-      android:layout_height="64dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_account" />
+      <ImageView
+          android:id="@+id/iv_avatar"
+          android:layout_width="64dp"
+          android:layout_height="64dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_account" />
 
-  <TextView
-      android:id="@+id/tv_name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:text="Sadio Mane"
-      android:textAppearance="@style/TextAppearance.Gas.Body1"
-      app:layout_constraintBottom_toTopOf="@+id/tv_email"
-      app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-      app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+      <TextView
+          android:id="@+id/tv_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          tools:text="Sadio Mane"
+          android:textAppearance="@style/TextAppearance.Gas.Subtitle1"
+          app:layout_constraintBottom_toTopOf="@+id/tv_email"
+          app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+          app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
 
-  <TextView
-      android:id="@+id/tv_email"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:text="super_firmino@mail.br"
-      android:textAppearance="@style/TextAppearance.Gas.Body1"
-      app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
-      app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-      app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+      <TextView
+          android:id="@+id/tv_email"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          tools:text="super_firmino@mail.br"
+          android:textAppearance="@style/TextAppearance.Gas.Body2"
+          app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+          app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+          app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-  <View
-      android:id="@+id/divider"
-      android:layout_width="0dp"
-      android:layout_height="1dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginEnd="16dp"
-      android:background="?android:attr/listDivider"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+      <View
+          android:id="@+id/divider"
+          android:layout_width="0dp"
+          android:layout_height="1dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="16dp"
+          android:layout_marginEnd="16dp"
+          android:background="?android:attr/listDivider"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -10,11 +10,11 @@ import com.musicgear.gas.BuildConfig
 import com.musicgear.gas.di.BindingComponent
 import com.musicgear.gas.di.categoriesModule
 import com.musicgear.gas.di.dataModule
+import com.musicgear.gas.di.instrumentsModule
 import com.musicgear.gas.di.mainModule
 import com.musicgear.gas.di.navigationModule
 import com.musicgear.gas.di.startModule
 import com.musicgear.gas.di.utilsModule
-import com.musicgear.gas.instruments.di.instrumentsModule
 import com.vk.api.sdk.VK
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.android.schedulers.AndroidSchedulers

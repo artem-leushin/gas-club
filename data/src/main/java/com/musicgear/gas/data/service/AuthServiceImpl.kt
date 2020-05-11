@@ -27,17 +27,17 @@ class AuthServiceImpl(private val sessionSource: VkSessionSource) : AuthService 
     }.flatMapCompletable { sessionSource.saveSession(it) }
 
   override fun logout(): Completable = Completable.fromCallable { VK.logout() }
+    .andThen(sessionSource.clearSession())
 
   private val authCallback: (ObservableEmitter<VkSession>) -> VKAuthCallback = { emitter ->
     object : VKAuthCallback {
-      override fun onLogin(token: VKAccessToken) = emitter
-        .onNext(token.toDomain())
+      override fun onLogin(token: VKAccessToken) {
+        emitter.onNext(token.toDomain())
+        emitter.onComplete()
+      }
 
       override fun onLoginFailed(errorCode: Int) = emitter
         .onError(VkLoginFailedException(errorCode))
     }
   }
 }
-
-
-

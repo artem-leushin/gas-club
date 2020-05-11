@@ -1,8 +1,8 @@
 package com.musicgear.gas.domain.interactor
 
 import android.app.Activity
-import com.musicgear.gas.domain.entity.SessionStatus
 import com.musicgear.gas.domain.entity.AuthBundle
+import com.musicgear.gas.domain.entity.SessionStatus
 import com.musicgear.gas.domain.service.AuthService
 import com.musicgear.gas.domain.service.SessionStatusService
 import io.reactivex.Completable
@@ -24,4 +24,10 @@ class CheckIfUserIsLoggedInUseCase(
   private val sessionStatusRepo: SessionStatusService
 ) {
   fun execute(): Observable<SessionStatus> = sessionStatusRepo.observeSessionStatus()
+}
+
+class LogoutUseCase(
+  private val authService: AuthService
+) {
+  fun execute(): Completable = authService.logout()
 }

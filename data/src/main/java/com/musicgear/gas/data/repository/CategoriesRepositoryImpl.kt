@@ -5,7 +5,7 @@ import com.musicgear.gas.domain.entity.Category
 import com.musicgear.gas.domain.repository.CategoriesRepository
 import io.reactivex.Observable
 
-class CategoriesRepositoryImpl(
+internal class CategoriesRepositoryImpl(
   private val remote: CategoriesSource
 ) : CategoriesRepository {
   override fun getShoppingCategories(): Observable<List<Category>> = remote.getCategories()

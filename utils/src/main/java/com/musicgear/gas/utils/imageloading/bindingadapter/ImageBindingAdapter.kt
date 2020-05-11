@@ -9,15 +9,10 @@ class ImageBindingAdapter(private val imageLoader: ImageLoader) {
   lateinit var packageName: String
 
   @BindingAdapter(
-    value = [
-      "imgUrl",
-      "alphaGradient",
-      "transformCenterCrop",
-      "transformCircle",
-      "transformRoundedCorners"],
+    value = ["imgUrl", "alphaGradient", "transformCenterCrop", "transformCircle", "transformRoundedCorners"],
     requireAll = false
   )
-  fun loadImage(
+  fun loadImageUrl(
     imageView: ImageView,
     imgUrl: String? = null,
     alphaGradient: Boolean = false,
@@ -25,9 +20,6 @@ class ImageBindingAdapter(private val imageLoader: ImageLoader) {
     transformCircle: Boolean = false,
     transformRoundedCorners: Int = 0
   ) {
-    if (!::packageName.isInitialized)
-      packageName = imageView.context.packageName
-
     imageLoader.loadImg(
       imageView,
       imgUrl,
@@ -41,15 +33,10 @@ class ImageBindingAdapter(private val imageLoader: ImageLoader) {
   }
 
   @BindingAdapter(
-    value = [
-      "imgResId",
-      "alphaGradient",
-      "transformCenterCrop",
-      "transformCircle",
-      "transformRoundedCorners"],
+    value = ["imgResId", "alphaGradient", "transformCenterCrop", "transformCircle", "transformRoundedCorners"],
     requireAll = false
   )
-  fun loadImage(
+  fun loadImageResId(
     imageView: ImageView,
     imgResId: Int? = 0,
     alphaGradient: Boolean = false,
@@ -75,12 +62,7 @@ class ImageBindingAdapter(private val imageLoader: ImageLoader) {
   }
 
   @BindingAdapter(
-    value = [
-      "assetName",
-      "alphaGradient",
-      "transformCenterCrop",
-      "transformCircle",
-      "transformRoundedCorners"],
+    value = ["assetName", "alphaGradient", "transformCenterCrop", "transformCircle", "transformRoundedCorners"],
     requireAll = false
   )
   fun loadAssetImage(
@@ -105,5 +87,5 @@ class ImageBindingAdapter(private val imageLoader: ImageLoader) {
       )
     )
   }
-
 }
+

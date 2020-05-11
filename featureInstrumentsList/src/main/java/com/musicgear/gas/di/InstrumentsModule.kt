@@ -1,4 +1,4 @@
-package com.musicgear.gas.instruments.di
+package com.musicgear.gas.di
 
 import com.musicgear.gas.domain.interactor.LoadInstrumentsUseCase
 import com.musicgear.gas.instruments.InstrumentsViewModel
@@ -6,6 +6,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val instrumentsModule = module {
-  viewModel { InstrumentsViewModel(getInstrumentsForCategory = get()) }
+  viewModel { InstrumentsViewModel(loadInstruments = get(), coordinator = get()) }
   factory { LoadInstrumentsUseCase(repo = get()) }
 }

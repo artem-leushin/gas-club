@@ -1,16 +1,25 @@
 package com.musicgear.gas.data
 
-import org.junit.Assert.assertEquals
+import com.musicgear.gas.domain.entity.SizeType
 import org.junit.Test
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class ExampleUnitTest {
+
+  val sizes = listOf(
+    SizeType.PROPORTIONAL_75,
+    SizeType.PROPORTIONAL_130,
+    SizeType.PROPORTIONAL_604,
+    SizeType.RATIO_130,
+    SizeType.RATIO_200,
+    SizeType.RATIO_320,
+    SizeType.RATIO_510,
+    SizeType.PROPORTIONAL_807,
+    SizeType.PROPORTIONAL_X1024,
+    SizeType.PROPORTIONAL_X2560
+  )
+
   @Test
-  fun addition_isCorrect() {
-    assertEquals(4, 2 + 2)
+  fun `sizes priority is correct`() {
+
   }
 }

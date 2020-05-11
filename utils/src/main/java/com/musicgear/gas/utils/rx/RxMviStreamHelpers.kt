@@ -41,4 +41,4 @@ inline fun <reified SC> Observable<SC>.handleError(crossinline func: (Throwable)
   }
 
 inline fun <reified T> Completable.andThenAction(crossinline source: () -> T): Observable<T> =
-  andThen(Observable.fromCallable { source() })
+  andThen(Observable.defer { Observable.just(source()) })

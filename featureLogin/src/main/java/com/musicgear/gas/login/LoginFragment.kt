@@ -18,10 +18,9 @@ import com.musicgear.gas.login.LoginView.State
 import com.musicgear.gas.login.LoginView.StateChange
 import com.musicgear.gas.login.databinding.FragmentLoginBinding
 import com.musicgear.gas.utils.basecomponents.BaseBindingFragment
+import com.musicgear.gas.utils.rx.plusAssign
 import com.musicgear.gas.utils.rx.safeClicks
 import com.musicgear.gas.utils.snackBarShort
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
 import kotlinx.android.synthetic.main.fragment_login.btnLogin
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +29,6 @@ class LoginFragment :
   LoginView {
 
   override val viewModel: LoginViewModel by viewModel()
-  override val viewSubscriptions: CompositeDisposable = CompositeDisposable()
 
   override fun layoutResId(): Int = R.layout.fragment_login
 
@@ -40,8 +38,14 @@ class LoginFragment :
     savedInstanceState: Bundle?
   ): View? {
     super.onCreateView(inflater, container, savedInstanceState)
+    postponeEnterTransition()
     prepareEnterTransition()
     return viewBinding!!.root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    startPostponedEnterTransition()
   }
 
   private fun prepareEnterTransition() {
@@ -64,6 +68,7 @@ class LoginFragment :
   }
 
   override fun render(state: State) {
+    viewBinding!!.loading = state.loading
     state.error?.message?.let { snackBarShort(it)?.show() }
   }
 }

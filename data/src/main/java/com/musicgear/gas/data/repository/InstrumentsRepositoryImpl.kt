@@ -5,12 +5,12 @@ import com.musicgear.gas.domain.entity.Instrument
 import com.musicgear.gas.domain.repository.InstrumentsRepository
 import io.reactivex.Observable
 
-class InstrumentsRepositoryImpl(
+internal class InstrumentsRepositoryImpl(
   private val remote: InstrumentsSource
 ) : InstrumentsRepository {
 
-  override fun getInstruments(categoryId: Int): Observable<List<Instrument>> =
-    remote.getInstruments(categoryId)
+  override fun getInstruments(categoryId: Int, page: Int): Observable<List<Instrument>> =
+    remote.getInstruments(categoryId, page)
 
 }
 

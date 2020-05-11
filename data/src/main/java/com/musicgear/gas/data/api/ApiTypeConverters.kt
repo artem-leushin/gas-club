@@ -2,10 +2,9 @@ package com.musicgear.gas.data.api
 
 import com.bluelinelabs.logansquare.typeconverters.IntBasedTypeConverter
 import com.bluelinelabs.logansquare.typeconverters.StringBasedTypeConverter
-import org.threeten.bp.Instant.ofEpochSecond
+import com.musicgear.gas.domain.entity.SizeType
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -50,8 +49,14 @@ internal class LocalDateTimeUnixConverter : IntBasedTypeConverter<LocalDateTime>
   }
 
   override fun getFromInt(date: Int): LocalDateTime = try {
-    LocalDateTime.ofInstant(ofEpochSecond(date.toLong()), ZoneId.systemDefault())
+    LocalDateTime.ofEpochSecond(date.toLong(), 0, ZoneOffset.UTC)
   } catch (e: Exception) {
     LocalDateTime.MIN
   }
+}
+
+class SizeTypeConverter : StringBasedTypeConverter<SizeType>() {
+  override fun convertToString(`object`: SizeType?): String = `object`?.code ?: ""
+
+  override fun getFromString(code: String?): SizeType = SizeType.valueFor(code ?: "s")
 }

@@ -110,9 +110,9 @@ object Deps {
   const val roomCompiler = "androidx.room:room-compiler:${Version.lifecycle}"
 
   // Jetpack navigation
-  const val navigation = "androidx.navigation:navigation-fragment-ktx:${Version.lifecycle}"
-  const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Version.lifecycle}"
-  const val navigationDynamic = "androidx.navigation:navigation-dynamic-features-fragment:${Version.lifecycle}"
+  const val navigation = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
+  const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Version.navigation}"
+  const val navigationDynamic = "androidx.navigation:navigation-dynamic-features-fragment:${Version.navigation}"
 
   // KTX
   const val ktxCore = "androidx.core:core-ktx:${Version.ktxCore}"

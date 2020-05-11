@@ -12,10 +12,19 @@ interface MainView : BaseView<State> {
   sealed class Intent {
     class ShowControls(val animate: Boolean = true) : Intent()
     class HideControls(val animate: Boolean = true) : Intent()
+    object Logout : Intent()
   }
 
-  sealed class StateChanges {
-    object ContolsVisible : StateChanges()
-    object ControlsHidden : StateChanges()
+  sealed class StateChange {
+    object ControlsVisible : StateChange()
+    object ControlsHidden : StateChange()
+    class Transition(transition: () -> Unit) : StateChange() {
+      init {
+        transition()
+      }
+    }
+
+    class Error(val error: Throwable) : StateChange()
+    object HideError : StateChange()
   }
 }

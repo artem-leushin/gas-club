@@ -7,6 +7,8 @@ import com.musicgear.gas.navigation.AppNavigator
 import com.musicgear.gas.navigation.CategoriesCoordinatorImpl
 import com.musicgear.gas.navigation.InstrumentsCoordinatorImpl
 import com.musicgear.gas.navigation.LoginCoordinatorImpl
+import com.musicgear.gas.navigation.MainCoordinator
+import com.musicgear.gas.navigation.MainCoordinatorImpl
 import com.musicgear.gas.navigation.StartCoordinatorImpl
 import com.musicgear.gas.start.StartCoordinator
 import org.koin.dsl.module
@@ -17,4 +19,5 @@ val navigationModule = module {
   single<LoginCoordinator> { LoginCoordinatorImpl(navigator = get()) }
   single<CategoriesCoordinator> { CategoriesCoordinatorImpl(navigator = get()) }
   single<InstrumentsCoordinator> { InstrumentsCoordinatorImpl(navigator = get()) }
+  single<MainCoordinator> { MainCoordinatorImpl(navigator = get()) }
 }

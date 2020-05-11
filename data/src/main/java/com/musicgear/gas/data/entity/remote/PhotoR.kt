@@ -6,13 +6,13 @@ import com.musicgear.gas.data.api.LocalDateTimeUnixConverter
 import org.threeten.bp.LocalDateTime
 
 @JsonObject
-data class PhotoR(
+internal data class PhotoR(
   @JsonField
   var id: Int? = Int.MIN_VALUE,
   @JsonField
   var text: String? = "",
   @JsonField(typeConverter = LocalDateTimeUnixConverter::class)
   var date: LocalDateTime? = LocalDateTime.MIN,
-  @JsonField(name = ["photo_1280"])
-  var photoUrl: String? = ""
+  @JsonField(name = ["sizes"])
+  var photoSizes: List<SizeR>? = emptyList()
 )

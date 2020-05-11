@@ -13,19 +13,13 @@ import com.musicgear.gas.utils.rx.safeClicks
 
 class CategoriesAdapter(
   private val intentsPublisher: (Any) -> Unit
-) : ListAdapter<DisplayableCategory, CategoryViewHolder>(
-  ItemDiffCallback
-) {
+) : ListAdapter<DisplayableCategory, CategoryViewHolder>(ItemDiffCallback) {
 
-  override fun getItemViewType(position: Int): Int =
-    R.layout.item_category
+  override fun getItemViewType(position: Int): Int = R.layout.item_category
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
     val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-    return CategoryViewHolder(
-      binding,
-      intentsPublisher
-    )
+    return CategoryViewHolder(binding, intentsPublisher)
   }
 
   override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
@@ -40,7 +34,8 @@ class CategoryViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
   init {
-    binding.run { root.safeClicks { publishIntent(GoToInstruments(category!!.id)) } }
+    binding.run { root.safeClicks { publishIntent(GoToInstruments(category!!)) } }
+      .subscribe()
   }
 
   fun bind(category: DisplayableCategory) {

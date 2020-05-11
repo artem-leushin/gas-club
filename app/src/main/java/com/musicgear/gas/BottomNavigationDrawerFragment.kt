@@ -4,17 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.musicgear.gas.databinding.FragmentBottomSheetBinding
+import com.musicgear.gas.utils.basecomponents.dialogs.BaseBindingBottomDialogFragment
 import com.musicgear.gas.utils.snackBarShort
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.navigation_view
 
-class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+class BottomNavigationDrawerFragment : BaseBindingBottomDialogFragment<FragmentBottomSheetBinding>(){
+
+  override fun layoutResId(): Int = R.layout.fragment_bottom_sheet
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_bottom_sheet, container, false)
+    super.onCreateView(inflater, container, savedInstanceState)
+    return viewBinding!!.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,7 +28,6 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
       when (it.itemId) {
         R.id.bottom_menu_categories -> snackBarShort(it.title)?.show()
         R.id.bottom_menu_black_list -> snackBarShort(it.title)?.show()
-        R.id.bottom_menu_bookmarks -> snackBarShort(it.title)?.show()
       }
       true
     }

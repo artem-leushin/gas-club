@@ -6,7 +6,7 @@ import com.musicgear.gas.data.mappers.toDomain
 import com.musicgear.gas.domain.entity.Comment
 import io.reactivex.Observable
 
-class CommentsRemoteSource(
+internal class CommentsRemoteSource(
   private val api: RetrofitApi
 ) : CommentsSource {
   override fun getComments(instrumentId: Int): Observable<List<Comment>> =

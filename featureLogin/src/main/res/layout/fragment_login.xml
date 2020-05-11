@@ -7,6 +7,10 @@
   <data>
 
     <import type="com.musicgear.gas.login.R" />
+
+    <variable
+        name="loading"
+        type="Boolean" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,10 +18,10 @@
       android:layout_height="match_parent">
 
     <ImageView
-        android:transitionName="@string/shared_transition_logo"
         android:id="@+id/iv_logo"
         android:layout_width="0dp"
         android:layout_height="300dp"
+        android:transitionName="@string/shared_transition_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +33,6 @@
         android:id="@+id/iv_background"
         android:layout_width="0dp"
         android:layout_height="400dp"
-        tools:alpha="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,6 +40,7 @@
         bind:alphaGradient="@{true}"
         bind:assetName="@{`ic_logo_background.jpg`}"
         bind:transformCenterCrop="@{true}"
+        tools:alpha="0.2"
         tools:src="@mipmap/ic_logo_background" />
 
     <com.google.android.material.button.MaterialButton
@@ -50,7 +54,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.35"
+        bind:visible="@{!loading}" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/crimson_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnLogin"
+        bind:visible="@{loading}" />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.musicgear.gas.di
 
 import android.content.res.Resources
 import androidx.databinding.DataBindingComponent
+import com.musicgear.gas.domain.interactor.LogoutUseCase
 import com.musicgear.gas.main.MainViewModel
 import com.musicgear.gas.utils.imageloading.bindingadapter.ImageBindingAdapter
 import org.koin.android.ext.koin.androidContext
@@ -12,7 +13,8 @@ import org.koin.dsl.module
 
 val mainModule = module {
   single<Resources> { androidContext().resources }
-  viewModel { MainViewModel() }
+  viewModel { MainViewModel(logout = get(), coordinator = get()) }
+  factory { LogoutUseCase(authService = get()) }
 }
 
 

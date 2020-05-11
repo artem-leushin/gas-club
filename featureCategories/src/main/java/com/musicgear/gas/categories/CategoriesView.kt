@@ -1,7 +1,9 @@
 package com.musicgear.gas.categories
 
+import android.os.Parcelable
 import com.musicgear.gas.categories.CategoriesView.State
 import com.musicgear.gas.utils.basecomponents.mvi.BaseView
+import kotlinx.android.parcel.Parcelize
 
 interface CategoriesView : BaseView<State> {
   data class State(
@@ -13,7 +15,7 @@ interface CategoriesView : BaseView<State> {
 
   sealed class Event {
     object RefreshCategories : Event()
-    class GoToInstruments(val id: Int) : Event()
+    class GoToInstruments(val category: DisplayableCategory) : Event()
   }
 
   sealed class StateChange {
@@ -29,11 +31,12 @@ interface CategoriesView : BaseView<State> {
     }
   }
 
+  @Parcelize
   data class DisplayableCategory(
     val id: Int,
     val name: String,
     val description: String,
     val instrumentsCount: String,
     val photoUrl: String
-  )
+  ): Parcelable
 }

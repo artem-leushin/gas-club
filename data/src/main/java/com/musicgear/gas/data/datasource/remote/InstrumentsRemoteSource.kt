@@ -6,11 +6,11 @@ import com.musicgear.gas.data.mappers.toDomain
 import com.musicgear.gas.domain.entity.Instrument
 import io.reactivex.Observable
 
-class InstrumentsRemoteSource(
+internal class InstrumentsRemoteSource(
   private val api: RetrofitApi
 ) : InstrumentsSource {
-  override fun getInstruments(categoryId: Int): Observable<List<Instrument>> =
-    api.getPhotos(albumId = categoryId)
-      .map { it.map { instrument -> instrument.toDomain() } }
+  override fun getInstruments(categoryId: Int, page: Int): Observable<List<Instrument>> =
+    api.getPhotos(albumId = categoryId, offset = page)
+      .map { it.response?.items?.map { instrument -> instrument.toDomain() } }
 
 }

@@ -10,6 +10,7 @@ import com.jakewharton.rxbinding2.widget.afterTextChangeEvents
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 import kotlin.LazyThreadSafetyMode.NONE
@@ -37,5 +38,10 @@ inline fun Disposable?.disposeOf() {
 
 }
 
+operator fun CompositeDisposable?.plusAssign(disposable: Disposable) {
+  this?.let {
+    add(disposable)
+  }
+}
 
 

@@ -1,5 +1,5 @@
 package com.musicgear.gas.categories
 
 interface CategoriesCoordinator {
-  fun goToInstruments()
+  fun goToInstruments(category: CategoriesView.DisplayableCategory)
 }

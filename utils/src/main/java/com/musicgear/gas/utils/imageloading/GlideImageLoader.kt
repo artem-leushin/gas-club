@@ -5,16 +5,19 @@ import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.Transformation
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.musicgear.gas.utils.R
 import com.musicgear.gas.utils.imageloading.ImageLoader.Args
-import com.musicgear.gas.utils.imageloading.transformation.AlphaTransformation
+import com.musicgear.gas.utils.imageloading.transformation.AlphaGradientTransformation
 import com.musicgear.gas.utils.px
 import java.util.ArrayList
 
 object GlideImageLoader : ImageLoader {
+
   override fun loadImg(imageView: ImageView, imgUrl: String?, args: Args) {
     require(!args.transformCircle || args.roundedCornersRadiusDp == 0) {
       "Cannot apply transformCircle and roundedCornersRadiusDp attrs at the same time"
@@ -24,6 +27,8 @@ object GlideImageLoader : ImageLoader {
 
     GlideApp.with(imageView)
       .load(imgUrl)
+      .placeholder(R.drawable.ic_placeholder)
+      .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
       .apply(optionsTransformation)
       .into(imageView)
   }
@@ -33,6 +38,7 @@ object GlideImageLoader : ImageLoader {
 
     GlideApp.with(imageView)
       .load(uri)
+      .placeholder(R.drawable.ic_placeholder)
       .apply(optionsTransformation)
       .into(imageView)
   }
@@ -53,7 +59,7 @@ object GlideImageLoader : ImageLoader {
         if (transformCenterCrop) add(CenterCrop())
         if (transformCircle) add(CircleCrop())
         if (roundedCornersRadiusDp > 0) add(RoundedCorners(roundedCornersRadiusDp.px))
-        if (alphaGradient) add(AlphaTransformation())
+        if (alphaGradient) add(AlphaGradientTransformation())
       }
     }
 

@@ -23,7 +23,7 @@ abstract class BaseViewModel<State, StateChange> : ViewModel() {
       viewModelIntents(),
       sideEffectRelay
     ).scan(initState()) { previousState, stateChanges ->
-      reduceState(previousState, stateChanges)
+      reduce(previousState, stateChanges)
     }
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe { state -> states.value = state }
@@ -34,7 +34,7 @@ abstract class BaseViewModel<State, StateChange> : ViewModel() {
   protected open fun viewModelIntents(): Observable<StateChange> = Observable.never()
   protected open fun viewModelIntents(sideEffects: Relay<StateChange>): Observable<StateChange> = Observable.never()
 
-  protected abstract fun reduceState(state: State, changes: StateChange): State
+  protected abstract fun reduce(state: State, changes: StateChange): State
 
   fun viewIntentsConsumer() = viewIntentsConsumer.also {
     if (intentsDisposable == null)

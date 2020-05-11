@@ -8,12 +8,11 @@ import com.musicgear.gas.categories.CategoriesView.State
 import com.musicgear.gas.categories.CategoriesView.StateChange
 import com.musicgear.gas.categories.adapter.CategoriesAdapter
 import com.musicgear.gas.categories.adapter.HorizontalDividerDecoration
-import com.musicgear.gas.categories.adapter.MarginItemDecoration
+import com.musicgear.gas.utils.adapter.MarginItemDecoration
 import com.musicgear.gas.utils.basecomponents.BaseFragment
 import com.musicgear.gas.utils.px
+import com.musicgear.gas.utils.rx.plusAssign
 import com.musicgear.gas.utils.snackBarShort
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
 import kotlinx.android.synthetic.main.fragment_categories.refresh_layout
 import kotlinx.android.synthetic.main.fragment_categories.rv_categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,7 +21,6 @@ class CategoriesFragment : BaseFragment<State, StateChange, CategoriesViewModel>
 
   private lateinit var listAdapter: CategoriesAdapter
   override val viewModel: CategoriesViewModel by viewModel()
-  override val viewSubscriptions: CompositeDisposable = CompositeDisposable()
 
   override fun layoutResId(): Int = R.layout.fragment_categories
 

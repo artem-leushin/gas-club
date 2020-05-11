@@ -3,7 +3,9 @@ package com.musicgear.gas.navigation
 import android.view.View
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.musicgear.gas.categories.CategoriesCoordinator
+import com.musicgear.gas.categories.CategoriesView.DisplayableCategory
 import com.musicgear.gas.instruments.InstrumentsCoordinator
+import com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument
 import com.musicgear.gas.login.LoginCoordinator
 import com.musicgear.gas.start.StartCoordinator
 
@@ -21,9 +23,15 @@ class LoginCoordinatorImpl(private val navigator: AppNavigator) : LoginCoordinat
 }
 
 class CategoriesCoordinatorImpl(private val navigator: AppNavigator) : CategoriesCoordinator {
-  override fun goToInstruments() = navigator.goFromCategoriesToInstruments()
+  override fun goToInstruments(category: DisplayableCategory) =
+    navigator.goFromCategoriesToInstruments(category)
 }
 
 class InstrumentsCoordinatorImpl(private val navigator: AppNavigator) : InstrumentsCoordinator {
-  override fun goToItemDetails() = navigator.goFromInstrumentsToDetails()
+  override fun goToItemDetails(instrument: DisplayableInstrument) =
+    navigator.goFromInstrumentsToDetails(instrument)
+}
+
+class MainCoordinatorImpl(private val navigator: AppNavigator) : MainCoordinator {
+  override fun logout() = navigator.logout()
 }

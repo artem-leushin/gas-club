@@ -7,7 +7,7 @@ import com.musicgear.gas.domain.repository.UserRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-class UserRepositoryImpl(private val local: UserSource, remote: UserSource) :
+internal class UserRepositoryImpl(private val local: UserSource, remote: UserSource) :
   UserRepository {
 
   private val source = local.getUser().compose(ReplayingShare.instance<User>())

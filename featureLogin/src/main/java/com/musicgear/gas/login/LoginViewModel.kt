@@ -11,8 +11,9 @@ import com.musicgear.gas.login.LoginView.StateChange.HideError
 import com.musicgear.gas.login.LoginView.StateChange.StartLoading
 import com.musicgear.gas.login.LoginView.StateChange.Success
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
+import com.musicgear.gas.utils.rx.andThenAction
 import com.musicgear.gas.utils.rx.applySchedulers
-import com.musicgear.gas.utils.rx.sequenceEvents
+import com.musicgear.gas.utils.rx.handleError
 import io.reactivex.Observable
 
 class LoginViewModel(
@@ -29,9 +30,9 @@ class LoginViewModel(
           .switchMap {
             startLogin.execute(it.activity)
               .applySchedulers()
-              .andThen(Observable.just(Success))
+              .andThenAction { StateChange.Idle }
               .cast(StateChange::class.java)
-              .onErrorResumeNext { e: Throwable -> sequenceEvents(Error(e), HideError) }
+              .handleError { listOf(Error(it), HideError) }
               .startWith(StartLoading)
           },
 
@@ -39,15 +40,15 @@ class LoginViewModel(
           .switchMap {
             proceedLogin.execute(it.vkAuthBundle)
               .applySchedulers()
-              .andThen(Observable.just(StateChange.Transition(coordinator::goToMusicGear)))
+              .andThenAction { StateChange.Transition(coordinator::goToMusicGear) }
               .cast(StateChange::class.java)
-              .onErrorResumeNext { e: Throwable -> sequenceEvents(Error(e), HideError) }
+              .handleError { listOf(Error(it), HideError) }
               .startWith(StartLoading)
           }
       )
     }
 
-  override fun reduceState(state: State, changes: StateChange): State = when (changes) {
+  override fun reduce(state: State, changes: StateChange): State = when (changes) {
     is StartLoading -> state.copy(loading = true)
     is Success -> state.copy(success = true, loading = false, error = null)
     is Error -> state.copy(success = false, loading = false, error = changes.error)

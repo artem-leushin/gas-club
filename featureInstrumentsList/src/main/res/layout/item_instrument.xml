@@ -1,0 +1,35 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+        name="instrument"
+        type="com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument" />
+
+    <import type="com.musicgear.gas.instruments.R" />
+  </data>
+
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/root"
+      style="@style/Widget.MaterialComponents.CardView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:stateListAnimator="@animator/thread_elevation_state_animator"
+      app:cardCornerRadius="0dp"
+      app:rippleColor="@color/cream_dark"
+      app:strokeWidth="0dp">
+
+      <ImageView
+          android:id="@+id/iv_photo"
+          android:layout_width="match_parent"
+          android:layout_height="250dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:scaleType="centerCrop"
+          tools:srcCompat="@tools:sample/backgrounds/scenic" />
+  </com.google.android.material.card.MaterialCardView>
+
+</layout>

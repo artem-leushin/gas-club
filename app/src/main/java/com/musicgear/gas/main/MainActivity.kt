@@ -11,14 +11,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.transition.TransitionManager
 import com.musicgear.gas.BottomNavigationDrawerFragment
 import com.musicgear.gas.FragmentLifecycleListener
 import com.musicgear.gas.R
 import com.musicgear.gas.login.LoginFragment
 import com.musicgear.gas.main.MainView.State
-import com.musicgear.gas.main.MainView.StateChanges
+import com.musicgear.gas.main.MainView.StateChange
 import com.musicgear.gas.navigation.AppNavigator
 import com.musicgear.gas.utils.basecomponents.BaseActivity
 import com.musicgear.gas.utils.isOnScreen
@@ -32,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<State, StateChanges, MainViewModel>(),
+class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   MainView {
 
   private val navigator: AppNavigator = get()
@@ -48,7 +47,6 @@ class MainActivity : BaseActivity<State, StateChanges, MainViewModel>(),
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     monitorChildFragments()
-    setSupportActionBar(bottomAppBar)
     setupNavigator()
   }
 
@@ -62,13 +60,41 @@ class MainActivity : BaseActivity<State, StateChanges, MainViewModel>(),
       (supportFragmentManager.findFragmentById(R.id.fragment_host) as NavHostFragment).navController
 
     navigator.setNavController(mainNavController)
-    setupUiWithNavigation(mainNavController)
+    setupToolbar(mainNavController)
+    setupBottomBar()
   }
 
-  private fun setupUiWithNavigation(mainNavController: NavController) {
-    val conf = AppBarConfiguration.Builder((setOf(R.id.categoriesFragment))).build()
+  private fun setupToolbar(mainNavController: NavController) {
+    val topDestinations = setOf(R.id.categoriesFragment, R.id.blacklistedUsersFragment)
+    val conf = AppBarConfiguration.Builder(topDestinations).build()
     NavigationUI.setupWithNavController(toolbar, mainNavController, conf)
-    bottomAppBar.setOnMenuItemClickListener { it.onNavDestinationSelected(mainNavController) }
+    toolbar.inflateMenu(R.menu.menu_top)
+    toolbar.setOnMenuItemClickListener {
+      if (it.itemId == R.id.menu_action_logout) {
+        viewModel.publishViewIntent(MainView.Intent.Logout)
+        true
+      } else false
+    }
+  }
+
+  private fun setupBottomBar() {
+    setSupportActionBar(bottomAppBar)
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_bottom, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.menu_action_search -> snackBarShort(item.title)?.show()
+      android.R.id.home -> BottomNavigationDrawerFragment().show(
+        supportFragmentManager,
+        "Bottom Menu"
+      )
+    }
+    return true
   }
 
   private fun monitorChildFragments() =
@@ -76,11 +102,6 @@ class MainActivity : BaseActivity<State, StateChanges, MainViewModel>(),
 
   private fun stopMonitoringChildFragments() =
     supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentsLifecycleListener)
-
-  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.bottom_app_bar_menu, menu)
-    return true
-  }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
@@ -91,17 +112,6 @@ class MainActivity : BaseActivity<State, StateChanges, MainViewModel>(),
     (supportFragmentManager.findFragmentById(R.id.fragment_host) as NavHostFragment)
       .childFragmentManager.fragments.filterIsInstance<LoginFragment>()
       .firstOrNull()?.onActivityResult(requestCode, resultCode, data)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      R.id.bottom_menu_search -> snackBarShort(item.title)?.show()
-      android.R.id.home -> BottomNavigationDrawerFragment().show(
-        supportFragmentManager,
-        "Bottom Menu"
-      )
-    }
-    return true
   }
 
   override fun initIntents() {
@@ -133,4 +143,3 @@ class MainActivity : BaseActivity<State, StateChanges, MainViewModel>(),
     toolbar.visibility = View.VISIBLE
   }
 }
-

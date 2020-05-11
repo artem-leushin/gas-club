@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_main"
     app:startDestination="@id/startFragment">
 
   <fragment
       android:id="@+id/loginFragment"
-      android:name="com.musicgear.gas.login.LoginFragment"
-      android:label="Login" />
+      android:name="com.musicgear.gas.login.LoginFragment" />
 
   <fragment
       android:id="@+id/categoriesFragment"
       android:name="com.musicgear.gas.categories.CategoriesFragment"
-      android:label="Categories" >
+      android:label="Categories">
     <action
         android:id="@+id/from_categories_to_instruments"
         app:destination="@id/instrumentsFragment" />
@@ -23,26 +23,33 @@
   <fragment
       android:id="@+id/instrumentsFragment"
       android:name="com.musicgear.gas.instruments.InstrumentsFragment"
-      android:label="Instruments" >
+      android:label="Instruments">
     <action
         android:id="@+id/from_instruments_to_item_details"
         app:destination="@id/musicItemDetailsFragment" />
+    <argument
+        android:name="category"
+        app:argType="com.musicgear.gas.categories.CategoriesView$DisplayableCategory" />
   </fragment>
 
   <fragment
       android:id="@+id/musicItemDetailsFragment"
       android:name="com.musicgear.gas.details.MusicItemDetailsFragment"
-      android:label="Details" />
+      android:label="Details">
+    <argument
+        android:name="instrument"
+        app:argType="com.musicgear.gas.instruments.InstrumentsView$Displayable$DisplayableInstrument" />
+  </fragment>
 
   <fragment
       android:id="@+id/blacklistedUsersFragment"
       android:name="com.musicgear.gas.blacklist.BlacklistedUsersFragment"
-      android:label="BlacklistedUsersFragment" />
+      android:label="Blacklist" />
 
   <fragment
       android:id="@+id/startFragment"
       android:name="com.musicgear.gas.start.StartFragment"
-      android:label="StartFragment" >
+      android:label="StartFragment">
 
     <action
         android:id="@+id/from_start_to_login"
@@ -51,5 +58,8 @@
   <action
       android:id="@+id/to_categories"
       app:destination="@id/categoriesFragment" />
+  <action
+      android:id="@+id/to_login"
+      app:destination="@id/loginFragment" />
 
 </navigation>

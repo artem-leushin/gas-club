@@ -1,6 +1,4 @@
-package com.musicgear.gas.domain
-
-const val GAS_GROUP_ID = -6923031
+package com.musicgear.gas.domain.constants
 
 const val HTTP_CLIENT_FACTORY_API = "api"
 const val HTTP_CLIENT_FACTORY_IMG = "img"
