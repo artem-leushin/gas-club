@@ -22,7 +22,8 @@ interface InstrumentsView {
   sealed class StateChange {
     object FirstPageLoading : StateChange()
     object NextPageLoading : StateChange()
-    class InstrumentsLoaded(val instruments: List<DisplayableInstrument>) : StateChange()
+    class FirstPageSuccess(val instruments: List<DisplayableInstrument>) : StateChange()
+    class NextPageSuccess(val instruments: List<DisplayableInstrument>) : StateChange()
     class Error(val error: Throwable) : StateChange()
     object HideError : StateChange()
     class Transition(transition: () -> Unit) : StateChange() {

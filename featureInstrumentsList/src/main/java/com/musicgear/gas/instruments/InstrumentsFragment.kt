@@ -5,7 +5,6 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.musicgear.gas.domain.constants.ARG_CATEGORY
-import com.musicgear.gas.instruments.InstrumentsView.Intent.LoadNextPage
 import com.musicgear.gas.instruments.InstrumentsView.Intent.RefreshInstruments
 import com.musicgear.gas.instruments.InstrumentsView.State
 import com.musicgear.gas.instruments.InstrumentsView.StateChange
@@ -56,7 +55,7 @@ class InstrumentsFragment :
       layoutManager = LinearLayoutManager(context)
       adapter = listAdapter
       addItemDecoration(MarginItemDecoration(top = 8.px, bottom = 8.px))
-      addOnScrollListener(EndlessScrollListener { viewModel.publishViewIntent(LoadNextPage) })
+      addOnScrollListener(EndlessScrollListener { viewModel.publishViewIntent(InstrumentsView.Intent.LoadNextPage) })
     }
   }
 

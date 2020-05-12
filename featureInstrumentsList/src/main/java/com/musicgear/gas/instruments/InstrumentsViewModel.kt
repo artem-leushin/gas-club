@@ -12,8 +12,8 @@ import com.musicgear.gas.instruments.InstrumentsView.StateChange
 import com.musicgear.gas.instruments.InstrumentsView.StateChange.Error
 import com.musicgear.gas.instruments.InstrumentsView.StateChange.FirstPageLoading
 import com.musicgear.gas.instruments.InstrumentsView.StateChange.HideError
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.InstrumentsLoaded
 import com.musicgear.gas.instruments.InstrumentsView.StateChange.NextPageLoading
+import com.musicgear.gas.instruments.InstrumentsView.StateChange.NextPageSuccess
 import com.musicgear.gas.instruments.InstrumentsView.StateChange.Transition
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.applySchedulers
@@ -30,8 +30,8 @@ class InstrumentsViewModel(
   var categoryId: Int = 0
 
   private val defaultPerPage = 20
-  private var firstPage = 0
-  private var currentPage = 0
+  private var initialOffset = 0
+  private var currentOffset = 0
   private var loadingPage: Boolean = false
   private var endReached: Boolean = false
 
@@ -43,30 +43,33 @@ class InstrumentsViewModel(
 
         ofType(RefreshInstruments::class.java)
           .doOnNext {
-            currentPage = firstPage
             loadingPage = true
+            currentOffset = initialOffset
           }
-          .switchMap { loadInstruments(page = firstPage).startWith(FirstPageLoading) },
+          .switchMap { loadInstruments(offset = currentOffset).startWith(FirstPageLoading) },
 
         ofType(LoadNextPage::class.java)
           .filter { loadingPage.not() && endReached.not() }
-          .doOnNext { loadingPage = true }
-          .switchMap { loadInstruments(page = currentPage).startWith(NextPageLoading) }
+          .doOnNext {
+            loadingPage = true
+            currentOffset += defaultPerPage
+          }
+          .switchMap { loadInstruments(offset = currentOffset).startWith(NextPageLoading) }
       )
     }
 
-  override fun viewModelIntents(): Observable<StateChange> = loadInstruments(firstPage)
+  override fun viewModelIntents(): Observable<StateChange> = loadInstruments(initialOffset)
     .startWith(FirstPageLoading)
 
-  private fun loadInstruments(page: Int): Observable<StateChange> =
-    loadInstruments.execute(categoryId, page)
+  private fun loadInstruments(offset: Int): Observable<StateChange> =
+    loadInstruments.execute(categoryId, offset)
       .applySchedulers()
       .doOnNext {
         endReached = it.size < defaultPerPage
-        currentPage++
+        loadingPage = false
       }
       .map(::mapToDisplayable)
-      .map { InstrumentsLoaded(it) }
+      .map { NextPageSuccess(it) }
       .cast(StateChange::class.java)
       .handleError { listOf(Error(it), HideError) }
 
@@ -84,13 +87,26 @@ class InstrumentsViewModel(
       error = null,
       instruments = state.instruments + ProgressItem
     )
-    is InstrumentsLoaded -> state.copy(
+    is StateChange.FirstPageSuccess -> state.copy(
       success = true,
       firstPageLoading = false,
       nextPageLoading = false,
       error = null,
       instruments = changes.instruments
     )
+    is NextPageSuccess -> {
+      val newList = state.instruments.toMutableList()
+      newList -= ProgressItem
+      newList += changes.instruments
+
+      state.copy(
+        success = true,
+        firstPageLoading = false,
+        nextPageLoading = false,
+        error = null,
+        instruments = newList
+      )
+    }
     is Error -> state.copy(
       success = false,
       nextPageLoading = false,

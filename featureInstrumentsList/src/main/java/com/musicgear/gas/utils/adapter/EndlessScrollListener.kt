@@ -19,7 +19,7 @@ class EndlessScrollListener(
         .findFirstVisibleItemPosition()
 
       if ((visibleItemCount + pastVisiblesItems) == totalItemCount)
-        loadNextPage()
+        loadNextPage.invoke()
     }
   }
 }
