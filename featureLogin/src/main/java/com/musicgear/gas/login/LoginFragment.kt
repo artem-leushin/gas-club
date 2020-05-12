@@ -32,13 +32,17 @@ class LoginFragment :
 
   override fun layoutResId(): Int = R.layout.fragment_login
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    postponeEnterTransition()
+  }
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     super.onCreateView(inflater, container, savedInstanceState)
-    postponeEnterTransition()
     prepareEnterTransition()
     return viewBinding!!.root
   }
@@ -50,6 +54,7 @@ class LoginFragment :
 
   private fun prepareEnterTransition() {
     sharedElementEnterTransition = TransitionSet().apply {
+      allowEnterTransitionOverlap = true
       addTransition(ChangeBounds())
       addTransition(ChangeImageTransform())
     }

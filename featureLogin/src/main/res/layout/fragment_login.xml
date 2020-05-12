@@ -69,7 +69,6 @@
         app:layout_constraintTop_toTopOf="@+id/btnLogin"
         bind:visible="@{loading}" />
 
-
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

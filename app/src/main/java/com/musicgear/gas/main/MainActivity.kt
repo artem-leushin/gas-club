@@ -2,6 +2,7 @@ package com.musicgear.gas.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -65,7 +66,7 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   }
 
   private fun setupToolbar(mainNavController: NavController) {
-    val topDestinations = setOf(R.id.categoriesFragment, R.id.blacklistedUsersFragment)
+    val topDestinations = setOf(R.id.categoriesFragment, R.id.blacklistedUsersFragment, R.id.loginFragment)
     val conf = AppBarConfiguration.Builder(topDestinations).build()
     NavigationUI.setupWithNavController(toolbar, mainNavController, conf)
     toolbar.inflateMenu(R.menu.menu_top)
@@ -129,17 +130,21 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
 
   private fun animateControlsOut() {
     if (isOnScreen(toolbar).not() || isOnScreen(bottomAppBar).not()) return
-
+    delayAction { cl_root.transitionToStart() }
     TransitionManager.beginDelayedTransition(cl_root)
     fab.visibility = View.GONE
     bottomAppBar.visibility = View.GONE
-    toolbar.visibility = View.GONE
   }
 
   private fun animateControlsIn() {
+    delayAction { cl_root.transitionToEnd() }
     TransitionManager.beginDelayedTransition(cl_root)
     bottomAppBar.visibility = View.VISIBLE
     fab.visibility = View.VISIBLE
-    toolbar.visibility = View.VISIBLE
   }
+
+}
+
+fun delayAction(delay: Long = 150, action: () -> Unit) {
+  Handler().postDelayed({ action() }, delay)
 }

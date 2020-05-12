@@ -15,6 +15,7 @@ import com.musicgear.gas.utils.rx.andThenAction
 import com.musicgear.gas.utils.rx.applySchedulers
 import com.musicgear.gas.utils.rx.handleError
 import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 class LoginViewModel(
   private val startLogin: LoginWithVkUseCase,
@@ -39,6 +40,7 @@ class LoginViewModel(
         ofType(ProceedLogin::class.java)
           .switchMap {
             proceedLogin.execute(it.vkAuthBundle)
+              .delay(1, TimeUnit.SECONDS)
               .applySchedulers()
               .andThenAction { StateChange.Transition(coordinator::goToMusicGear) }
               .cast(StateChange::class.java)

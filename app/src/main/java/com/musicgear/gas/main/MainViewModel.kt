@@ -29,7 +29,6 @@ class MainViewModel(
             logout.execute()
               .applySchedulers()
               .andThenAction { StateChange.Transition(coordinator::logout) }
-              .map { ControlsHidden }
               .cast(StateChange::class.java)
               .handleError { listOf(Error(it), HideError) }
           },
