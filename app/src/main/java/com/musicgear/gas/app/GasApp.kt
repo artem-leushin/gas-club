@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.musicgear.di.loginModule
 import com.musicgear.gas.BuildConfig
+import com.musicgear.gas.details.detailsModule
 import com.musicgear.gas.di.BindingComponent
 import com.musicgear.gas.di.categoriesModule
 import com.musicgear.gas.di.dataModule
@@ -41,6 +42,7 @@ class GasApp : Application() {
         loginModule,
         categoriesModule,
         instrumentsModule,
+        detailsModule,
         utilsModule
       )
     }

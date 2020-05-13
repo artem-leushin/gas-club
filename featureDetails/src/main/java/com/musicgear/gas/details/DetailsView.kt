@@ -2,7 +2,7 @@ package com.musicgear.gas.details
 
 import com.musicgear.gas.utils.basecomponents.mvi.BaseView
 
-interface MusicItemDetailsView : BaseView<MusicItemDetailsView.State> {
+interface DetailsView : BaseView<DetailsView.State> {
   data class State(
     val loading: Boolean = false,
     val success: Boolean = false,

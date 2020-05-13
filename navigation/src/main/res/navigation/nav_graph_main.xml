@@ -26,19 +26,16 @@
       android:label="Instruments">
     <action
         android:id="@+id/from_instruments_to_item_details"
-        app:destination="@id/musicItemDetailsFragment" />
+        app:destination="@id/detailsFragment" />
     <argument
         android:name="category"
         app:argType="com.musicgear.gas.categories.CategoriesView$DisplayableCategory" />
   </fragment>
 
   <fragment
-      android:id="@+id/musicItemDetailsFragment"
-      android:name="com.musicgear.gas.details.MusicItemDetailsFragment"
+      android:id="@+id/detailsFragment"
+      android:name="com.musicgear.gas.details.DetailsFragment"
       android:label="Details">
-    <argument
-        android:name="instrument"
-        app:argType="com.musicgear.gas.instruments.InstrumentsView$Displayable$DisplayableInstrument" />
   </fragment>
 
   <fragment

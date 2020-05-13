@@ -3,6 +3,7 @@ package com.musicgear.gas.utils.basecomponents.mvi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.Observable
@@ -11,6 +12,8 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel<State, StateChange> : ViewModel() {
   private var states = MutableLiveData<State>()
+    .distinctUntilChanged() as MutableLiveData<State>
+
   private val viewIntentsConsumer: Relay<Any> = PublishRelay.create()
   private val sideEffectRelay: Relay<StateChange> = PublishRelay.create()
   private var intentsDisposable: Disposable? = null
@@ -32,7 +35,8 @@ abstract class BaseViewModel<State, StateChange> : ViewModel() {
   abstract fun viewIntents(intentStream: Observable<*>): Observable<StateChange>
 
   protected open fun viewModelIntents(): Observable<StateChange> = Observable.never()
-  protected open fun viewModelIntents(sideEffects: Relay<StateChange>): Observable<StateChange> = Observable.never()
+  protected open fun viewModelIntents(sideEffects: Relay<StateChange>): Observable<StateChange> =
+    Observable.never()
 
   protected abstract fun reduce(state: State, changes: StateChange): State
 

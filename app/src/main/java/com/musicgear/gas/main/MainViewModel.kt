@@ -4,10 +4,16 @@ import com.musicgear.gas.domain.interactor.LogoutUseCase
 import com.musicgear.gas.main.MainView.Intent
 import com.musicgear.gas.main.MainView.State
 import com.musicgear.gas.main.MainView.StateChange
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode.None
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode.PostPhoto
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode.TalkToSeller
 import com.musicgear.gas.main.MainView.StateChange.ControlsHidden
 import com.musicgear.gas.main.MainView.StateChange.ControlsVisible
 import com.musicgear.gas.main.MainView.StateChange.Error
 import com.musicgear.gas.main.MainView.StateChange.HideError
+import com.musicgear.gas.main.MainView.StateChange.Idle
+import com.musicgear.gas.main.MainView.StateChange.Transition
 import com.musicgear.gas.navigation.MainCoordinator
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.andThenAction
@@ -28,7 +34,7 @@ class MainViewModel(
           .switchMap {
             logout.execute()
               .applySchedulers()
-              .andThenAction { StateChange.Transition(coordinator::logout) }
+              .andThenAction { Transition(coordinator::logout) }
               .cast(StateChange::class.java)
               .handleError { listOf(Error(it), HideError) }
           },
@@ -37,13 +43,20 @@ class MainViewModel(
           .map { ControlsVisible },
 
         ofType(Intent.HideControls::class.java)
-          .map { ControlsHidden }
+          .map { ControlsHidden },
+
+        ofType(Intent.SwitchToMode::class.java)
+          .switchMap { Observable.just(it.mode, Idle) }
       )
     }
 
   override fun reduce(state: State, changes: StateChange): State = when (changes) {
     is ControlsVisible -> state.copy(hideControls = false, displayControls = true)
     is ControlsHidden -> state.copy(hideControls = true, displayControls = false)
+    is PostPhoto,
+    is TalkToSeller,
+    is None -> state.copy(screenMode = changes as BottomAppBarMode, changeScreenMode = true)
+    is Idle -> state.copy(changeScreenMode = false)
     else -> state
   }
 }

@@ -2,8 +2,6 @@ package com.musicgear.gas.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.FragmentManager
@@ -13,14 +11,20 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.transition.TransitionManager
+import com.google.android.material.bottomappbar.BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+import com.google.android.material.bottomappbar.BottomAppBar.FAB_ALIGNMENT_MODE_END
 import com.musicgear.gas.BottomNavigationDrawerFragment
 import com.musicgear.gas.FragmentLifecycleListener
 import com.musicgear.gas.R
 import com.musicgear.gas.login.LoginFragment
 import com.musicgear.gas.main.MainView.State
 import com.musicgear.gas.main.MainView.StateChange
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode.None
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode.PostPhoto
+import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode.TalkToSeller
 import com.musicgear.gas.navigation.AppNavigator
 import com.musicgear.gas.utils.basecomponents.BaseActivity
+import com.musicgear.gas.utils.delayAction
 import com.musicgear.gas.utils.isOnScreen
 import com.musicgear.gas.utils.snackBarShort
 import io.reactivex.disposables.CompositeDisposable
@@ -66,15 +70,23 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   }
 
   private fun setupToolbar(mainNavController: NavController) {
-    val topDestinations = setOf(R.id.categoriesFragment, R.id.blacklistedUsersFragment, R.id.loginFragment)
+    val topDestinations =
+      setOf(R.id.categoriesFragment, R.id.blacklistedUsersFragment, R.id.loginFragment)
     val conf = AppBarConfiguration.Builder(topDestinations).build()
     NavigationUI.setupWithNavController(toolbar, mainNavController, conf)
     toolbar.inflateMenu(R.menu.menu_top)
     toolbar.setOnMenuItemClickListener {
-      if (it.itemId == R.id.menu_action_logout) {
-        viewModel.publishViewIntent(MainView.Intent.Logout)
-        true
-      } else false
+      when (it.itemId) {
+        R.id.menu_action_logout -> {
+          viewModel.publishViewIntent(MainView.Intent.Logout)
+          true
+        }
+        R.id.menu_action_search -> {
+          snackBarShort(it.title)?.show()
+          true
+        }
+        else -> false
+      }
     }
   }
 
@@ -82,14 +94,8 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
     setSupportActionBar(bottomAppBar)
   }
 
-  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_bottom, menu)
-    return true
-  }
-
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
-      R.id.menu_action_search -> snackBarShort(item.title)?.show()
       android.R.id.home -> BottomNavigationDrawerFragment().show(
         supportFragmentManager,
         "Bottom Menu"
@@ -126,25 +132,32 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   override fun render(state: State) {
     if (state.hideControls) animateControlsOut()
     if (state.displayControls) animateControlsIn()
+    if (state.changeScreenMode) renderBottomBarMode(state)
+  }
+
+  private fun renderBottomBarMode(state: State) = when (state.screenMode) {
+    PostPhoto -> delayAction(300) {
+      bottomAppBar.fabAlignmentMode = FAB_ALIGNMENT_MODE_CENTER
+      fab.show()
+    }
+    TalkToSeller -> delayAction(300) {
+      bottomAppBar.fabAlignmentMode = FAB_ALIGNMENT_MODE_END
+    }
+    None -> fab.hide()
   }
 
   private fun animateControlsOut() {
     if (isOnScreen(toolbar).not() || isOnScreen(bottomAppBar).not()) return
+    fab.hide()
     delayAction { cl_root.transitionToStart() }
     TransitionManager.beginDelayedTransition(cl_root)
-    fab.visibility = View.GONE
     bottomAppBar.visibility = View.GONE
   }
 
   private fun animateControlsIn() {
+    if (isOnScreen(toolbar) || isOnScreen(bottomAppBar)) return
     delayAction { cl_root.transitionToEnd() }
     TransitionManager.beginDelayedTransition(cl_root)
     bottomAppBar.visibility = View.VISIBLE
-    fab.visibility = View.VISIBLE
   }
-
-}
-
-fun delayAction(delay: Long = 150, action: () -> Unit) {
-  Handler().postDelayed({ action() }, delay)
 }
