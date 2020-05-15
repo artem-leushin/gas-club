@@ -12,7 +12,6 @@ dependencies {
   implementation project(":featureLogin")
   implementation project(':featureCategories')
   implementation project(':featureInstrumentsList')
-  implementation project(':featureDetails')
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
   implementation "androidx.appcompat:appcompat:$Version.appCompat"

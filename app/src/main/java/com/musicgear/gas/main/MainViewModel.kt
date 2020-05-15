@@ -14,6 +14,8 @@ import com.musicgear.gas.main.MainView.StateChange.Error
 import com.musicgear.gas.main.MainView.StateChange.HideError
 import com.musicgear.gas.main.MainView.StateChange.Idle
 import com.musicgear.gas.main.MainView.StateChange.Transition
+import com.musicgear.gas.main.MainView.StateChange.UserLoadSuccess
+import com.musicgear.gas.main.MainView.StateChange.UserLoading
 import com.musicgear.gas.navigation.MainCoordinator
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.andThenAction
@@ -51,6 +53,8 @@ class MainViewModel(
     }
 
   override fun reduce(state: State, changes: StateChange): State = when (changes) {
+    is UserLoading -> state.copy(userLoading = true)
+    is UserLoadSuccess -> state.copy(userLoading = false, user = changes.user)
     is ControlsVisible -> state.copy(hideControls = false, displayControls = true)
     is ControlsHidden -> state.copy(hideControls = true, displayControls = false)
     is PostPhoto,

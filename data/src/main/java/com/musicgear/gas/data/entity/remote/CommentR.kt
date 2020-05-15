@@ -2,9 +2,25 @@ package com.musicgear.gas.data.entity.remote
 
 import com.bluelinelabs.logansquare.annotation.JsonField
 import com.bluelinelabs.logansquare.annotation.JsonObject
+import com.musicgear.gas.data.api.AttachmentTypeConverter
+import com.musicgear.gas.domain.entity.AttachmentType
 
 @JsonObject
-data class CommentR(
+internal data class CommentR(
+  @JsonField(name = ["id"])
+  var id: Int? = Int.MIN_VALUE,
+  @JsonField(name = ["from_id"])
+  var userId: Int? = Int.MIN_VALUE,
   @JsonField
-  var text: String? = ""
+  var text: String? = "",
+  @JsonField
+  var attachments: List<PhotoAttachmentR>? = null
+)
+
+@JsonObject
+internal data class PhotoAttachmentR(
+  @JsonField(typeConverter = AttachmentTypeConverter::class)
+  var type: AttachmentType? = AttachmentType.PHOTO,
+  @JsonField
+  var photo: PhotoR? = null
 )

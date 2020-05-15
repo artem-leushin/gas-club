@@ -6,6 +6,7 @@ import android.widget.ImageView
 
 interface ImageLoader {
   fun loadImg(imageView: ImageView, imgUrl: String? = "", args: Args)
+  fun loadImg(imageView: ImageView, imgUrl: String? = "", args: Args, clientListener: () -> Unit)
   fun loadImg(imageView: ImageView, uri: Uri, args: Args)
   fun loadAssetImg(imageView: ImageView, assetName: String, args: Args)
   fun loadBitmap(iv: ImageView, bitmap: Bitmap, centerCrop: Boolean)

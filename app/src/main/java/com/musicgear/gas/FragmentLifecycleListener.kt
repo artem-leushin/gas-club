@@ -6,8 +6,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.musicgear.gas.categories.CategoriesFragment
-import com.musicgear.gas.details.DetailsFragment
-import com.musicgear.gas.instruments.InstrumentsFragment
+import com.musicgear.gas.instruments.details.DetailsFragment
+import com.musicgear.gas.instruments.master.InstrumentsFragment
 import com.musicgear.gas.login.LoginFragment
 import com.musicgear.gas.main.MainView.Intent
 import com.musicgear.gas.main.MainView.Intent.HideControls

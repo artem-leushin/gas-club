@@ -9,9 +9,7 @@ internal fun User.toDB() = UserDB(
   id,
   firstName,
   lastName,
-  email,
-  phone,
-  birthDate,
+  screenName,
   avatarUrl
 )
 

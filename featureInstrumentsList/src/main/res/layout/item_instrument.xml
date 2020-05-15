@@ -6,7 +6,7 @@
 
     <variable
         name="instrument"
-        type="com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument" />
+        type="com.musicgear.gas.instruments.master.InstrumentsView.Displayable.DisplayableInstrument" />
 
     <import type="com.musicgear.gas.instruments.R" />
   </data>

@@ -1,20 +1,22 @@
-package com.musicgear.gas.instruments
+package com.musicgear.gas.instruments.master
 
-import com.musicgear.gas.domain.entity.Instrument
+import com.musicgear.gas.domain.entity.InstrumentPhoto
 import com.musicgear.gas.domain.interactor.LoadInstrumentsUseCase
-import com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument
-import com.musicgear.gas.instruments.InstrumentsView.Displayable.ProgressItem
-import com.musicgear.gas.instruments.InstrumentsView.Intent.GoToDetails
-import com.musicgear.gas.instruments.InstrumentsView.Intent.LoadNextPage
-import com.musicgear.gas.instruments.InstrumentsView.Intent.RefreshInstruments
-import com.musicgear.gas.instruments.InstrumentsView.State
-import com.musicgear.gas.instruments.InstrumentsView.StateChange
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.Error
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.FirstPageLoading
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.HideError
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.NextPageLoading
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.NextPageSuccess
-import com.musicgear.gas.instruments.InstrumentsView.StateChange.Transition
+import com.musicgear.gas.instruments.InstrumentsCoordinator
+import com.musicgear.gas.instruments.master.InstrumentsView.Displayable.DisplayableInstrument
+import com.musicgear.gas.instruments.master.InstrumentsView.Displayable.ProgressItem
+import com.musicgear.gas.instruments.master.InstrumentsView.Intent.GoToDetails
+import com.musicgear.gas.instruments.master.InstrumentsView.Intent.LoadNextPage
+import com.musicgear.gas.instruments.master.InstrumentsView.Intent.RefreshInstruments
+import com.musicgear.gas.instruments.master.InstrumentsView.State
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.Error
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.FirstPageLoading
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.FirstPageSuccess
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.HideError
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.NextPageLoading
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.NextPageSuccess
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange.Transition
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.applySchedulers
 import com.musicgear.gas.utils.rx.handleError
@@ -26,7 +28,6 @@ class InstrumentsViewModel(
 ) : BaseViewModel<State, StateChange>() {
   override fun initState(): State = State()
 
-  var currentInstrumentPosition: Int = 0
   var categoryId: Int = 0
 
   private val defaultPerPage = 20
@@ -39,7 +40,9 @@ class InstrumentsViewModel(
     with(intentStream) {
       Observable.merge(
         ofType(GoToDetails::class.java)
-          .map { Transition { coordinator.goToItemDetails(it.instrument) } },
+          .map {
+            Transition { coordinator.goToItemDetails(it.instrument, it.sharedViews) }
+          },
 
         ofType(RefreshInstruments::class.java)
           .doOnNext {
@@ -73,11 +76,11 @@ class InstrumentsViewModel(
       .cast(StateChange::class.java)
       .handleError { listOf(Error(it), HideError) }
 
-  private fun mapToDisplayable(instruments: List<Instrument>): List<DisplayableInstrument> =
+  private fun mapToDisplayable(instruments: List<InstrumentPhoto>): List<DisplayableInstrument> =
     instruments.map { it.toPresentation() }
 
-  private fun Instrument.toPresentation() = DisplayableInstrument(
-    id, name, dateAdded.toString(), photoSizes.first().srcUrl
+  private fun InstrumentPhoto.toPresentation() = DisplayableInstrument(
+    id, userId, name, dateAdded.toString(), photoSizes.first().srcUrl
   )
 
   override fun reduce(state: State, changes: StateChange): State = when (changes) {
@@ -87,7 +90,7 @@ class InstrumentsViewModel(
       error = null,
       instruments = state.instruments + ProgressItem
     )
-    is StateChange.FirstPageSuccess -> state.copy(
+    is FirstPageSuccess -> state.copy(
       success = true,
       firstPageLoading = false,
       nextPageLoading = false,

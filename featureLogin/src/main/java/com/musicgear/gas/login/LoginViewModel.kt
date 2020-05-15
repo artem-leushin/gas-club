@@ -50,6 +50,13 @@ class LoginViewModel(
       )
     }
 
+//  loadUser.execute()
+//  .applySchedulers()
+//  .map { UserLoadSuccess(it) }
+//  .cast(StateChange::class.java)
+//  .startWith(UserLoading)
+//  .handleError { listOf(Error(it), HideError) }
+
   override fun reduce(state: State, changes: StateChange): State = when (changes) {
     is StartLoading -> state.copy(loading = true)
     is Success -> state.copy(success = true, loading = false, error = null)

@@ -1,9 +1,11 @@
 package com.musicgear.gas.main
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -43,6 +45,14 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   override val viewModel: MainViewModel by viewModel()
   override val viewSubscriptions: Disposable = CompositeDisposable()
 
+  private val talkToSellerDrawable: Drawable by lazy {
+    ResourcesCompat.getDrawable(resources, R.drawable.ic_chat_bubble, theme)!!
+  }
+
+  private val takePhotoDrawable: Drawable by lazy {
+    ResourcesCompat.getDrawable(resources, R.drawable.ic_photo_add, theme)!!
+  }
+
   private val fragmentsLifecycleListener: FragmentManager.FragmentLifecycleCallbacks by lazy {
     FragmentLifecycleListener(viewModel::publishViewIntent)
   }
@@ -53,6 +63,7 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
     super.onCreate(savedInstanceState)
     monitorChildFragments()
     setupNavigator()
+    fab.setOnClickListener { snackBarShort("Not implemented yet")?.show() }
   }
 
   override fun onDestroy() {
@@ -82,7 +93,7 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
           true
         }
         R.id.menu_action_search -> {
-          snackBarShort(it.title)?.show()
+          snackBarShort("Not implemented yet")?.show()
           true
         }
         else -> false
@@ -136,12 +147,14 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   }
 
   private fun renderBottomBarMode(state: State) = when (state.screenMode) {
-    PostPhoto -> delayAction(300) {
+    PostPhoto -> {
       bottomAppBar.fabAlignmentMode = FAB_ALIGNMENT_MODE_CENTER
+      fab.setImageDrawable(takePhotoDrawable)
       fab.show()
     }
-    TalkToSeller -> delayAction(300) {
+    TalkToSeller -> {
       bottomAppBar.fabAlignmentMode = FAB_ALIGNMENT_MODE_END
+      fab.setImageDrawable(talkToSellerDrawable)
     }
     None -> fab.hide()
   }

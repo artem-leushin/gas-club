@@ -5,7 +5,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.musicgear.gas.categories.CategoriesCoordinator
 import com.musicgear.gas.categories.CategoriesView.DisplayableCategory
 import com.musicgear.gas.instruments.InstrumentsCoordinator
-import com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument
+import com.musicgear.gas.instruments.master.InstrumentsView
 import com.musicgear.gas.login.LoginCoordinator
 import com.musicgear.gas.start.StartCoordinator
 
@@ -28,8 +28,16 @@ class CategoriesCoordinatorImpl(private val navigator: AppNavigator) : Categorie
 }
 
 class InstrumentsCoordinatorImpl(private val navigator: AppNavigator) : InstrumentsCoordinator {
-  override fun goToItemDetails(instrument: DisplayableInstrument) =
-    navigator.goFromInstrumentsToDetails(instrument)
+  override fun goToItemDetails(
+    instrument: InstrumentsView.Displayable.DisplayableInstrument,
+    sharedViews: Pair<View, String>?
+  ) {
+    val extras = sharedViews?.let { FragmentNavigatorExtras(it) } ?: FragmentNavigatorExtras()
+    navigator.goFromInstrumentsToDetails(instrument, extras)
+  }
+
+  override fun goToItemDetails(instrumentId: Int, sharedViews: Pair<View, String>?) {
+  }
 }
 
 class MainCoordinatorImpl(private val navigator: AppNavigator) : MainCoordinator {

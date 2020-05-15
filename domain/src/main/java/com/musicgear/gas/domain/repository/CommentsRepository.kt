@@ -4,5 +4,5 @@ import com.musicgear.gas.domain.entity.Comment
 import io.reactivex.Observable
 
 interface CommentsRepository {
-  fun getSellerDescriptionComment(instrumentId: Int): Observable<Comment>
+  fun getCommentsForInstrument(instrumentId: Int): Observable<List<Comment>>
 }

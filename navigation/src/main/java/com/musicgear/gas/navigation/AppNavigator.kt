@@ -7,7 +7,7 @@ import androidx.navigation.Navigator
 import com.musicgear.gas.categories.CategoriesView.DisplayableCategory
 import com.musicgear.gas.domain.constants.ARG_CATEGORY
 import com.musicgear.gas.domain.constants.ARG_INSTRUMENT
-import com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument
+import com.musicgear.gas.instruments.master.InstrumentsView
 
 class AppNavigator {
   private lateinit var navController: NavController
@@ -44,13 +44,16 @@ class AppNavigator {
     navController.navigate(R.id.from_categories_to_instruments, args, navOptions)
   }
 
-  fun goFromInstrumentsToDetails(instrument: DisplayableInstrument) {
+  fun goFromInstrumentsToDetails(
+    instrument: InstrumentsView.Displayable.DisplayableInstrument,
+    extras: Navigator.Extras
+  ) {
     val navOptions = NavOptions.Builder()
       .setEnterAnim(R.anim.fade_in)
       .setExitAnim(R.anim.fade_out)
       .build()
-    val args = bundleOf(ARG_INSTRUMENT to instrument.id)
-    navController.navigate(R.id.from_instruments_to_item_details, args, navOptions)
+    val args = bundleOf(ARG_INSTRUMENT to instrument)
+    navController.navigate(R.id.from_instruments_to_item_details, args, navOptions, extras)
   }
 
   fun logout() {
@@ -62,5 +65,3 @@ class AppNavigator {
     navController.navigate(R.id.to_login, null, navOptions)
   }
 }
-
-

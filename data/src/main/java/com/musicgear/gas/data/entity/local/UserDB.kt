@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.musicgear.gas.data.database.LocalDateConverter
-import org.threeten.bp.LocalDate
 
 internal const val USER_DEFAULT_ID = 1
 
@@ -14,9 +13,7 @@ internal class UserDB(
   @PrimaryKey val id: Int = USER_DEFAULT_ID,
   val firstName: String = "",
   val lastName: String = "",
-  val email: String = "",
-  val phone: String = "",
-  val birthDate: LocalDate = LocalDate.MIN,
+  val screenName: String = "",
   val avatarUrl: String = ""
 ) {
   companion object {

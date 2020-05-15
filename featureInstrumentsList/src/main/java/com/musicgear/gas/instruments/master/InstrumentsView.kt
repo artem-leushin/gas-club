@@ -1,7 +1,8 @@
-package com.musicgear.gas.instruments
+package com.musicgear.gas.instruments.master
 
 import android.os.Parcelable
-import com.musicgear.gas.instruments.InstrumentsView.Displayable.DisplayableInstrument
+import android.view.View
+import com.musicgear.gas.instruments.master.InstrumentsView.Displayable.DisplayableInstrument
 import kotlinx.android.parcel.Parcelize
 
 interface InstrumentsView {
@@ -16,7 +17,12 @@ interface InstrumentsView {
   sealed class Intent {
     object RefreshInstruments : Intent()
     object LoadNextPage : Intent()
-    class GoToDetails(val instrument: DisplayableInstrument) : Intent()
+    class GoToDetails(
+      val instrument: DisplayableInstrument,
+      val sharedViews: Pair<View, String>,
+      val position: Int
+    ) : Intent()
+
   }
 
   sealed class StateChange {
@@ -34,14 +40,23 @@ interface InstrumentsView {
   }
 
   sealed class Displayable {
+    abstract val id: Int
+    abstract val transitionName: String
+
     @Parcelize
     data class DisplayableInstrument(
-      val id: Int,
-      val title: String,
+      override val id: Int,
+      val userId: Int,
+      val description: String,
       val dateAdded: String,
       val photoUrl: String
-    ) : Displayable(), Parcelable
+    ) : Displayable(), Parcelable {
+      override val transitionName = "$id $dateAdded"
+    }
 
-    object ProgressItem : Displayable()
+    object ProgressItem : Displayable() {
+      override val id = -1
+      override val transitionName = ""
+    }
   }
 }

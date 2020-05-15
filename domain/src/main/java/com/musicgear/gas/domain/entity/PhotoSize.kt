@@ -17,9 +17,10 @@ enum class SizeType(val code: String) {
   RATIO_510("r"),
   PROPORTIONAL_807("y"),
   PROPORTIONAL_X1024("z"),
-  PROPORTIONAL_X2560("w");
+  PROPORTIONAL_X2560("w"),
+  UNKNOWN("");
 
   companion object {
-    fun valueFor(code: String): SizeType = values().first { it.code == code }
+    fun valueFor(code: String): SizeType = values().firstOrNull { it.code == code } ?: UNKNOWN
   }
 }

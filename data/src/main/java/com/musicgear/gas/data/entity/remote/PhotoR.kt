@@ -9,6 +9,10 @@ import org.threeten.bp.LocalDateTime
 internal data class PhotoR(
   @JsonField
   var id: Int? = Int.MIN_VALUE,
+  @JsonField(name = ["album_id"])
+  var albumId: Int? = Int.MIN_VALUE,
+  @JsonField(name = ["user_id"])
+  var userId: Int? = Int.MIN_VALUE,
   @JsonField
   var text: String? = "",
   @JsonField(typeConverter = LocalDateTimeUnixConverter::class)

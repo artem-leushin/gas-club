@@ -1,15 +1,18 @@
-package com.musicgear.gas.instruments
+package com.musicgear.gas.instruments.master
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.musicgear.gas.domain.constants.ARG_CATEGORY
-import com.musicgear.gas.instruments.InstrumentsView.Intent.RefreshInstruments
-import com.musicgear.gas.instruments.InstrumentsView.State
-import com.musicgear.gas.instruments.InstrumentsView.StateChange
-import com.musicgear.gas.instruments.adapter.InstrumentsAdapter
+import com.musicgear.gas.instruments.R
 import com.musicgear.gas.instruments.databinding.FragmentInstrumentsBinding
+import com.musicgear.gas.instruments.master.InstrumentsView.Intent.RefreshInstruments
+import com.musicgear.gas.instruments.master.InstrumentsView.State
+import com.musicgear.gas.instruments.master.InstrumentsView.StateChange
+import com.musicgear.gas.instruments.master.adapter.InstrumentsAdapter
 import com.musicgear.gas.utils.adapter.EndlessScrollListener
 import com.musicgear.gas.utils.adapter.MarginItemDecoration
 import com.musicgear.gas.utils.basecomponents.BaseBindingFragment
@@ -32,9 +35,13 @@ class InstrumentsFragment :
 
   override fun layoutResId(): Int = R.layout.fragment_instruments
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     viewModel.categoryId = requireArguments().getInt(ARG_CATEGORY, 0)
+    return super.onCreateView(inflater, container, savedInstanceState)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,8 +56,7 @@ class InstrumentsFragment :
   }
 
   private fun initRecyclerView() {
-    this.listAdapter = InstrumentsAdapter(viewModel::publishViewIntent, imageLoader)
-
+    listAdapter = InstrumentsAdapter(viewModel::publishViewIntent, imageLoader)
     rv_instruments.apply {
       layoutManager = LinearLayoutManager(context)
       adapter = listAdapter
@@ -66,5 +72,4 @@ class InstrumentsFragment :
     state.error?.message?.let { snackBarShort(it)?.show() }
   }
 }
-
 

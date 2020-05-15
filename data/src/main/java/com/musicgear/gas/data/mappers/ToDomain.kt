@@ -4,11 +4,15 @@ import com.musicgear.gas.data.entity.local.UserDB
 import com.musicgear.gas.data.entity.local.VkSessionDB
 import com.musicgear.gas.data.entity.remote.AlbumR
 import com.musicgear.gas.data.entity.remote.CommentR
+import com.musicgear.gas.data.entity.remote.PhotoAttachmentR
 import com.musicgear.gas.data.entity.remote.PhotoR
 import com.musicgear.gas.data.entity.remote.SizeR
+import com.musicgear.gas.data.entity.remote.UserR
+import com.musicgear.gas.domain.entity.AttachmentType
 import com.musicgear.gas.domain.entity.Category
 import com.musicgear.gas.domain.entity.Comment
-import com.musicgear.gas.domain.entity.Instrument
+import com.musicgear.gas.domain.entity.InstrumentPhoto
+import com.musicgear.gas.domain.entity.PhotoAttachment
 import com.musicgear.gas.domain.entity.Size
 import com.musicgear.gas.domain.entity.SizeType
 import com.musicgear.gas.domain.entity.User
@@ -20,10 +24,15 @@ internal fun UserDB.toDomain() = User(
   id,
   firstName,
   lastName,
-  email,
-  phone,
-  birthDate,
+  screenName,
   avatarUrl
+)
+internal fun UserR.toDomain() = User(
+  id ?: Int.MIN_VALUE,
+  firstName ?: "",
+  lastName ?: "",
+  screenName ?: "",
+  photoUrl ?: ""
 )
 
 internal fun VKAccessToken.toDomain() = VkSession(
@@ -49,14 +58,26 @@ internal fun AlbumR.toDomain() = Category(
   thumbSizes?.map { it.toDomain() } ?: listOf()
 )
 
-internal fun PhotoR.toDomain() = Instrument(
+internal fun PhotoR.toDomain() = InstrumentPhoto(
   id ?: Int.MIN_VALUE,
+  albumId ?: Int.MIN_VALUE,
+  userId ?: Int.MIN_VALUE,
   text ?: "",
   date ?: LocalDateTime.MIN,
   photoSizes?.map { it.toDomain() } ?: listOf()
 )
 
-internal fun CommentR.toDomain() = Comment(text ?: "")
+internal fun CommentR.toDomain() = Comment(
+  id ?: Int.MIN_VALUE,
+  userId ?: Int.MIN_VALUE,
+  text ?: "",
+  attachments?.map { it.toDomain() } ?: emptyList()
+)
+
+internal fun PhotoAttachmentR.toDomain() = PhotoAttachment(
+  type ?: AttachmentType.PHOTO,
+  photo?.toDomain() ?: InstrumentPhoto.EMPTY
+)
 
 internal fun SizeR.toDomain() = Size(
   srcUrl ?: "",

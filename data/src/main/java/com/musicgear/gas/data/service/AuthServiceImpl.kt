@@ -24,7 +24,8 @@ class AuthServiceImpl(private val sessionSource: VkSessionSource) : AuthService 
   override fun proceedLogin(authBundle: AuthBundle): Completable =
     Observable.create<VkSession> { emitter ->
       authBundle.run { VK.onActivityResult(requestCode, resultCode, data, authCallback(emitter)) }
-    }.flatMapCompletable { sessionSource.saveSession(it) }
+    }
+      .flatMapCompletable { sessionSource.saveSession(it) }
 
   override fun logout(): Completable = Completable.fromCallable { VK.logout() }
     .andThen(sessionSource.clearSession())

@@ -9,4 +9,5 @@ interface UserRepository {
   fun saveUser(user: User): Completable
   fun updateUser(user: User): Completable
   fun clear(): Completable
+  fun refresh(): Completable
 }

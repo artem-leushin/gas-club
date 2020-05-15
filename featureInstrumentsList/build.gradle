@@ -24,6 +24,8 @@ dependencies {
   implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${Version.rxBinding2}"
   implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
 
+  implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
+
   testImplementation Deps.jUnit
   androidTestImplementation Deps.jUnitExt
   androidTestImplementation Deps.espresso

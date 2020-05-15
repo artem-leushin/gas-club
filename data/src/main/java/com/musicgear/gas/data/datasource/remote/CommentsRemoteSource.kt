@@ -10,6 +10,6 @@ internal class CommentsRemoteSource(
   private val api: RetrofitApi
 ) : CommentsSource {
   override fun getComments(instrumentId: Int): Observable<List<Comment>> =
-    api.getComments(albumId = instrumentId)
-      .map { it.map { comment -> comment.toDomain() } }
+    api.getComments(photoId = instrumentId)
+      .map { it.response?.items?.map { comment -> comment.toDomain() } }
 }

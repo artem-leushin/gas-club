@@ -13,3 +13,8 @@ class ConnectionErrorException : DomainException {
 class VkLoginFailedException(code: Int?) :
   DomainException("Failed to login with VK. Error code: $code")
 
+class UnsupportedByLocalException() :
+  DomainException("This operation is not supported by Local")
+
+class UnsupportedByRemoteException() :
+  DomainException("This operation is not supported by Remote")

@@ -2,6 +2,7 @@ package com.musicgear.gas.data.api
 
 import com.bluelinelabs.logansquare.typeconverters.IntBasedTypeConverter
 import com.bluelinelabs.logansquare.typeconverters.StringBasedTypeConverter
+import com.musicgear.gas.domain.entity.AttachmentType
 import com.musicgear.gas.domain.entity.SizeType
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
@@ -58,5 +59,11 @@ internal class LocalDateTimeUnixConverter : IntBasedTypeConverter<LocalDateTime>
 class SizeTypeConverter : StringBasedTypeConverter<SizeType>() {
   override fun convertToString(`object`: SizeType?): String = `object`?.code ?: ""
 
-  override fun getFromString(code: String?): SizeType = SizeType.valueFor(code ?: "s")
+  override fun getFromString(code: String?): SizeType = SizeType.valueFor(code ?: "")
+}
+
+class AttachmentTypeConverter: StringBasedTypeConverter<AttachmentType>() {
+  override fun convertToString(`object`: AttachmentType?): String = `object`?.code ?: ""
+
+  override fun getFromString(string: String?): AttachmentType = AttachmentType.valueFor(string ?: "")
 }

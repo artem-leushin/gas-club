@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.musicgear.di.loginModule
 import com.musicgear.gas.BuildConfig
-import com.musicgear.gas.details.detailsModule
 import com.musicgear.gas.di.BindingComponent
 import com.musicgear.gas.di.categoriesModule
 import com.musicgear.gas.di.dataModule
+import com.musicgear.gas.di.detailsModule
 import com.musicgear.gas.di.instrumentsModule
 import com.musicgear.gas.di.mainModule
 import com.musicgear.gas.di.navigationModule

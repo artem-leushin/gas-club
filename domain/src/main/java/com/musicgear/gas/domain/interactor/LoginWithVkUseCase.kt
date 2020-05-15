@@ -3,6 +3,7 @@ package com.musicgear.gas.domain.interactor
 import android.app.Activity
 import com.musicgear.gas.domain.entity.AuthBundle
 import com.musicgear.gas.domain.entity.SessionStatus
+import com.musicgear.gas.domain.repository.UserRepository
 import com.musicgear.gas.domain.service.AuthService
 import com.musicgear.gas.domain.service.SessionStatusService
 import io.reactivex.Completable
@@ -15,9 +16,11 @@ class LoginWithVkUseCase(
 }
 
 class ProceedLoginWithVkUseCase(
-  private val authService: AuthService
+  private val authService: AuthService,
+  private val userRepository: UserRepository
 ) {
   fun execute(authBundle: AuthBundle): Completable = authService.proceedLogin(authBundle)
+    .andThen(userRepository.refresh())
 }
 
 class CheckIfUserIsLoggedInUseCase(

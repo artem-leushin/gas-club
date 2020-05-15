@@ -1,4 +1,4 @@
-package com.musicgear.gas.instruments.adapter
+package com.musicgear.gas.instruments.master.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.musicgear.gas.instruments.InstrumentsView.Displayable
-import com.musicgear.gas.instruments.InstrumentsView.Intent
 import com.musicgear.gas.instruments.R
 import com.musicgear.gas.instruments.databinding.ItemInstrumentBinding
+import com.musicgear.gas.instruments.master.InstrumentsView.Displayable
+import com.musicgear.gas.instruments.master.InstrumentsView.Intent.GoToDetails
 import com.musicgear.gas.utils.imageloading.ImageLoader
 import com.musicgear.gas.utils.rx.safeClicks
 
@@ -17,6 +17,12 @@ class InstrumentsAdapter(
   private val intentsPublisher: (Any) -> Unit,
   private val imageLoader: ImageLoader
 ) : ListAdapter<Displayable, RecyclerView.ViewHolder>(ItemDiffCallback) {
+
+  init {
+    setHasStableIds(true)
+  }
+
+  override fun getItemId(position: Int): Long = getItem(position).id.toLong()
 
   override fun getItemViewType(position: Int): Int = when (getItem(position)) {
     is Displayable.DisplayableInstrument -> R.layout.item_instrument
@@ -58,12 +64,18 @@ class InstrumentViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
   init {
-    binding.run { root.safeClicks { publishIntent(Intent.GoToDetails(instrument!!)) } }
-      .subscribe()
+    binding.run {
+      root.safeClicks {
+        publishIntent(
+          GoToDetails(instrument!!, Pair(ivPhoto, ivPhoto.transitionName), adapterPosition)
+        )
+      }
+    }.subscribe()
   }
 
   fun bind(instrument: Displayable.DisplayableInstrument) {
     binding.instrument = instrument
+    binding.ivPhoto.transitionName = instrument.transitionName
     imageLoader.loadImg(
       binding.ivPhoto,
       instrument.photoUrl,

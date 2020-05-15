@@ -45,20 +45,20 @@
           android:layout_marginStart="16dp"
           tools:text="Sadio Mane"
           android:textAppearance="@style/TextAppearance.Gas.Subtitle1"
-          app:layout_constraintBottom_toTopOf="@+id/tv_email"
+          app:layout_constraintBottom_toTopOf="@+id/tv_screen_name"
           app:layout_constraintStart_toEndOf="@+id/iv_avatar"
           app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
 
       <TextView
-          android:id="@+id/tv_email"
+          android:id="@+id/tv_screen_name"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
-          tools:text="super_firmino@mail.br"
           android:textAppearance="@style/TextAppearance.Gas.Body2"
           app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
           app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-          app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+          app:layout_constraintTop_toBottomOf="@+id/tv_name"
+          tools:text="Yabeedabeedoo" />
 
       <View
           android:id="@+id/divider"

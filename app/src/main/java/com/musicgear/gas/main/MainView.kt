@@ -1,5 +1,6 @@
 package com.musicgear.gas.main
 
+import com.musicgear.gas.domain.entity.User
 import com.musicgear.gas.main.MainView.State
 import com.musicgear.gas.main.MainView.StateChange.BottomAppBarMode
 import com.musicgear.gas.utils.basecomponents.mvi.BaseView
@@ -9,7 +10,9 @@ interface MainView : BaseView<State> {
     val hideControls: Boolean = true,
     val displayControls: Boolean = false,
     val screenMode: BottomAppBarMode = BottomAppBarMode.None,
-    val changeScreenMode: Boolean = false
+    val changeScreenMode: Boolean = false,
+    val userLoading: Boolean = false,
+    val user: User = User.EMPTY
   )
 
   sealed class Intent {
@@ -23,6 +26,8 @@ interface MainView : BaseView<State> {
     object Idle : StateChange()
     object ControlsVisible : StateChange()
     object ControlsHidden : StateChange()
+    class UserLoadSuccess(val user: User) : StateChange()
+    object UserLoading : StateChange()
 
     sealed class BottomAppBarMode : StateChange() {
       object PostPhoto : BottomAppBarMode()

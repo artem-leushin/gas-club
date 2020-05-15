@@ -1,30 +1,28 @@
 package com.musicgear.gas.domain.entity
 
-import org.threeten.bp.LocalDate
-
 data class User(
   val id: Int,
   val firstName: String,
   val lastName: String,
-  val email: String,
-  val phone: String,
-  val birthDate: LocalDate,
+  val screenName: String,
   val avatarUrl: String
 ) {
+
+  val fullName: String = "$firstName $lastName"
 
   companion object {
     val EMPTY = User(
       id = -1,
       firstName = "",
       lastName = "",
-      email = "",
-      phone = "",
-      birthDate = LocalDate.now(),
+      screenName = "",
       avatarUrl = ""
     )
   }
 
+  fun isEmpty() = this == EMPTY
+
   override fun toString(): String {
-    return "$id,$email,$firstName,$firstName,$phone,${birthDate.toString()},$avatarUrl"
+    return "$id,,$firstName,$firstName,$avatarUrl"
   }
 }

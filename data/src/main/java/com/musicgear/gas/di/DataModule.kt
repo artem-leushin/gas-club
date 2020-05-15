@@ -20,6 +20,7 @@ import com.musicgear.gas.data.datasource.remote.CommentsRemoteSource
 import com.musicgear.gas.data.datasource.remote.InstrumentsRemoteSource
 import com.musicgear.gas.data.datasource.remote.UserRemoteSource
 import com.musicgear.gas.data.repository.CategoriesRepositoryImpl
+import com.musicgear.gas.data.repository.CommentsRepositoryImpl
 import com.musicgear.gas.data.repository.InstrumentsRepositoryImpl
 import com.musicgear.gas.data.repository.ResourcesRepositoryImpl
 import com.musicgear.gas.data.repository.UserRepositoryImpl
@@ -31,6 +32,7 @@ import com.musicgear.gas.domain.constants.HTTP_CLIENT_FACTORY_IMG
 import com.musicgear.gas.domain.constants.USER_SOURCE_LOCAL
 import com.musicgear.gas.domain.constants.USER_SOURCE_REMOTE
 import com.musicgear.gas.domain.repository.CategoriesRepository
+import com.musicgear.gas.domain.repository.CommentsRepository
 import com.musicgear.gas.domain.repository.InstrumentsRepository
 import com.musicgear.gas.domain.repository.ResourcesRepository
 import com.musicgear.gas.domain.repository.UserRepository
@@ -47,6 +49,7 @@ val dataModule = module {
 
   single<InternetObserverService> { InternetObserverImpl(context = get()) }
   single<ResourcesRepository> { ResourcesRepositoryImpl(resources = get()) }
+
   single<SessionStatusService> { SessionStatusServiceImpl() }
   single<AuthService> { AuthServiceImpl(sessionSource = get()) }
   single<VkSessionSource> { VkSessionLocalSource(dao = get()) }
@@ -65,6 +68,7 @@ val dataModule = module {
   }
   single<CategoriesRepository> { CategoriesRepositoryImpl(remote = get()) }
   single<InstrumentsRepository> { InstrumentsRepositoryImpl(remote = get()) }
+  single<CommentsRepository> { CommentsRepositoryImpl(remote = get()) }
 
   single { GasRoomDbProvider.createGasRoomDb(get()).userDao() }
   single { GasRoomDbProvider.createGasRoomDb(get()).vkSessionDao() }
