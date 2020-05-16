@@ -16,7 +16,7 @@ internal interface RetrofitApi {
     @Query("fields") fields: List<String>? = listOf("screen_name, photo_200_orig")
   ): Observable<UserResponse>
 
-  @GET("photos.getAlbums")
+  @GET("photos.getAlbumsasd")
   fun getAlbums(
     @Query("owner_id") groupId: Int? = GAS_GROUP_ID,
     @Query("need_covers") needCovers: Int? = 1,

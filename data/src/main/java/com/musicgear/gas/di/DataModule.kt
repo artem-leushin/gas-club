@@ -1,12 +1,12 @@
 package com.musicgear.gas.di
 
-import com.github.aurae.retrofit2.LoganSquareConverterFactory
 import com.musicgear.gas.data.BuildConfig
 import com.musicgear.gas.data.api.okhttp.ClientFactory
 import com.musicgear.gas.data.api.okhttp.ImageLoaderClientFactory
 import com.musicgear.gas.data.api.okhttp.OkHttpClientFactory
 import com.musicgear.gas.data.api.okhttp.RxErrorHandlingCallAdapterFactory
 import com.musicgear.gas.data.api.retrofit.RetrofitApiFactory
+import com.musicgear.gas.data.api.retrofit.converter.GasConverterFactory
 import com.musicgear.gas.data.database.room.GasRoomDbProvider
 import com.musicgear.gas.data.datasource.CategoriesSource
 import com.musicgear.gas.data.datasource.CommentsSource
@@ -91,5 +91,5 @@ val dataModule = module {
   }
 
   single<CallAdapter.Factory> { RxErrorHandlingCallAdapterFactory() }
-  single<Converter.Factory> { LoganSquareConverterFactory.create() }
+  single<Converter.Factory> { GasConverterFactory() }
 }

@@ -62,8 +62,9 @@ class SizeTypeConverter : StringBasedTypeConverter<SizeType>() {
   override fun getFromString(code: String?): SizeType = SizeType.valueFor(code ?: "")
 }
 
-class AttachmentTypeConverter: StringBasedTypeConverter<AttachmentType>() {
+class AttachmentTypeConverter : StringBasedTypeConverter<AttachmentType>() {
   override fun convertToString(`object`: AttachmentType?): String = `object`?.code ?: ""
 
-  override fun getFromString(string: String?): AttachmentType = AttachmentType.valueFor(string ?: "")
+  override fun getFromString(string: String?): AttachmentType =
+    AttachmentType.valueFor(string ?: "")
 }
