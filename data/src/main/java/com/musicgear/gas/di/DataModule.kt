@@ -1,10 +1,8 @@
 package com.musicgear.gas.di
 
-import com.musicgear.gas.data.BuildConfig
 import com.musicgear.gas.data.api.okhttp.ClientFactory
 import com.musicgear.gas.data.api.okhttp.ImageLoaderClientFactory
 import com.musicgear.gas.data.api.okhttp.OkHttpClientFactory
-import com.musicgear.gas.data.api.okhttp.RxErrorHandlingCallAdapterFactory
 import com.musicgear.gas.data.api.retrofit.RetrofitApiFactory
 import com.musicgear.gas.data.api.retrofit.converter.GasConverterFactory
 import com.musicgear.gas.data.database.room.GasRoomDbProvider
@@ -39,13 +37,15 @@ import com.musicgear.gas.domain.repository.UserRepository
 import com.musicgear.gas.domain.service.AuthService
 import com.musicgear.gas.domain.service.InternetObserverService
 import com.musicgear.gas.domain.service.SessionStatusService
+import okhttp3.HttpUrl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.CallAdapter
 import retrofit2.Converter
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 val dataModule = module {
-  single { BuildConfig.BASE_URL }
+  single { HttpUrl.Builder() }
 
   single<InternetObserverService> { InternetObserverImpl(context = get()) }
   single<ResourcesRepository> { ResourcesRepositoryImpl(resources = get()) }
@@ -90,6 +90,6 @@ val dataModule = module {
     )
   }
 
-  single<CallAdapter.Factory> { RxErrorHandlingCallAdapterFactory() }
+  single<CallAdapter.Factory> { RxJava2CallAdapterFactory.create() }
   single<Converter.Factory> { GasConverterFactory() }
 }

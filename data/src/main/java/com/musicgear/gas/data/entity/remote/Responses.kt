@@ -28,6 +28,6 @@ internal open class CommentsResponse(
 )
 
 @JsonObject
-internal open class Response<T>(
+internal open class BaseResponse<T>(
   @JsonField(name = ["response"]) var response: T? = null
 )

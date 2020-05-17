@@ -39,10 +39,7 @@ internal object LoganSquareJsonMapper {
     val jsonString = if (type is ParameterizedType) {
       val rawType = type.rawType
       if (rawType !is List<*> && rawType !is Map<*, *>) {
-        LoganSquare.serialize<Any>(
-          value,
-          ConverterUtils.parameterizedTypeOf(type)
-        )
+        LoganSquare.serialize<Any>(value, ConverterUtils.parameterizedTypeOf(type))
       } else null
     } else LoganSquare.serialize(value)
 

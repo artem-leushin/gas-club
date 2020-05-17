@@ -1,6 +1,6 @@
 package com.musicgear.gas.data.datasource
 
-import com.musicgear.gas.data.api.retrofit.RetrofitApi.Companion.GAS_GROUP_ID
+import com.musicgear.gas.data.api.retrofit.GasApi.Companion.GAS_GROUP_ID
 import com.musicgear.gas.domain.entity.Category
 import io.reactivex.Observable
 

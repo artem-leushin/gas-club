@@ -1,5 +1,6 @@
 package com.musicgear.gas.data.api.retrofit
 
+import com.github.aurae.retrofit2.LoganSquareConverterFactory
 import com.musicgear.gas.data.api.okhttp.OkHttpClientFactory
 import retrofit2.CallAdapter
 import retrofit2.Converter
@@ -12,11 +13,11 @@ internal class RetrofitApiFactory(
   private val callAdapterFactory: CallAdapter.Factory
 ) {
 
-  fun createRetrofitApi(): RetrofitApi = Retrofit.Builder()
+  fun createRetrofitApi(): GasApi = Retrofit.Builder()
     .client(gasHttpClientFactory.create())
     .baseUrl(baseUrl)
     .addCallAdapterFactory(callAdapterFactory)
-    .addConverterFactory(converterFactory)
+    .addConverterFactory(LoganSquareConverterFactory.create())
     .build()
-    .create(RetrofitApi::class.java)
+    .create(GasApi::class.java)
 }
