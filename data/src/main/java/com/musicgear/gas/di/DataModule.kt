@@ -1,5 +1,6 @@
 package com.musicgear.gas.di
 
+import com.musicgear.gas.data.BuildConfig
 import com.musicgear.gas.data.api.okhttp.ClientFactory
 import com.musicgear.gas.data.api.okhttp.ImageLoaderClientFactory
 import com.musicgear.gas.data.api.okhttp.OkHttpClientFactory
@@ -45,6 +46,7 @@ import retrofit2.Converter
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 val dataModule = module {
+  single { BuildConfig.BASE_URL }
   single { HttpUrl.Builder() }
 
   single<InternetObserverService> { InternetObserverImpl(context = get()) }

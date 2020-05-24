@@ -20,7 +20,7 @@ object Version {
   // https://developer.android.com/jetpack
   const val appCompat = "1.1.0"
   const val material = "1.1.0"
-  const val constraintLayout = "2.0.0-beta4"
+  const val constraintLayout = "2.0.0-beta6"
   const val viewpager2 = "1.0.0"
   const val lifecycle = "2.2.0"
   const val arch = "2.1.0"
