@@ -24,14 +24,14 @@ object Version {
   const val viewpager2 = "1.0.0"
   const val lifecycle = "2.2.0"
   const val arch = "2.1.0"
-  const val navigation = "2.3.0-alpha06"
+  const val navigation = "2.3.0-beta01"
   const val room = "2.2.5"
   const val multidex = "2.0.1"
   const val dataBindingCompiler = "3.1.2"
 
   // ktx
   // https://github.com/android/android-ktx
-  const val ktxCore = "1.2.0"
+  const val ktxCore = "1.3.0"
   const val ktxCollections = "1.1.0"
   const val ktxFragment = "1.2.4"
   const val ktxRoom = "2.2.5"
