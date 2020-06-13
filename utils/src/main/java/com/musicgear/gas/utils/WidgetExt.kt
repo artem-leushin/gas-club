@@ -7,6 +7,7 @@ import android.graphics.Rect
 import android.util.TypedValue
 import android.view.View
 import androidx.annotation.AttrRes
+import androidx.core.content.ContextCompat
 
 fun Activity.isOnScreen(view: View): Boolean {
   if (view.isShown.not()) {
@@ -26,3 +27,5 @@ fun Context.resolveAttribute(@AttrRes attr: Int): Int {
   theme.resolveAttribute(attr, value, true)
   return value.resourceId
 }
+
+fun Context.getColorByAttr(@AttrRes attr: Int) = ContextCompat.getColor(this, this.resolveAttribute(attr))

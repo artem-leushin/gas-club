@@ -20,8 +20,7 @@ import com.musicgear.gas.start.StartFragment
 
 class FragmentLifecycleListener(
   private val publishIntent: (Intent) -> Unit
-) :
-  FragmentManager.FragmentLifecycleCallbacks() {
+) : FragmentManager.FragmentLifecycleCallbacks() {
 
   override fun onFragmentAttached(fm: FragmentManager, fragment: Fragment, context: Context) {
     when (fragment) {
@@ -30,46 +29,6 @@ class FragmentLifecycleListener(
       is CategoriesFragment -> publishIntent(ShowControls)
     }
   }
-
-//  override fun onFragmentCreated(fm: FragmentManager, fragment: Fragment, savedInstanceState: Bundle?) {
-//    when (fragment) {
-//      is InstrumentsFragment -> publishIntent(SwitchToMode(PostPhoto))
-//      is DetailsFragment -> publishIntent(SwitchToMode(TalkToSeller))
-//      is CategoriesFragment -> publishIntent(SwitchToMode(None))
-//    }
-//  }
-
-//  override fun onFragmentPreAttached(fm: FragmentManager, fragment: Fragment, context: Context) {
-//    when (fragment) {
-//      is InstrumentsFragment -> publishIntent(SwitchToMode(PostPhoto))
-//      is DetailsFragment -> publishIntent(SwitchToMode(TalkToSeller))
-//      is CategoriesFragment -> publishIntent(SwitchToMode(None))
-//    }
-//  }
-
-//  override fun onFragmentCreated(fm: FragmentManager, fragment: Fragment, savedInstanceState: Bundle?) {
-//    when (fragment) {
-//      is InstrumentsFragment -> publishIntent(SwitchToMode(PostPhoto))
-//      is DetailsFragment -> publishIntent(SwitchToMode(TalkToSeller))
-//      is CategoriesFragment -> publishIntent(SwitchToMode(None))
-//    }
-//  }
-
-//  override fun onFragmentResumed(fm: FragmentManager, fragment: Fragment) {
-//    when (fragment) {
-//      is InstrumentsFragment -> publishIntent(SwitchToMode(PostPhoto))
-//      is DetailsFragment -> publishIntent(SwitchToMode(TalkToSeller))
-//      is CategoriesFragment -> publishIntent(SwitchToMode(None))
-//    }
-//  }
-
-//  override fun onFragmentStarted(fm: FragmentManager, fragment: Fragment) {
-//    when (fragment) {
-//      is InstrumentsFragment -> publishIntent(SwitchToMode(PostPhoto))
-//      is DetailsFragment -> publishIntent(SwitchToMode(TalkToSeller))
-//      is CategoriesFragment -> publishIntent(SwitchToMode(None))
-//    }
-//  }
 
   override fun onFragmentViewCreated(
     fm: FragmentManager,

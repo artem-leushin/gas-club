@@ -7,8 +7,8 @@ object Version {
   const val compileSdk = 29
   const val buildTools = "29.0.2"
 
-  const val kotlin = "1.3.61"
-  const val kotlinPlugin = "1.3.61"
+  const val kotlin = "1.3.72"
+  const val kotlinPlugin = "1.3.72"
   const val coroutinesAndroid = "1.0.1" // https://kotlinlang.org/
 
   const val jackson = "2.9.9"
@@ -24,7 +24,7 @@ object Version {
   const val viewpager2 = "1.0.0"
   const val lifecycle = "2.2.0"
   const val arch = "2.1.0"
-  const val navigation = "2.3.0-beta01"
+  const val navigation = "2.3.0-rc01"
   const val room = "2.2.5"
   const val multidex = "2.0.1"
   const val dataBindingCompiler = "3.1.2"
@@ -40,7 +40,7 @@ object Version {
 
   //rxExtensions
   const val rxJava3 = "3.0.0"            //https://github.com/ReactiveX/RxJava
-  const val rxJava2 = "2.2.0"
+  const val rxJava2 = "2.2.19"
   const val rxRelay = "2.0.0"           //https://github.com/JakeWharton/RxRelay
   const val rxReplayShare = "2.2.0"     //https://github.com/JakeWharton/RxReplayingShare
   const val rxKotlin2 = "2.2.0"          //https://github.com/ReactiveX/RxKotlin
@@ -49,7 +49,7 @@ object Version {
   const val rxAndroid3 = "3.0.0"
   const val rxBinding2 = "2.2.0"         //https://github.com/JakeWharton/RxBinding
   const val rxBinding3 = "3.1.0"
-  const val rxNetwork = "3.0.1"         //https://github.com/pwittchen/ReactiveNetwork
+  const val rxNetwork = "3.0.8"         //https://github.com/pwittchen/ReactiveNetwork
   const val rxPermissions = "0.10.2"    //https://github.com/tbruyelle/RxPermissions
 
   // Networking
@@ -60,7 +60,7 @@ object Version {
   const val retrofitLoganSquare = "1.4.1"
 
   // DI
-  const val koin = "2.1.5"  //https://github.com/InsertKoinIO/koin
+  const val koin = "2.1.6"  //https://github.com/InsertKoinIO/koin
 
   // Debugging
   const val debugDb = "1.0.4"    //https://github.com/amitshekhariitbhu/Android-Debug-Database
