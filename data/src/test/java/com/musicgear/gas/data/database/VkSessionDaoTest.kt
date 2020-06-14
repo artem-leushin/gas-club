@@ -1,15 +1,13 @@
-package com.musicgear.gas.data.local
+package com.musicgear.gas.data.database
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.musicgear.gas.data.database.daos.UserDao
+import com.musicgear.gas.data.database.daos.VkSessionDao
 import com.musicgear.gas.data.database.room.GasDatabase
 import com.musicgear.gas.data.database.room.GasRoomDbProvider
-import com.musicgear.gas.data.entity.local.UserDB
-import com.musicgear.gas.data.mappers.toDB
-import com.musicgear.gas.domain.entity.User
+import com.musicgear.gas.data.entity.local.VkSessionDB
 import io.reactivex.observers.TestObserver
 import org.junit.After
 import org.junit.Before
@@ -18,24 +16,24 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UserDaoTest {
+class VkSessionDaoTest {
 
   @get:Rule
   open val executorRule = InstantTaskExecutorRule()
 
   private lateinit var db: GasDatabase
-  private lateinit var userDao: UserDao
-  private val expectedUser = User(11, "Artem", "Leushin", "artem_leushin", "www.avatar.com").toDB()
-  private val modifiedUser = expectedUser.copy(firstName = "Sheppard", avatarUrl = "www.new_avatar.com")
+  private lateinit var dao: VkSessionDao
+  private val expectedSession = VkSessionDB(11, "email", "phone", "11_22_33_44")
+  private val modifiedSession = expectedSession.copy(email = "email 2", accessToken = "55_66_77")
 
-  private val getUserObserver = TestObserver<List<UserDB>>()
+  private val getUserObserver = TestObserver<List<VkSessionDB>>()
   private val insertUserObserver = TestObserver<Void>()
 
   @Before
   fun setup() {
     val context = ApplicationProvider.getApplicationContext<Context>()
     db = GasDatabase(GasRoomDbProvider.createInMemoryRoom(context))
-    userDao = db.userDao
+    dao = db.vkSessionDao
   }
 
   @After
@@ -44,18 +42,17 @@ class UserDaoTest {
   }
 
   @Test
-  fun `empty dao returns empty user list`() {
-    userDao.getUser()
+  fun `empty dao returns empty session list`() {
+    dao.getSession()
       .subscribe(getUserObserver)
 
     getUserObserver
-      .awaitCount(1)
       .assertValue(emptyList())
   }
 
   @Test
-  fun `user subscription is not completed after receiving an item`() {
-    userDao.getUser()
+  fun `session subscription is not completed after receiving an item`() {
+    dao.getSession()
       .subscribe(getUserObserver)
 
     getUserObserver
@@ -65,15 +62,15 @@ class UserDaoTest {
   }
 
   @Test
-  fun `empty dao returns valid user after insertion`() {
-    userDao.getUser()
+  fun `empty dao returns valid session after insertion`() {
+    dao.getSession()
       .subscribe(getUserObserver)
 
     getUserObserver
       .awaitCount(1)
       .assertValue(listOf())
 
-    userDao.insert(expectedUser)
+    dao.insert(expectedSession)
       .subscribe(insertUserObserver)
 
     insertUserObserver
@@ -85,32 +82,32 @@ class UserDaoTest {
     getUserObserver
       .awaitCount(2)
       .assertValueCount(2)
-      .assertValues(emptyList(), listOf(expectedUser))
+      .assertValues(emptyList(), listOf(expectedSession))
   }
 
   @Test
-  fun `fields are updated for existing user`() {
-    userDao.insert(expectedUser)
-      .andThen(userDao.update(modifiedUser))
+  fun `fields are updated for existing session`() {
+    dao.insert(expectedSession)
+      .andThen(dao.update(modifiedSession))
       .blockingAwait()
 
-    userDao.getUser()
+    dao.getSession()
       .test()
-      .assertValue(listOf(modifiedUser))
+      .assertValue(listOf(modifiedSession))
   }
 
   @Test
-  fun `user is deleted from the database`() {
-    userDao.insert(expectedUser)
+  fun `session is deleted from the database`() {
+    dao.insert(expectedSession)
       .blockingAwait()
 
-    userDao.getUser()
+    dao.getSession()
       .test()
-      .assertValue(listOf(expectedUser))
+      .assertValue(listOf(expectedSession))
 
-    userDao.delete().blockingAwait()
+    dao.delete().blockingAwait()
 
-    userDao.getUser()
+    dao.getSession()
       .test()
       .assertValue(emptyList())
   }

@@ -16,12 +16,12 @@ internal class UserRepositoryImpl(
 
   override fun observeUser(): Observable<User> = source
 
-  override fun saveUser(user: User): Completable = local.saveUser(user)
+  override fun saveUser(user: User): Completable = local.insert(user)
 
-  override fun updateUser(user: User): Completable = local.updateUser(user)
+  override fun updateUser(user: User): Completable = local.update(user)
 
-  override fun clear(): Completable = local.deleteUser()
+  override fun clear(): Completable = local.delete()
 
   override fun refresh(): Completable = remote.getUser()
-    .flatMapCompletable { local.saveUser(it) }
+    .flatMapCompletable { local.insert(it) }
 }

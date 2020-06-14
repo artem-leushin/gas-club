@@ -18,9 +18,9 @@ internal class UserLocalSource(
       else it[0].toDomain()
     }
 
-  override fun saveUser(user: User): Completable = dao.insert(user.toDB())
+  override fun insert(user: User): Completable = dao.insert(user.toDB())
 
-  override fun updateUser(user: User): Completable = dao.update(user.toDB())
+  override fun update(user: User): Completable = dao.update(user.toDB())
 
-  override fun deleteUser(): Completable = dao.delete()
+  override fun delete(): Completable = dao.delete()
 }

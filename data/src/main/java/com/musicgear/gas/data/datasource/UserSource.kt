@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 interface UserSource {
   fun getUser(): Observable<User>
-  fun saveUser(user: User): Completable
-  fun updateUser(user: User): Completable
-  fun deleteUser(): Completable
+  fun insert(user: User): Completable
+  fun update(user: User): Completable
+  fun delete(): Completable
 }

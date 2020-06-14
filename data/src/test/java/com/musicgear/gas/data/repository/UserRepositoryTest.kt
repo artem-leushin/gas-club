@@ -65,35 +65,35 @@ class UserRepositoryTest {
   fun `repo gives fresh user after refreshing`() {
     every { local.getUser() } returns Observable.just(emptyUser)
     every { remote.getUser() } returns Observable.just(newUser)
-    every { local.saveUser(newUser) } returns Completable.complete()
+    every { local.insert(newUser) } returns Completable.complete()
 
     val userSubscription = repo.observeUser().test()
     userSubscription.assertValue(emptyUser)
 
     repo.refresh().blockingAwait()
 
-    verify { local.saveUser(newUser) }
+    verify { local.insert(newUser) }
 
     userSubscription.assertValue(newUser)
   }
 
   @Test
   fun `repo saves specified user to the datasource`() {
-    every { local.saveUser(any()) } returns Completable.complete()
-    every { local.updateUser(any()) } returns Completable.complete()
+    every { local.insert(any()) } returns Completable.complete()
+    every { local.update(any()) } returns Completable.complete()
 
     repo.saveUser(newUser).blockingAwait()
-    verify { local.saveUser(newUser) }
+    verify { local.insert(newUser) }
 
     repo.updateUser(newUser).blockingAwait()
-    verify { local.updateUser(newUser) }
+    verify { local.update(newUser) }
   }
 
   @Test
   fun `clearing repo deletes user from the datasource`() {
-    every { local.deleteUser() } returns Completable.complete()
+    every { local.delete() } returns Completable.complete()
 
     repo.clear().blockingAwait()
-    verify { local.deleteUser() }
+    verify { local.delete() }
   }
 }

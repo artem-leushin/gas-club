@@ -1,4 +1,4 @@
-package com.musicgear.gas.data.remote
+package com.musicgear.gas.data.api
 
 import com.musicgear.gas.data.api.okhttp.ClientFactory
 import com.musicgear.gas.data.api.retrofit.GasApi

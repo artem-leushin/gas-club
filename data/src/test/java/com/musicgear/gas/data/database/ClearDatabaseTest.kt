@@ -1,4 +1,4 @@
-package com.musicgear.gas.data.local
+package com.musicgear.gas.data.database
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

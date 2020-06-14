@@ -14,9 +14,9 @@ internal class UserRemoteSource(
 
   override fun getUser(): Observable<User> = api.getUser().map { it.user!![0].toDomain() }
 
-  override fun saveUser(user: User): Completable = throw UnsupportedByRemoteException()
+  override fun insert(user: User): Completable = throw UnsupportedByRemoteException()
 
-  override fun updateUser(user: User): Completable = throw UnsupportedByRemoteException()
+  override fun update(user: User): Completable = throw UnsupportedByRemoteException()
 
-  override fun deleteUser(): Completable = throw UnsupportedByRemoteException()
+  override fun delete(): Completable = throw UnsupportedByRemoteException()
 }
