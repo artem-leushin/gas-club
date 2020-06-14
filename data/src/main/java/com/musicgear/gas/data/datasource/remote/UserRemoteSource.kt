@@ -12,7 +12,9 @@ internal class UserRemoteSource(
   private val api: GasApi
 ) : UserSource {
 
-  override fun getUser(): Observable<User> = api.getUser().map { it.user!![0].toDomain() }
+  override fun getUser(): Observable<User> = api.getUser().map {
+    it.user?.firstOrNull()?.toDomain() ?: User.EMPTY
+  }
 
   override fun insert(user: User): Completable = throw UnsupportedByRemoteException()
 
