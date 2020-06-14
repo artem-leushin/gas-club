@@ -3,12 +3,12 @@ package com.musicgear.gas.domain.entity
 import org.threeten.bp.LocalDateTime
 
 data class Category(
-  val id: Int,
-  val name: String,
-  val description: String,
-  val instrumentsCount: Int,
-  val thumbUrl: String,
-  val photoSizes: List<Size>
+  val id: Int = Int.MIN_VALUE,
+  val name: String = "",
+  val description: String = "",
+  val instrumentsCount: Int = Int.MIN_VALUE,
+  val thumbUrl: String = "",
+  val photoSizes: List<Size> = emptyList()
 )
 
 data class InstrumentPhoto(
@@ -29,19 +29,19 @@ data class InstrumentPhoto(
 }
 
 data class Comment(
-  val id: Int,
-  val userId: Int,
-  val text: String,
-  val attachments: List<PhotoAttachment>
+  val id: Int = Int.MIN_VALUE,
+  val userId: Int = Int.MIN_VALUE,
+  val text: String = "",
+  val attachments: List<PhotoAttachment> = emptyList()
 )
 
 data class PhotoAttachment(
-  val type: AttachmentType,
-  val photo: InstrumentPhoto
+  val type: AttachmentType = AttachmentType.UNKNOWN,
+  val photo: InstrumentPhoto = InstrumentPhoto.EMPTY
 )
 
 data class InstrumentDetails(
-  private val userComments: List<Comment>
+  private val userComments: List<Comment> = emptyList()
 ) {
   val text = buildString {
     userComments.forEach { appendln(it.text) }
