@@ -1,4 +1,4 @@
-package com.musicgear.gas.data
+package com.musicgear.gas.data.remote
 
 import com.musicgear.gas.data.api.okhttp.ClientFactory
 import com.musicgear.gas.data.api.retrofit.GasApi
@@ -6,10 +6,11 @@ import com.musicgear.gas.data.api.retrofit.converter.GasConverterFactory
 import com.musicgear.gas.data.datasource.VkSessionSource
 import com.musicgear.gas.data.entity.remote.UserR
 import com.musicgear.gas.data.entity.remote.UserResponse
+import com.musicgear.gas.data.utils.mockedResponse
 import com.musicgear.gas.domain.entity.VkSession
 import com.musicgear.gas.domain.service.InternetObserverService
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import io.mockk.every
+import io.mockk.mockk
 import io.reactivex.Observable
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -29,15 +30,15 @@ internal class ApiTest {
   private val accessToken = "testing_access_token"
   private val GAS_ID = GasApi.GAS_GROUP_ID
 
-  private val sessionSource: VkSessionSource = mock()
-  private val internetObserver: InternetObserverService = mock()
+  private val sessionSource: VkSessionSource = mockk(relaxed = true)
+  private val internetObserver: InternetObserverService = mockk(relaxed = true)
   private val converterFactory: Converter.Factory = GasConverterFactory()
   private val callAdapterFactory: CallAdapter.Factory = RxJava2CallAdapterFactory.create()
 
   @Before
   fun setup() {
-    whenever(sessionSource.getSession()).thenReturn(Observable.just(VkSession(accessToken = accessToken)))
-    whenever(internetObserver.observeInternetConnection()).thenReturn(Observable.just(true))
+    every { sessionSource.getSession() } returns Observable.just(VkSession(accessToken = accessToken))
+    every { internetObserver.observeInternetConnection() } returns Observable.just(true)
     server = MockWebServer()
     initApi()
   }

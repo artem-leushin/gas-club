@@ -8,8 +8,8 @@ internal class GasDatabase(
   private val roomDb: GasRoomDatabase
 ) {
 
-  private val userDao: UserDao = roomDb.userDao()
-  private val vkSessionDao: VkSessionDao = roomDb.vkSessionDao()
+  val userDao: UserDao = roomDb.userDao()
+  val vkSessionDao: VkSessionDao = roomDb.vkSessionDao()
 
   fun clearAllTables(): Completable = Completable.fromCallable { roomDb.clearAllTables() }
   fun close() = roomDb.close()

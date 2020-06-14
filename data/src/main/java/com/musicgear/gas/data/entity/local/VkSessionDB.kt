@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "db_vk_session")
 data class VkSessionDB(
   @PrimaryKey
-  val userId: Int,
-  val email: String,
-  val phone: String,
-  val accessToken: String
+  val userId: Int = 0,
+  val email: String = "",
+  val phone: String = "",
+  val accessToken: String = ""
 )

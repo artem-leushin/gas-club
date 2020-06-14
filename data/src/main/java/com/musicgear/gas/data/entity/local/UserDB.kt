@@ -9,7 +9,7 @@ internal const val USER_DEFAULT_ID = 1
 
 @Entity(tableName = "db_user")
 @TypeConverters(LocalDateConverter::class)
-internal class UserDB(
+internal data class UserDB(
   @PrimaryKey val id: Int = USER_DEFAULT_ID,
   val firstName: String = "",
   val lastName: String = "",

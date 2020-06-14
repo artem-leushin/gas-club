@@ -34,12 +34,11 @@ dependencies {
   testImplementation Deps.jUnit
   androidTestImplementation Deps.jUnitExt
   androidTestImplementation Deps.espresso
-  androidTestImplementation 'androidx.fragment:fragment-testing:1.2.4'
-  androidTestImplementation 'androidx.test:runner:1.2.0'
-  androidTestImplementation 'androidx.test:rules:1.2.0'
+  androidTestImplementation "androidx.fragment:fragment-testing:$Version.testFragment"
+  androidTestImplementation "androidx.test:runner:$Version.testRunner"
+  androidTestImplementation "androidx.test:rules:$Version.testRules"
+  androidTestImplementation "io.mockk:mockk-android:$Version.mockk"
   androidTestImplementation Deps.koinTests
-  androidTestImplementation "io.mockk:mockk-android:1.10.0"
-  kaptAndroidTest "androidx.databinding:databinding-compiler:3.6.3"
 
   androidTestImplementation "org.mockito:mockito-android:3.3.3"
   androidTestUtil 'androidx.test:orchestrator:1.1.0'

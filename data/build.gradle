@@ -35,13 +35,15 @@ dependencies {
   implementation Deps.koinAndroidExperimental
 
   testImplementation Deps.jUnit
-  testImplementation Deps.mockito
-  testImplementation Deps.mockitoKotlin
-  testImplementation Deps.testRoom
-  testImplementation Deps.testOkHttpMockServer
+  testImplementation Deps.jUnitExt
+  testImplementation Deps.mockk
   testImplementation Deps.testArch
   testImplementation Deps.koinTests
-  androidTestImplementation Deps.jUnitExt
+  testImplementation Deps.testRunner
+  testImplementation Deps.testOkHttpMockServer
+  testImplementation "org.robolectric:robolectric:${Version.robolectric}"
+
+
 }
 
 android {
