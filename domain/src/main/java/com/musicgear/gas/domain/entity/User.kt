@@ -1,11 +1,11 @@
 package com.musicgear.gas.domain.entity
 
 data class User(
-  val id: Int,
-  val firstName: String,
-  val lastName: String,
-  val screenName: String,
-  val avatarUrl: String
+  val id: Int = Int.MIN_VALUE,
+  val firstName: String = "",
+  val lastName: String = "",
+  val screenName: String = "",
+  val avatarUrl: String = ""
 ) {
 
   val fullName: String = "$firstName $lastName"
