@@ -14,9 +14,11 @@ import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.andThenAction
 import com.musicgear.gas.utils.rx.applySchedulers
 import com.musicgear.gas.utils.rx.handleError
+import com.musicgear.gas.utils.testing.OpenForTesting
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
+@OpenForTesting
 class LoginViewModel(
   private val startLogin: LoginWithVkUseCase,
   private val proceedLogin: ProceedLoginWithVkUseCase,
@@ -49,13 +51,6 @@ class LoginViewModel(
           }
       )
     }
-
-//  loadUser.execute()
-//  .applySchedulers()
-//  .map { UserLoadSuccess(it) }
-//  .cast(StateChange::class.java)
-//  .startWith(UserLoading)
-//  .handleError { listOf(Error(it), HideError) }
 
   override fun reduce(state: State, changes: StateChange): State = when (changes) {
     is StartLoading -> state.copy(loading = true)

@@ -1,6 +1,12 @@
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
+
+allOpen {
+  // allows mocking for classes w/o directly opening them for release builds
+  annotation 'com.musicgear.gas.utils.testing.OpenClass'
+}
 
 android {
   compileSdkVersion Version.compileSdk
@@ -13,8 +19,14 @@ android {
     versionName Version.appVersionName
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunnerArguments clearPackageData: 'true'
+
     vectorDrawables.useSupportLibrary = true
     resValue "string", "app_version", "${defaultConfig.versionName}${versionNameSuffix}"
+  }
+
+  testOptions {
+    execution 'ANDROIDX_TEST_ORCHESTRATOR'
   }
 
   buildTypes {

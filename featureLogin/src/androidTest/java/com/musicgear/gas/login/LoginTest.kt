@@ -3,6 +3,7 @@ package com.musicgear.gas.login
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.MutableLiveData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -10,9 +11,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.jakewharton.rxrelay2.PublishRelay
 import com.musicgear.gas.domain.exception.DomainException
 import com.musicgear.gas.login.LoginView.State
 import com.musicgear.gas.login.matchers.hasDrawable
+import io.mockk.every
 import io.mockk.mockk
 import org.hamcrest.Matchers
 import org.junit.Before
@@ -84,17 +87,41 @@ class LoginTest : BaseFragmentTest<LoginFragment>() {
   @Test
   fun backgroundAndLogoAreLoaded() {
     scenario.onFragment { it.render(State()) }
+    scenario.onFragment { Thread.sleep(1000) }
 
     onView(withId(R.id.iv_logo))
+      .check(matches(isDisplayed()))
+
+    onView(withId(R.id.iv_background))
       .check(matches(isDisplayed()))
 
     onView(withId(R.id.iv_logo))
       .check(matches(hasDrawable()))
 
     onView(withId(R.id.iv_background))
+      .check(matches(hasDrawable()))
+  }
+
+  @Test
+  fun viewStatePersisted_afterOrientationChange() {
+    every { vm.currentViewState() } returns MutableLiveData(State(loading = true))
+    every { vm.viewIntentsConsumer() } returns PublishRelay.create<Any>()
+    createAndRunScenario()
+
+    scenario.moveToState(Lifecycle.State.RESUMED)
+
+    onView(withId(R.id.btnLogin))
+      .check(matches(Matchers.not(isDisplayed())))
+
+    onView(withId(R.id.progress))
       .check(matches(isDisplayed()))
 
-    onView(withId(R.id.iv_background))
-      .check(matches(hasDrawable()))
+    scenario.recreate()
+
+    onView(withId(R.id.btnLogin))
+      .check(matches(Matchers.not(isDisplayed())))
+
+    onView(withId(R.id.progress))
+      .check(matches(isDisplayed()))
   }
 }

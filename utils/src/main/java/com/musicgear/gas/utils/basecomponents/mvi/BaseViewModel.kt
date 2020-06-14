@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
+import com.musicgear.gas.utils.testing.OpenForTesting
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
+@OpenForTesting
 abstract class BaseViewModel<State, StateChange> : ViewModel() {
   private var states = MutableLiveData<State>()
     .distinctUntilChanged() as MutableLiveData<State>
