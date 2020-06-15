@@ -1,0 +1,13 @@
+dependencies {
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
+  androidTestImplementation Deps.koinTests
+  androidTestImplementation "androidx.fragment:fragment-testing:$Version.testFragment"
+  androidTestImplementation "androidx.test:runner:$Version.testRunner"
+  androidTestImplementation "androidx.test:rules:$Version.testRules"
+  androidTestImplementation "io.mockk:mockk-android:$Version.mockk"
+  androidTestImplementation "org.mockito:mockito-android:3.3.3"
+  androidTestUtil 'androidx.test:orchestrator:1.1.0'
+  kaptAndroidTest "androidx.databinding:databinding-compiler:3.6.3" // needed for proper resolving of DataBindingComponent inside Instrumentation tests
+}

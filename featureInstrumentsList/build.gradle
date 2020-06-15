@@ -26,9 +26,7 @@ dependencies {
 
   implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
 
-  testImplementation Deps.jUnit
-  androidTestImplementation Deps.jUnitExt
-  androidTestImplementation Deps.espresso
-
   apply from: "${sharedDependencies}/commonRxJava.gradle"
+  apply from: "${sharedDependencies}/commonTestsUnit.gradle"
+  apply from: "${sharedDependencies}/commonTestsAndroid.gradle"
 }

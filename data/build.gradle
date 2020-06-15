@@ -34,16 +34,7 @@ dependencies {
   implementation Deps.koinAndroid
   implementation Deps.koinAndroidExperimental
 
-  testImplementation Deps.jUnit
-  testImplementation Deps.jUnitExt
-  testImplementation Deps.mockk
-  testImplementation Deps.testArch
-  testImplementation Deps.koinTests
-  testImplementation Deps.testRunner
-  testImplementation Deps.testOkHttpMockServer
-  testImplementation "org.robolectric:robolectric:${Version.robolectric}"
-
-
+  apply from: "${sharedDependencies}/commonTestsUnit.gradle"
 }
 
 android {

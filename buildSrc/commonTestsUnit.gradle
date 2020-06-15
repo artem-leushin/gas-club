@@ -1,0 +1,10 @@
+dependencies {
+  testImplementation Deps.jUnit
+  testImplementation Deps.jUnitExt
+  testImplementation Deps.mockk
+  testImplementation Deps.testArch
+  testImplementation Deps.koinTests
+  testImplementation Deps.testRunner
+  testImplementation Deps.testOkHttpMockServer
+  testImplementation "org.robolectric:robolectric:${Version.robolectric}"
+}

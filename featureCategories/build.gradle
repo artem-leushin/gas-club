@@ -24,9 +24,7 @@ dependencies {
   implementation "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${Version.rxBinding2}"
   implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
 
-  testImplementation Deps.jUnit
-  androidTestImplementation Deps.jUnitExt
-  androidTestImplementation Deps.espresso
-
   apply from: "${sharedDependencies}/commonRxJava.gradle"
+  apply from: "${sharedDependencies}/commonTestsUnit.gradle"
+  apply from: "${sharedDependencies}/commonTestsAndroid.gradle"
 }
