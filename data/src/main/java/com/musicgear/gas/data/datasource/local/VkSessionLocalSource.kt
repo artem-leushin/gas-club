@@ -18,13 +18,16 @@ internal class VkSessionLocalSource(private val dao: VkSessionDao) : VkSessionSo
   }
 
   override fun getSession(): Observable<VkSession> = dao.getSession()
-    .map { it[0].toDomain() }
+    .map {
+      if (it.isEmpty()) VkSession.EMPTY
+      else it[0].toDomain()
+    }
 
-  override fun saveSession(session: VkSession): Completable = dao.insert(session.toDB())
+  override fun insert(session: VkSession): Completable = dao.insert(session.toDB())
 
-  override fun clearSession(): Completable = dao.delete()
+  override fun clear(): Completable = dao.delete()
 
   override fun onTokenExpired() {
-    dao.delete()
+    dao.delete().blockingAwait()
   }
 }

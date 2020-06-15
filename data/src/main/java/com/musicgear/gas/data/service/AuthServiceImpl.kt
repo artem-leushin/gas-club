@@ -25,10 +25,10 @@ class AuthServiceImpl(private val sessionSource: VkSessionSource) : AuthService 
     Observable.create<VkSession> { emitter ->
       authBundle.run { VK.onActivityResult(requestCode, resultCode, data, authCallback(emitter)) }
     }
-      .flatMapCompletable { sessionSource.saveSession(it) }
+      .flatMapCompletable { sessionSource.insert(it) }
 
   override fun logout(): Completable = Completable.fromCallable { VK.logout() }
-    .andThen(sessionSource.clearSession())
+    .andThen(sessionSource.clear())
 
   private val authCallback: (ObservableEmitter<VkSession>) -> VKAuthCallback = { emitter ->
     object : VKAuthCallback {

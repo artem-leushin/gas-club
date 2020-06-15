@@ -18,10 +18,6 @@ val mainModule = module {
   factory { ObserveUserUseCase(repo = get()) }
   factory { LoadUserUseCase(repo = get()) }
 
-  single<DataBindingComponent> {
-    ImageBindingComponent(
-      imageBindingAdapters = get()
-    )
-  }
+  single<DataBindingComponent> { ImageBindingComponent(imageBindingAdapters = get()) }
 }
 

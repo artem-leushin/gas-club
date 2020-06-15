@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.datasource.local
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.musicgear.gas.data.database.daos.UserDao
 import com.musicgear.gas.data.datasource.UserSource
 import com.musicgear.gas.data.entity.local.UserDB
@@ -16,6 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class UserLocalSourceTest {
 
   private val userDao: UserDao = mockk(relaxed = true)

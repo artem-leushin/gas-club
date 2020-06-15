@@ -6,6 +6,6 @@ import io.reactivex.Observable
 
 interface VkSessionSource {
   fun getSession(): Observable<VkSession>
-  fun saveSession(session: VkSession): Completable
-  fun clearSession(): Completable
+  fun insert(session: VkSession): Completable
+  fun clear(): Completable
 }

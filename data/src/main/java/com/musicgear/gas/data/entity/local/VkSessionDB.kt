@@ -10,4 +10,10 @@ data class VkSessionDB(
   val email: String = "",
   val phone: String = "",
   val accessToken: String = ""
-)
+) {
+  companion object {
+    val EMPTY = VkSessionDB()
+  }
+
+  fun isEmpty() = this == EMPTY
+}

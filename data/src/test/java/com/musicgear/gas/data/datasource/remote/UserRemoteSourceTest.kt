@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.datasource.remote
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.musicgear.gas.data.api.retrofit.GasApi
 import com.musicgear.gas.data.datasource.UserSource
 import com.musicgear.gas.data.entity.remote.UserR
@@ -15,6 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class UserRemoteSourceTest {
 
   private val api: GasApi = mockk(relaxed = true)

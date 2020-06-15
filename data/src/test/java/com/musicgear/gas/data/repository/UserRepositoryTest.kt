@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.repository
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.musicgear.gas.data.datasource.UserSource
 import com.musicgear.gas.domain.entity.User
 import com.musicgear.gas.domain.repository.UserRepository
@@ -15,6 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class UserRepositoryTest {
 
   private val local: UserSource = mockk(relaxed = true)

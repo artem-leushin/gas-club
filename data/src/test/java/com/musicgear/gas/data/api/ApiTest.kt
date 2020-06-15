@@ -1,5 +1,7 @@
 package com.musicgear.gas.data.api
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.musicgear.gas.data.api.okhttp.ClientFactory
 import com.musicgear.gas.data.api.retrofit.GasApi
 import com.musicgear.gas.data.api.retrofit.converter.GasConverterFactory
@@ -17,12 +19,15 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.lang.reflect.Type
 
+@RunWith(AndroidJUnit4::class)
+@MediumTest
 internal class ApiTest {
   private lateinit var server: MockWebServer
   private lateinit var api: GasApi

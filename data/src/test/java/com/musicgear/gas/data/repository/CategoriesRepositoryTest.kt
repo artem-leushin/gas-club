@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.repository
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.musicgear.gas.data.api.retrofit.GasApi.Companion.GAS_GROUP_ID
 import com.musicgear.gas.data.datasource.CategoriesSource
 import com.musicgear.gas.domain.entity.Category
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class CategoriesRepositoryTest {
 
   private val remote: CategoriesSource = mockk(relaxed = true)

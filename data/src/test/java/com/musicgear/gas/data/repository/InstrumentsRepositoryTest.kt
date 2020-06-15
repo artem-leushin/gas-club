@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.repository
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.musicgear.gas.data.datasource.InstrumentsSource
 import com.musicgear.gas.domain.entity.InstrumentPhoto
 import com.musicgear.gas.domain.repository.InstrumentsRepository
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class InstrumentsRepositoryTest {
 
   private val remote: InstrumentsSource = mockk(relaxed = true)

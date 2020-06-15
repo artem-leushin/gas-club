@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.repository
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import com.musicgear.gas.data.datasource.CommentsSource
 import com.musicgear.gas.domain.entity.Comment
 import com.musicgear.gas.domain.repository.CommentsRepository
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@SmallTest
 class CommentsRepositoryTest {
 
   private val remote: CommentsSource = mockk(relaxed = true)

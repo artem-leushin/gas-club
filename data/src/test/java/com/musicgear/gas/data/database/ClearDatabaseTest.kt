@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.MediumTest
 import com.musicgear.gas.data.database.daos.UserDao
 import com.musicgear.gas.data.database.daos.VkSessionDao
 import com.musicgear.gas.data.database.room.GasDatabase
@@ -17,6 +18,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@MediumTest
 class ClearDatabaseTest {
 
   @get:Rule
