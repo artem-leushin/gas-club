@@ -11,6 +11,7 @@ import com.musicgear.gas.data.datasource.CategoriesSource
 import com.musicgear.gas.data.datasource.CommentsSource
 import com.musicgear.gas.data.datasource.InstrumentsSource
 import com.musicgear.gas.data.datasource.UserSource
+import com.musicgear.gas.data.datasource.VkFacade
 import com.musicgear.gas.data.datasource.VkSessionSource
 import com.musicgear.gas.data.datasource.local.UserLocalSource
 import com.musicgear.gas.data.datasource.local.VkSessionLocalSource
@@ -26,6 +27,7 @@ import com.musicgear.gas.data.repository.UserRepositoryImpl
 import com.musicgear.gas.data.service.AuthServiceImpl
 import com.musicgear.gas.data.service.InternetObserverImpl
 import com.musicgear.gas.data.service.SessionStatusServiceImpl
+import com.musicgear.gas.data.service.VkFacadeImpl
 import com.musicgear.gas.domain.constants.HTTP_CLIENT_FACTORY_API
 import com.musicgear.gas.domain.constants.HTTP_CLIENT_FACTORY_IMG
 import com.musicgear.gas.domain.constants.USER_SOURCE_LOCAL
@@ -38,6 +40,7 @@ import com.musicgear.gas.domain.repository.UserRepository
 import com.musicgear.gas.domain.service.AuthService
 import com.musicgear.gas.domain.service.InternetObserverService
 import com.musicgear.gas.domain.service.SessionStatusService
+import com.vk.api.sdk.VK
 import okhttp3.HttpUrl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -49,11 +52,14 @@ val dataModule = module {
   single { BuildConfig.BASE_URL }
   single { HttpUrl.Builder() }
 
+  single { VK }
+  single<VkFacade> { VkFacadeImpl(vk = get()) }
+
   single<InternetObserverService> { InternetObserverImpl(context = get()) }
   single<ResourcesRepository> { ResourcesRepositoryImpl(resources = get()) }
 
   single<SessionStatusService> { SessionStatusServiceImpl() }
-  single<AuthService> { AuthServiceImpl(sessionSource = get()) }
+  single<AuthService> { AuthServiceImpl(sessionSource = get(), vkFacade = get()) }
   single<VkSessionSource> { VkSessionLocalSource(dao = get()) }
 
   single<CategoriesSource> { CategoriesRemoteSource(api = get()) }
@@ -94,4 +100,5 @@ val dataModule = module {
 
   single<CallAdapter.Factory> { RxJava2CallAdapterFactory.create() }
   single<Converter.Factory> { GasConverterFactory() }
+
 }

@@ -16,7 +16,7 @@ data class VkSession(
 }
 
 data class AuthBundle(
-  val requestCode: Int,
-  val resultCode: Int,
-  val data: Intent?
+  val requestCode: Int = Int.MIN_VALUE,
+  val resultCode: Int = Int.MIN_VALUE,
+  val data: Intent? = null
 )

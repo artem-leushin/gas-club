@@ -13,6 +13,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.observers.TestObserver
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -81,14 +82,15 @@ class VkSessionLocalSourceTest {
 
   @Test
   fun `source deletes session when VK token expired`() {
-    var subscribed = false
     val daoDeleteSession = Completable.complete()
-      .doOnSubscribe { subscribed = true }
+    val deleteSessionObserver = TestObserver<Any>()
 
-    every { dao.delete() } returns daoDeleteSession
+    every { dao.delete() } returns Completable.fromCallable {
+      daoDeleteSession.subscribe(deleteSessionObserver)
+    }
+
     tokenExpiryHandler.onTokenExpired()
-
     verify { dao.delete() }
-    Assert.assertTrue(subscribed)
+    Assert.assertTrue(deleteSessionObserver.hasSubscription())
   }
 }
