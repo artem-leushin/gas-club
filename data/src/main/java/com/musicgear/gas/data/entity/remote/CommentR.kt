@@ -20,7 +20,7 @@ internal data class CommentR(
 @JsonObject
 internal data class PhotoAttachmentR(
   @JsonField(typeConverter = AttachmentTypeConverter::class)
-  var type: AttachmentType? = AttachmentType.PHOTO,
+  var type: AttachmentType? = AttachmentType.UNKNOWN,
   @JsonField
   var photo: PhotoR? = null
 )

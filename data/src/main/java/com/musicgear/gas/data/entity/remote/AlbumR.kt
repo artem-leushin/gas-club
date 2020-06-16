@@ -27,9 +27,9 @@ internal data class SizeR(
   @JsonField(name = ["src", "url"])
   var srcUrl: String? = "",
   @JsonField
-  var width: Int? = 0,
+  var width: Int? = Int.MIN_VALUE,
   @JsonField
-  var height: Int? = 0,
+  var height: Int? = Int.MIN_VALUE,
   @JsonField(name = ["type"], typeConverter = SizeTypeConverter::class)
-  var type: SizeType? = SizeType.PROPORTIONAL_130
+  var type: SizeType? = SizeType.PROPORTIONAL_75
 )

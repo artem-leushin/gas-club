@@ -1,11 +1,15 @@
 package com.musicgear.gas.domain.entity
 
 data class Size(
-  val srcUrl: String,
-  val width: Int,
-  val height: Int,
-  val type: SizeType
-)
+  val srcUrl: String = "",
+  val width: Int = Int.MIN_VALUE,
+  val height: Int = Int.MIN_VALUE,
+  val type: SizeType = SizeType.PROPORTIONAL_75
+) {
+  companion object {
+    val EMPTY = Size()
+  }
+}
 
 enum class SizeType(val code: String) {
   PROPORTIONAL_75("s"),

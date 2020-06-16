@@ -75,13 +75,13 @@ internal fun CommentR.toDomain() = Comment(
 )
 
 internal fun PhotoAttachmentR.toDomain() = PhotoAttachment(
-  type ?: AttachmentType.PHOTO,
+  type ?: AttachmentType.UNKNOWN,
   photo?.toDomain() ?: InstrumentPhoto.EMPTY
 )
 
 internal fun SizeR.toDomain() = Size(
   srcUrl ?: "",
-  width ?: 0,
-  height ?: 0,
-  type ?: SizeType.PROPORTIONAL_130
+  width ?: Int.MIN_VALUE,
+  height ?: Int.MIN_VALUE,
+  type ?: SizeType.PROPORTIONAL_75
 )

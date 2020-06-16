@@ -12,7 +12,7 @@ data class User(
 
   companion object {
     val EMPTY = User(
-      id = -1,
+      id = Int.MIN_VALUE,
       firstName = "",
       lastName = "",
       screenName = "",
