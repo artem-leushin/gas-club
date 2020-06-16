@@ -25,6 +25,7 @@ import com.musicgear.gas.data.repository.InstrumentsRepositoryImpl
 import com.musicgear.gas.data.repository.ResourcesRepositoryImpl
 import com.musicgear.gas.data.repository.UserRepositoryImpl
 import com.musicgear.gas.data.service.AuthServiceImpl
+import com.musicgear.gas.data.service.ConnectivityStreamFactory
 import com.musicgear.gas.data.service.InternetObserverImpl
 import com.musicgear.gas.data.service.SessionStatusServiceImpl
 import com.musicgear.gas.data.service.VkFacadeImpl
@@ -42,6 +43,7 @@ import com.musicgear.gas.domain.service.InternetObserverService
 import com.musicgear.gas.domain.service.SessionStatusService
 import com.vk.api.sdk.VK
 import okhttp3.HttpUrl
+import org.koin.android.ext.koin.androidApplication
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.CallAdapter
@@ -55,7 +57,8 @@ val dataModule = module {
   single { VK }
   single<VkFacade> { VkFacadeImpl(vk = get()) }
 
-  single<InternetObserverService> { InternetObserverImpl(context = get()) }
+  single { ConnectivityStreamFactory(androidApplication()) }
+  single<InternetObserverService> { InternetObserverImpl(connectivityStreamFactory = get()) }
   single<ResourcesRepository> { ResourcesRepositoryImpl(resources = get()) }
 
   single<SessionStatusService> { SessionStatusServiceImpl() }
