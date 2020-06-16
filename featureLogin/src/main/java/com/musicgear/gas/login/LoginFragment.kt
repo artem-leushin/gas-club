@@ -12,8 +12,8 @@ import androidx.transition.Slide
 import androidx.transition.Transition
 import androidx.transition.TransitionSet
 import com.musicgear.gas.domain.entity.AuthBundle
-import com.musicgear.gas.login.LoginView.Event.ProceedLogin
-import com.musicgear.gas.login.LoginView.Event.StartLogin
+import com.musicgear.gas.login.LoginView.Intent.ProceedLogin
+import com.musicgear.gas.login.LoginView.Intent.StartLogin
 import com.musicgear.gas.login.LoginView.State
 import com.musicgear.gas.login.LoginView.StateChange
 import com.musicgear.gas.login.databinding.FragmentLoginBinding

@@ -2,8 +2,8 @@ package com.musicgear.gas.login
 
 import com.musicgear.gas.domain.interactor.LoginWithVkUseCase
 import com.musicgear.gas.domain.interactor.ProceedLoginWithVkUseCase
-import com.musicgear.gas.login.LoginView.Event.ProceedLogin
-import com.musicgear.gas.login.LoginView.Event.StartLogin
+import com.musicgear.gas.login.LoginView.Intent.ProceedLogin
+import com.musicgear.gas.login.LoginView.Intent.StartLogin
 import com.musicgear.gas.login.LoginView.State
 import com.musicgear.gas.login.LoginView.StateChange
 import com.musicgear.gas.login.LoginView.StateChange.Error
