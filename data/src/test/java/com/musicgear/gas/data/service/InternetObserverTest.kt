@@ -1,6 +1,7 @@
 package com.musicgear.gas.data.service
 
 import android.net.NetworkInfo
+import androidx.test.filters.SmallTest
 import com.github.pwittchen.reactivenetwork.library.rx2.Connectivity
 import com.musicgear.gas.data.utils.RxTestSchedulerRule
 import com.musicgear.gas.domain.service.InternetObserverService
@@ -15,6 +16,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@SmallTest
 class InternetObserverTest {
 
   @get:Rule

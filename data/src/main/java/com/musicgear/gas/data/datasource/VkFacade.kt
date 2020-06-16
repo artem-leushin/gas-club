@@ -8,4 +8,5 @@ interface VkFacade {
   fun login(activity: Activity)
   fun logout()
   fun handleAuthResultFromActivity(authBundle: AuthBundle, authCallback: VKAuthCallback)
+  fun isLoggedIn(): Boolean
 }

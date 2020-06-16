@@ -61,7 +61,7 @@ val dataModule = module {
   single<InternetObserverService> { InternetObserverImpl(connectivityStreamFactory = get()) }
   single<ResourcesRepository> { ResourcesRepositoryImpl(resources = get()) }
 
-  single<SessionStatusService> { SessionStatusServiceImpl() }
+  single<SessionStatusService> { SessionStatusServiceImpl(vkFacade = get()) }
   single<AuthService> { AuthServiceImpl(sessionSource = get(), vkFacade = get()) }
   single<VkSessionSource> { VkSessionLocalSource(dao = get()) }
 

@@ -15,4 +15,6 @@ class VkFacadeImpl(private val vk: VK) : VkFacade {
   override fun handleAuthResultFromActivity(authBundle: AuthBundle, authCallback: VKAuthCallback) {
     authBundle.run { vk.onActivityResult(requestCode, resultCode, data, authCallback) }
   }
+
+  override fun isLoggedIn(): Boolean = VK.isLoggedIn()
 }
