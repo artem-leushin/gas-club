@@ -12,6 +12,7 @@ import com.vk.api.sdk.auth.VKAccessToken
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import io.reactivex.Completable
 import io.reactivex.Emitter
 import org.junit.Before
 import org.junit.Test
@@ -67,6 +68,7 @@ class AuthServiceTest {
   @Test
   fun `access token is cleared on vk logout`() {
     every { vk.logout() } returns Unit
+    every { source.clear() } returns Completable.complete()
 
     service.logout()
       .test()

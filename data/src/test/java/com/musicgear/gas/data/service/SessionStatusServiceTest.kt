@@ -6,7 +6,6 @@ import com.musicgear.gas.domain.entity.SessionStatus
 import com.musicgear.gas.domain.service.SessionStatusService
 import io.mockk.every
 import io.mockk.mockk
-import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
 
@@ -33,16 +32,13 @@ class SessionStatusServiceTest {
   fun `login status is changed after user logs in`() {
     every { facade.isLoggedIn() } returns false andThen true
 
-    val observer = TestObserver<SessionStatus>()
-
     service.observeSessionStatus()
-      .subscribe(observer)
-
-    observer
+      .test()
       .assertValueCount(1)
       .assertValue(SessionStatus.LOGGED_OUT)
 
-    observer
+    service.observeSessionStatus()
+      .test()
       .assertValueCount(1)
       .assertValue(SessionStatus.LOGGED_IN)
   }
