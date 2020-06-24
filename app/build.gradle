@@ -34,11 +34,8 @@ dependencies {
   implementation Deps.koinAndroid
   implementation Deps.koinAndroidExperimental
 
-  testImplementation Deps.jUnit
-  androidTestImplementation Deps.jUnitExt
-  androidTestImplementation Deps.espresso
-
   apply from: "${sharedDependencies}/commonRxJava.gradle"
+  apply from: "${sharedDependencies}/commonTestsUnit.gradle"
 }
 
 android {

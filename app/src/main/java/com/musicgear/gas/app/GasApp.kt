@@ -12,8 +12,10 @@ import com.musicgear.gas.di.categoriesModule
 import com.musicgear.gas.di.dataModule
 import com.musicgear.gas.di.detailsModule
 import com.musicgear.gas.di.instrumentsModule
+import com.musicgear.gas.di.localDbModule
 import com.musicgear.gas.di.mainModule
 import com.musicgear.gas.di.navigationModule
+import com.musicgear.gas.di.remoteApiModule
 import com.musicgear.gas.di.startModule
 import com.musicgear.gas.di.utilsModule
 import com.vk.api.sdk.VK
@@ -39,6 +41,8 @@ class GasApp : Application() {
       androidLogger(Level.DEBUG)
       modules(
         mainModule,
+        remoteApiModule,
+        localDbModule,
         dataModule,
         navigationModule,
         startModule,

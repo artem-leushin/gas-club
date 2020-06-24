@@ -1,8 +1,8 @@
 package com.musicgear.gas.data.mappers
 
 import com.musicgear.gas.data.entity.remote.AlbumR
-import com.musicgear.gas.data.entity.remote.CommentR
 import com.musicgear.gas.data.entity.remote.PhotoAttachmentR
+import com.musicgear.gas.data.entity.remote.PhotoCommentR
 import com.musicgear.gas.data.entity.remote.PhotoR
 import com.musicgear.gas.data.entity.remote.SizeR
 import com.musicgear.gas.data.entity.remote.UserR
@@ -36,7 +36,7 @@ class MappersRTest {
   private val attachmentR = PhotoAttachmentR(AttachmentType.AUDIO, photoR)
 
   private val commentD = Comment(1, 11, "asdasd", listOf(attachmentD))
-  private val commentR = CommentR(1, 11, "asdasd", listOf(attachmentR))
+  private val commentR = PhotoCommentR(1, 11, "asdasd", listOf(attachmentR))
 
   @Test
   fun `user maps between api and domain`() {
@@ -71,6 +71,6 @@ class MappersRTest {
   @Test
   fun `comments map between api and domain`() {
     Assert.assertEquals(commentR.toDomain(), commentD)
-    Assert.assertEquals(CommentR().toDomain(), Comment())
+    Assert.assertEquals(PhotoCommentR().toDomain(), Comment())
   }
 }

@@ -40,7 +40,8 @@ dependencies {
 android {
   buildTypes {
     debug {
-      buildConfigField "String", "BASE_URL", '"https://api.vk.com/method/"'
+      buildConfigField "String", "BASE_URL_VK", '"https://api.vk.com/method/"'
+      buildConfigField "String", "BASE_URL_CONVERSATIONS", '"http://0.0.0.0:8080/"'
       buildConfigField "String", "API_VERSION", '"5.103"'
       buildConfigField "Integer", "GAS_CLUB_ID", '-6923031'
     }

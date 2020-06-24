@@ -24,10 +24,10 @@ internal open class PhotosResponse(
 @JsonObject
 internal open class CommentsResponse(
   @JsonField(name = ["count"]) var count: Int? = null,
-  @JsonField(name = ["items"]) var items: List<CommentR>? = null
+  @JsonField(name = ["items"]) var items: List<PhotoCommentR>? = null
 )
 
 @JsonObject
-internal open class BaseResponse<T>(
+internal class BaseResponse<T>(
   @JsonField(name = ["response"]) var response: T? = null
 )

@@ -22,7 +22,7 @@ internal class ErrorHolder(
     val noInternetConnection = ErrorHolder(
       errorCode = 503,
       message = "No internet connection. Service unavailable"
-    ).toString()
+    )
   }
 }
 

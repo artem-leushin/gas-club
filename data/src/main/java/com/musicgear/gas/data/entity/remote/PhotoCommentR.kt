@@ -6,7 +6,7 @@ import com.musicgear.gas.data.api.AttachmentTypeConverter
 import com.musicgear.gas.domain.entity.AttachmentType
 
 @JsonObject
-internal data class CommentR(
+internal data class PhotoCommentR(
   @JsonField(name = ["id"])
   var id: Int? = Int.MIN_VALUE,
   @JsonField(name = ["from_id"])

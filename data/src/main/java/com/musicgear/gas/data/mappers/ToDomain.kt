@@ -3,8 +3,8 @@ package com.musicgear.gas.data.mappers
 import com.musicgear.gas.data.entity.local.UserDB
 import com.musicgear.gas.data.entity.local.VkSessionDB
 import com.musicgear.gas.data.entity.remote.AlbumR
-import com.musicgear.gas.data.entity.remote.CommentR
 import com.musicgear.gas.data.entity.remote.PhotoAttachmentR
+import com.musicgear.gas.data.entity.remote.PhotoCommentR
 import com.musicgear.gas.data.entity.remote.PhotoR
 import com.musicgear.gas.data.entity.remote.SizeR
 import com.musicgear.gas.data.entity.remote.UserR
@@ -67,7 +67,7 @@ internal fun PhotoR.toDomain() = InstrumentPhoto(
   photoSizes?.map { it.toDomain() } ?: listOf()
 )
 
-internal fun CommentR.toDomain() = Comment(
+internal fun PhotoCommentR.toDomain() = Comment(
   id ?: Int.MIN_VALUE,
   userId ?: Int.MIN_VALUE,
   text ?: "",
