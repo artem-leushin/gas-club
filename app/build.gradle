@@ -13,29 +13,14 @@ dependencies {
   implementation project(':featureCategories')
   implementation project(':featureInstrumentsList')
 
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$Version.kotlin"
-  implementation "androidx.appcompat:appcompat:$Version.appCompat"
-  implementation "com.google.android.material:material:$Version.material"
-  implementation "androidx.constraintlayout:constraintlayout:$Version.constraintLayout"
-  implementation "androidx.core:core-ktx:$Version.ktxCore"
-
-  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$Version.lifecycle"
-  implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$Version.lifecycle"
-  implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Version.lifecycle"
-  implementation "androidx.lifecycle:lifecycle-common-java8:$Version.lifecycle"
-
   implementation "androidx.navigation:navigation-fragment-ktx:$Version.navigation"
   implementation "androidx.navigation:navigation-ui-ktx:$Version.navigation"
 
   implementation "com.vk:androidsdk:2.2.1"
-  implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
-
-  implementation Deps.koinCore
-  implementation Deps.koinAndroid
-  implementation Deps.koinAndroidExperimental
 
   apply from: "${sharedDependencies}/commonRxJava.gradle"
   apply from: "${sharedDependencies}/commonTestsUnit.gradle"
+  apply from: "${sharedDependencies}/commonFeature.gradle"
 }
 
 android {
