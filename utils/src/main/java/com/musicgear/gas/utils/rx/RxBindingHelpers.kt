@@ -35,8 +35,9 @@ inline fun <T> TextView.debouncedAfterTextChanges(noinline mapper: (String) -> T
 
 inline fun Disposable?.disposeOf() {
   this?.let { if (isDisposed.not()) dispose() }
-
 }
+
+fun Disposable?.disposed(): Boolean = this == null || this.isDisposed
 
 operator fun CompositeDisposable?.plusAssign(disposable: Disposable) {
   this?.let {

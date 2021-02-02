@@ -7,8 +7,8 @@ object Version {
   const val compileSdk = 29
   const val buildTools = "29.0.2"
 
-  const val kotlin = "1.3.72"
-  const val kotlinPlugin = "1.3.72"
+  const val kotlin = "1.4.21"
+  const val kotlinPlugin = "1.4.21"
   const val coroutinesAndroid = "1.0.1" // https://kotlinlang.org/
 
   const val jackson = "2.9.9"

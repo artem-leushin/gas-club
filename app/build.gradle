@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply from: "$rootProject.projectDir/base.gradle"
 
 dependencies {
@@ -21,10 +22,16 @@ dependencies {
   apply from: "${sharedDependencies}/commonRxJava.gradle"
   apply from: "${sharedDependencies}/commonTestsUnit.gradle"
   apply from: "${sharedDependencies}/commonFeature.gradle"
+  implementation "androidx.core:core-ktx:+"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 android {
   defaultConfig {
     applicationId "com.musicgear.gas"
   }
+}
+repositories {
+  maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+  mavenCentral()
 }

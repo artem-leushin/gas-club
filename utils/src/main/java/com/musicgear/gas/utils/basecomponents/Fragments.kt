@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -13,26 +14,18 @@ import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.disposeOf
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateChange>> :
-  Fragment(),
-  BaseView<State> {
+abstract class BaseFragment<State, VM>(@LayoutRes layoutId: Int) : Fragment(layoutId),
+  BaseView<State>
+    where VM : BaseViewModel<State, Any> {
 
-  protected var createdFirstTime: Boolean = true
   protected var viewSubscriptions: CompositeDisposable? = null
   protected abstract val viewModel: VM
-  protected abstract fun layoutResId(): Int
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    createdFirstTime = savedInstanceState == null
     observeViewState()
+    (viewModel as? SingleEventsViewModel<*>)?.observeSingleEvents()
   }
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? = inflater.inflate(layoutResId(), container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -42,6 +35,12 @@ abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateC
 
   override fun observeViewState() {
     viewModel.currentViewState().observe(this, Observer { state -> render(state) })
+    lifecycle.addObserver(viewModel)
+  }
+
+  private fun SingleEventsViewModel<*>.observeSingleEvents() {
+    singleEvents()
+      .observe(this@BaseFragment, Observer { event -> renderSingleEvent(event) })
   }
 
   override fun onDestroyView() {
@@ -54,8 +53,8 @@ abstract class BaseFragment<State, StateChange, VM : BaseViewModel<State, StateC
 abstract class BaseBindingFragment<Binding : ViewDataBinding,
     State,
     StateChange,
-    VM : BaseViewModel<State, StateChange>> :
-  BaseFragment<State, StateChange, VM>() {
+    VM : BaseViewModel<State, Any>>(@LayoutRes private val layoutId: Int) :
+  BaseFragment<State, VM>(layoutId) {
 
   protected var viewBinding: Binding? = null
     private set
@@ -64,7 +63,7 @@ abstract class BaseBindingFragment<Binding : ViewDataBinding,
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? = DataBindingUtil.inflate<Binding>(inflater, layoutResId(), container, false).run {
+  ): View? = DataBindingUtil.inflate<Binding>(inflater, layoutId, container, false).run {
     viewBinding = this
     root
   }
