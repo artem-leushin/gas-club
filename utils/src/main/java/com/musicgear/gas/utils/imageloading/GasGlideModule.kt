@@ -6,7 +6,7 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.bumptech.glide.load.engine.cache.LruResourceCache
 import com.bumptech.glide.module.AppGlideModule
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
 
 @GlideModule
 class GasGlideModule : AppGlideModule(), KoinComponent {

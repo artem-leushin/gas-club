@@ -10,7 +10,7 @@ dependencies {
   apply from: "${sharedDependencies}/commonTestsUnit.gradle"
   apply from: "${sharedDependencies}/commonTestsAndroid.gradle"
   apply from: "${sharedDependencies}/commonFeature.gradle"
-  implementation "androidx.core:core-ktx:+"
+  implementation "androidx.core:core-ktx:$Version.ktxCore"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

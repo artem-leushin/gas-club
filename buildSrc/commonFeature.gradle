@@ -18,9 +18,13 @@ dependencies {
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:$Version.lifecycle"
   implementation "androidx.lifecycle:lifecycle-common-java8:$Version.lifecycle"
 
-  implementation Deps.koinCore
-  implementation Deps.koinAndroid
-  implementation Deps.koinAndroidExperimental
+  implementation "org.koin:koin-core:${Version.koin}"
+  implementation "org.koin:koin-core-ext:${Version.koin}"
+  implementation "org.koin:koin-android:${Version.koin}"
+  implementation "org.koin:koin-androidx-ext:${Version.koin}"
+  implementation "org.koin:koin-androidx-scope:${Version.koin}"
+  implementation "org.koin:koin-androidx-viewmodel:${Version.koin}"
+  implementation "org.koin:koin-androidx-fragment:${Version.koin}"
 
   implementation "com.jakewharton.rxrelay2:rxrelay:${Version.rxRelay}"
 }

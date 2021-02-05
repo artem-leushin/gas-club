@@ -60,7 +60,7 @@ object Version {
   const val retrofitLoganSquare = "1.4.1"
 
   // DI
-  const val koin = "2.1.6"  //https://github.com/InsertKoinIO/koin
+  const val koin = "2.2.2"  //https://github.com/InsertKoinIO/koin
 
   // Debugging
   const val debugDb = "1.0.4"    //https://github.com/amitshekhariitbhu/Android-Debug-Database

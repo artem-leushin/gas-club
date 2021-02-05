@@ -4,7 +4,7 @@
     <font
         android:font="@font/open_sans_light"
         android:fontStyle="normal"
-        android:fontWeight="400"/>
+        android:fontWeight="300"/>
 
     <font
         android:font="@font/open_sans_regular"

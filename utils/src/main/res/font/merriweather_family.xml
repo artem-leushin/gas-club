@@ -8,7 +8,7 @@
 
     <font
         app:font="@font/merriweather_light_italic"
-        app:fontStyle="normal"
+        app:fontStyle="italic"
         app:fontWeight="200"/>
 
     <font
@@ -28,7 +28,7 @@
 
     <font
         app:font="@font/merriweather_bold_italic"
-        app:fontStyle="normal"
+        app:fontStyle="italic"
         app:fontWeight="700"/>
 
     <font
@@ -38,7 +38,7 @@
 
     <font
         app:font="@font/merriweather_black_italic"
-        app:fontStyle="normal"
+        app:fontStyle="italic"
         app:fontWeight="900"/>
 
 </font-family>

@@ -54,7 +54,7 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
   }
 
   private val fragmentsLifecycleListener: FragmentManager.FragmentLifecycleCallbacks by lazy {
-    FragmentLifecycleListener(viewModel::publishViewIntent)
+    FragmentLifecycleListener(viewModel::sendIntent)
   }
 
   override fun layoutResId(): Int = R.layout.activity_main
@@ -89,7 +89,7 @@ class MainActivity : BaseActivity<State, StateChange, MainViewModel>(),
     toolbar.setOnMenuItemClickListener {
       when (it.itemId) {
         R.id.menu_action_logout -> {
-          viewModel.publishViewIntent(MainView.Intent.Logout)
+          viewModel.sendIntent(MainView.Intent.Logout)
           true
         }
         R.id.menu_action_search -> {
