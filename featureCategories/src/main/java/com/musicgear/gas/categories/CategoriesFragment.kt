@@ -17,12 +17,11 @@ import kotlinx.android.synthetic.main.fragment_categories.refresh_layout
 import kotlinx.android.synthetic.main.fragment_categories.rv_categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CategoriesFragment : BaseFragment<State, StateChange, CategoriesViewModel>(), CategoriesView {
+class CategoriesFragment : BaseFragment<State, StateChange, CategoriesViewModel>(R.layout.fragment_categories),
+  CategoriesView {
 
   private lateinit var listAdapter: CategoriesAdapter
   override val viewModel: CategoriesViewModel by viewModel()
-
-  override fun layoutResId(): Int = R.layout.fragment_categories
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -36,7 +35,7 @@ class CategoriesFragment : BaseFragment<State, StateChange, CategoriesViewModel>
   }
 
   private fun initRecyclerView() {
-    this.listAdapter = CategoriesAdapter(viewModel::publishViewIntent)
+    this.listAdapter = CategoriesAdapter(viewModel::sendIntent)
 
     rv_categories.apply {
       layoutManager = LinearLayoutManager(context)

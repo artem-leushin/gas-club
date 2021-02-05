@@ -26,8 +26,7 @@ import io.reactivex.Observable
 class MainViewModel(
   private val logout: LogoutUseCase,
   private val coordinator: MainCoordinator
-) : BaseViewModel<State, StateChange>() {
-  override fun initState(): State = State()
+) : BaseViewModel<State, StateChange>(State()) {
 
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
     with(intentStream) {

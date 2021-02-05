@@ -5,8 +5,7 @@ import com.musicgear.gas.blacklist.BlacklistedUsersView.StateChange
 import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import io.reactivex.Observable
 
-class BlacklistedUsersViewModel : BaseViewModel<State, StateChange>() {
-  override fun initState(): State = State()
+class BlacklistedUsersViewModel : BaseViewModel<State, StateChange>(State()) {
 
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
     Observable.never()

@@ -21,8 +21,7 @@ import io.reactivex.Observable
 class CategoriesViewModel(
   private val loadCategories: LoadCategoriesUseCase,
   private val coordinator: CategoriesCoordinator
-) : BaseViewModel<State, StateChange>() {
-  override fun initState(): State = State()
+) : BaseViewModel<State, StateChange>(State()) {
 
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
     with(intentStream) {
@@ -35,7 +34,7 @@ class CategoriesViewModel(
       )
     }
 
-  override fun viewModelIntents(): Observable<StateChange> = loadCategories()
+  override fun startUpIntents(): Observable<StateChange> = loadCategories()
 
   private fun loadCategories(): Observable<StateChange> = loadCategories.execute()
     .applySchedulers()

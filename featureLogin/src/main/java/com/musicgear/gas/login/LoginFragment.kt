@@ -25,12 +25,10 @@ import kotlinx.android.synthetic.main.fragment_login.btnLogin
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment :
-  BaseBindingFragment<FragmentLoginBinding, State, StateChange, LoginViewModel>(),
+  BaseBindingFragment<FragmentLoginBinding, State, StateChange, LoginViewModel>(R.layout.fragment_login),
   LoginView {
 
   override val viewModel: LoginViewModel by viewModel()
-
-  override fun layoutResId(): Int = R.layout.fragment_login
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -64,7 +62,7 @@ class LoginFragment :
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    viewModel.publishViewIntent(ProceedLogin(AuthBundle(requestCode, resultCode, data)))
+    viewModel.sendIntent(ProceedLogin(AuthBundle(requestCode, resultCode, data)))
   }
 
   override fun initIntents() {

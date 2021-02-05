@@ -9,9 +9,8 @@ import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import com.musicgear.gas.domain.constants.ARG_CATEGORY
 import com.musicgear.gas.instruments.R
 import com.musicgear.gas.instruments.databinding.FragmentInstrumentsBinding
-import com.musicgear.gas.instruments.master.InstrumentsView.Intent.RefreshInstruments
-import com.musicgear.gas.instruments.master.InstrumentsView.State
-import com.musicgear.gas.instruments.master.InstrumentsView.StateChange
+import com.musicgear.gas.instruments.master.InstrumentsView.*
+import com.musicgear.gas.instruments.master.InstrumentsView.Intent.*
 import com.musicgear.gas.instruments.master.adapter.InstrumentsAdapter
 import com.musicgear.gas.utils.adapter.EndlessScrollListener
 import com.musicgear.gas.utils.adapter.MarginItemDecoration
@@ -26,14 +25,12 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InstrumentsFragment :
-  BaseBindingFragment<FragmentInstrumentsBinding, State, StateChange, InstrumentsViewModel>(),
+  BaseBindingFragment<FragmentInstrumentsBinding, State, StateChange, InstrumentsViewModel>(R.layout.fragment_instruments),
   InstrumentsView {
 
   private val imageLoader: ImageLoader by inject()
   private lateinit var listAdapter: InstrumentsAdapter
   override val viewModel: InstrumentsViewModel by viewModel()
-
-  override fun layoutResId(): Int = R.layout.fragment_instruments
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -56,12 +53,12 @@ class InstrumentsFragment :
   }
 
   private fun initRecyclerView() {
-    listAdapter = InstrumentsAdapter(viewModel::publishViewIntent, imageLoader)
+    listAdapter = InstrumentsAdapter(viewModel::sendIntent, imageLoader)
     rv_instruments.apply {
       layoutManager = LinearLayoutManager(context)
       adapter = listAdapter
       addItemDecoration(MarginItemDecoration(top = 8.px, bottom = 8.px))
-      addOnScrollListener(EndlessScrollListener { viewModel.publishViewIntent(InstrumentsView.Intent.LoadNextPage) })
+      addOnScrollListener(EndlessScrollListener { viewModel.sendIntent(LoadNextPage) })
     }
   }
 

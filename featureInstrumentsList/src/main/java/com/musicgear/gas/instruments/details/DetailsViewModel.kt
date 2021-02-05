@@ -18,8 +18,7 @@ import io.reactivex.Observable
 
 class DetailsViewModel(
   private val loadAuthorComments: LoadAuthorCommentsForInstrument
-) : BaseViewModel<State, StateChange>() {
-  override fun initState(): State = State()
+) : BaseViewModel<State, StateChange>(State()) {
 
   lateinit var instrument: InstrumentsView.Displayable.DisplayableInstrument
 

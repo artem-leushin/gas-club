@@ -14,9 +14,9 @@ import com.musicgear.gas.utils.basecomponents.mvi.BaseViewModel
 import com.musicgear.gas.utils.rx.disposeOf
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseFragment<State, VM>(@LayoutRes layoutId: Int) : Fragment(layoutId),
+abstract class BaseFragment<State, StateChange, VM>(@LayoutRes layoutId: Int) : Fragment(layoutId),
   BaseView<State>
-    where VM : BaseViewModel<State, Any> {
+  where VM : BaseViewModel<State, StateChange> {
 
   protected var viewSubscriptions: CompositeDisposable? = null
   protected abstract val viewModel: VM
@@ -50,11 +50,10 @@ abstract class BaseFragment<State, VM>(@LayoutRes layoutId: Int) : Fragment(layo
   }
 }
 
-abstract class BaseBindingFragment<Binding : ViewDataBinding,
-    State,
-    StateChange,
-    VM : BaseViewModel<State, Any>>(@LayoutRes private val layoutId: Int) :
-  BaseFragment<State, VM>(layoutId) {
+abstract class BaseBindingFragment<Binding, State, StateChange, VM>(@LayoutRes private val layoutId: Int) :
+  BaseFragment<State, StateChange, VM>(layoutId)
+  where VM : BaseViewModel<State, StateChange>,
+        Binding : ViewDataBinding {
 
   protected var viewBinding: Binding? = null
     private set

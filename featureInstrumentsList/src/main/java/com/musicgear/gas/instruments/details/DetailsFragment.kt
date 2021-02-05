@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.musicgear.gas.domain.constants.ARG_INSTRUMENT
 import com.musicgear.gas.instruments.R
 import com.musicgear.gas.instruments.databinding.FragmentDetailsBinding
+import com.musicgear.gas.instruments.details.DetailsView.*
 import com.musicgear.gas.instruments.details.DetailsView.Intent.LoadDetails
 import com.musicgear.gas.instruments.master.InstrumentsView.Displayable.DisplayableInstrument
 import com.musicgear.gas.utils.basecomponents.BaseBindingFragment
@@ -16,7 +17,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment :
-  BaseBindingFragment<FragmentDetailsBinding, DetailsView.State, DetailsView.StateChange, DetailsViewModel>(),
+  BaseBindingFragment<FragmentDetailsBinding, State, StateChange, DetailsViewModel>(R.layout.fragment_details),
   DetailsView {
 
   private val instrument: DisplayableInstrument by lazy {
@@ -25,8 +26,6 @@ class DetailsFragment :
 
   override val viewModel: DetailsViewModel by viewModel()
   private val imageLoader: ImageLoader by inject()
-
-  override fun layoutResId(): Int = R.layout.fragment_details
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -50,10 +49,10 @@ class DetailsFragment :
 
   override fun initIntents() {
     viewModel.viewIntentsConsumer()
-    viewModel.publishViewIntent(LoadDetails(instrument))
+    viewModel.sendIntent(LoadDetails(instrument))
   }
 
-  override fun render(state: DetailsView.State) {
+  override fun render(state: State) {
     viewBinding!!.loading = state.loading
 
     if (state.success)

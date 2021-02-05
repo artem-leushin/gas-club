@@ -25,8 +25,7 @@ import io.reactivex.Observable
 class InstrumentsViewModel(
   private val loadInstruments: LoadInstrumentsUseCase,
   private val coordinator: InstrumentsCoordinator
-) : BaseViewModel<State, StateChange>() {
-  override fun initState(): State = State()
+) : BaseViewModel<State, StateChange>(State()) {
 
   var categoryId: Int = 0
 
@@ -61,7 +60,7 @@ class InstrumentsViewModel(
       )
     }
 
-  override fun viewModelIntents(): Observable<StateChange> = loadInstruments(initialOffset)
+  override fun startUpIntents(): Observable<StateChange> = loadInstruments(initialOffset)
     .startWith(FirstPageLoading)
 
   private fun loadInstruments(offset: Int): Observable<StateChange> =

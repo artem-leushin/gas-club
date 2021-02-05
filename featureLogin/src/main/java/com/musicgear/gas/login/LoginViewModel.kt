@@ -23,8 +23,7 @@ class LoginViewModel(
   private val startLogin: LoginWithVkUseCase,
   private val proceedLogin: ProceedLoginWithVkUseCase,
   private val coordinator: LoginCoordinator
-) : BaseViewModel<State, StateChange>() {
-  override fun initState(): State = State()
+) : BaseViewModel<State, StateChange>(State()) {
 
   override fun viewIntents(intentStream: Observable<*>): Observable<StateChange> =
     with(intentStream) {
